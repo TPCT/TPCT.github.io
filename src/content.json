@@ -1,8 +1,10 @@
 {
   "site": {
-    "title": "Islam Elsayed — CEO @ ShiftCodes · Senior Engineer",
+    "title": "Islam Elsayed — Senior Full-Stack Engineer | Laravel, Python",
+    "jobTitle": "Senior Full-Stack Engineer & Systems Architect",
+    "alternateName": "TPCT",
     "shortTitle": "Islam Elsayed",
-    "description": "CEO @ ShiftCodes, technical team lead and consultant, and senior full-stack engineer. 9+ years shipping production software across the Middle East and US.",
+    "description": "Senior full-stack engineer and systems architect in Alexandria, Egypt. CEO of ShiftCodes. 9+ years building Laravel, Python, FastAPI and Django platforms.",
     "url": "https://tpct.github.io",
     "lang": "en",
     "locale": "en_US",
@@ -83,6 +85,7 @@
   },
   "about": {
     "title": "About",
+    "factsLabel": "Key facts",
     "paragraphs": [
       "I'm Islam Elsayed, CEO of ShiftCodes and a senior technical team lead and consultant based in Alexandria, Egypt. Since 2017 I have shipped production software for companies in Egypt, Jordan, the UAE, Saudi Arabia and the US, from a national waste analytics platform in Saudi Arabia to multi-tenant SaaS, a food-tech restaurant platform and websites for banks and high-profile Jordanian clients.",
       "I've worked as a CTO, a team lead and a senior engineer, and I start from the real operation before I write code. That has meant moving a multi-tenant platform from microservices to a modular monolith and cutting server costs from $15k to $2k, taking Oracle fetches over 100M+ rows from 3 s to 500 ms, and building a headless CMS that cut project delivery from about a month to 4 days.",
@@ -942,6 +945,8 @@
     "website": "https://shiftcodes.net",
     "websiteLabel": "ShiftCodes",
     "github": "https://github.com/TPCT",
+    "linkedin": "https://www.linkedin.com/in/tpct/",
+    "linkedinLabel": "LinkedIn · tpct",
     "githubLabel": "GitHub · TPCT",
     "location": "Alexandria, Egypt"
   },

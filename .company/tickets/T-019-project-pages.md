@@ -98,7 +98,7 @@ The JSON-LD breadcrumb has 2 levels (Home → Project) on purpose: `/#work` is a
     [<a class="project__prev" rel="prev" href="{projectPath(prev)}"><span class="label">{pp.prevLabel}</span> {prev.name}</a>]
     [<a class="project__next" rel="next" href="{projectPath(next)}"><span class="label">{pp.nextLabel}</span> {next.name}</a>]
   </nav>
-  <a class="text-link project__back" href="/#work">{icon arrow-left? → NO: use text only}{pp.backLabel}</a>
+  <a class="text-link project__back" href="/#work">{pp.backLabel}</a>   <!-- text only, no icon -->
 </div></article>
 ```
 - **Icons.** Use only names that already exist in `src/lib/icons.mjs` (`lock`, `git-branch`, `arrow-up-right`). Do not add icons.
@@ -123,7 +123,7 @@ The JSON-LD breadcrumb has 2 levels (Home → Project) on purpose: `/#work` is a
 ### 6. CSS (`src/styles/85-project.css`, ≤ 3,072 bytes raw)
 - **Reuse existing styles:** `.container`, `.lead`, `.label`, `.tags`/`.tag`, `.badge`, `.card__meta`, `.card__year`, `.card__private`, `.btn`, `.text-link`, and the plate tokens.
 - **New rules only for:**
-  - `.project__wrap`: max-width ~ 860px, centred, vertical padding from the T-015 rhythm tokens (`--section-pad`, or whatever the variable is called in `01-tokens.css`).
+  - `.project__wrap`: max-width ~ 860px, centred, vertical padding `var(--section-pad)` (the T-015 rhythm token in `01-tokens.css`).
   - `.crumbs ol`: inline flex, wrap. Separators via `li + li::before { content: "/" }` in `--muted`. `aria-current` in `--fg`.
   - `.project__head h1`: use the existing h1 display font. Size it with `clamp()` so it is smaller than the hero h1.
   - `.project__facts`: a 2-column grid below 768px and 4 columns from 768px, as a frosted plate with thin dividers. `dt` uses the `.label` style; `dd` is `--fg`.
@@ -144,7 +144,7 @@ The JSON-LD breadcrumb has 2 levels (Home → Project) on purpose: `/#work` is a
   - no `href="http`.
 - **Open-source cards:** exactly two `<a`: one `href="/work/<id>/"` and the unchanged repo link.
 - **"case-study repoUrl is ignored":** the card may contain only `href="/work/<id>/"` (assert that no `href="http` and no `github.com` appear).
-- **Keep the rest unchanged,** including the 2 KB-free `site.js` check.
+- **Keep the rest unchanged,** including the `site.js < 30000` check.
 
 ### New `test/project-pages.test.mjs`
 Build to a tmp dir with `now: new Date('2026-10-21T12:00:00Z')`, then check:

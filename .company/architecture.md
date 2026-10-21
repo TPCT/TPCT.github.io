@@ -209,3 +209,30 @@ T-006/T-007/T-008 can run in parallel once T-005 is merged.
   - Byte creep. Each file has its own cap test.
   - Confidentiality of timeline copy. Covered by a scoped `checkConfidential` test on the rendered section.
 - Tests: one new test file per chunk, plus the shared vm smoke test. The lead runs the full suite, Lighthouse/axe and the eyes-on checklist (ux-wow §8) once at the gate.
+
+## 15. SEO round (T-018, T-019)
+- **Approach:** keep the zero-dependency static build. Make the existing head data richer, and add one static page per project so that every project has its own indexable URL. No framework and no client-side routing.
+- **Components:**
+  - `src/lib/schema.mjs`: pure JSON-LD builders (`schemaIds`, `projectNode`, `homeGraph`, `projectGraph`, `jsonLdScript`).
+  - `renderHead(c, { page, title, description, path, ogType, jsonLd, assets })`: one head for home, project and 404 pages.
+  - `src/render/project-page.mjs`: `projectTitle`, `projectDescription`, `renderProjectPage`.
+  - `projectPath(p)` in `html.mjs`.
+  - `85-project.css`.
+- **Data:** new `site.jobTitle`, `site.alternateName`, `contact.linkedin`, `contact.linkedinLabel` and `projectPage.*` labels, all validated. Title ≤ 65 and description ≤ 160 are enforced by validation.
+- **URLs:**
+  - `/` is the ProfilePage;
+  - `/work/<id>/` are the project pages (canonical, `og:type` article, BreadcrumbList + CreativeWork/SoftwareSourceCode);
+  - `/404.html` stays noindex.
+  - The sitemap lists `/` plus every project page, with `lastmod` = build date (`build({ now })`).
+- **Graph ids:** `<base>#website`, `#person`, `#org`, `#profilepage`, `#projects`, `#project-<id>`. A project node keeps the same `@id` on the home ItemList and on its own page.
+- **Decisions and alternatives:**
+  - Short title (60 chars) instead of the 88-char brief. Rejected because SERPs truncate it.
+  - A single theme-color that follows the theme instead of a media pair. Rejected because the default is dark whatever the OS preference.
+  - A 2-level JSON-LD breadcrumb. A 3-level one with `/#work` was rejected because a fragment is not a separate page.
+  - No `/work/` index page. Rejected for now: the home page already lists all the work.
+  - Shared OG image instead of per-project images. Per-project images were rejected: they would need a Playwright run per project.
+- **Confidentiality:** case studies may link only internally. `codeRepository` is emitted only for open-source projects. Every page goes through `checkConfidential` (test + CI).
+- **Risks:**
+  - CSS budget: T-019 needs T-010's cap raise.
+  - `sections.mjs` / `content.json` contention with T-013/T-014/T-016/T-017. Handled by sequencing (STATUS.md order).
+- **Test strategy:** `seo.test.mjs` (updated pins), `seo-meta.test.mjs` (graph integrity, robots, rel=me, accessible-name audit), `project-pages.test.mjs` (every page, unique metadata, sitemap, links, confidentiality). The reviewer gate is Lighthouse mobile with SEO 100 / Perf ≥ 90 / A11y ≥ 95: local first, then SEO re-checked on the live site.

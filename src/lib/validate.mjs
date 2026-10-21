@@ -16,7 +16,10 @@ export function validateContent(c) {
   };
   const stringArray = (v, p) => array(v, p).forEach((s, i) => { if (typeof s !== 'string' || !s.trim()) errors.push(`${p}[${i}]: required non-empty string`); });
   c = object(c, 'content');
-  const site = strings(c.site, 'title shortTitle description url lang locale author ogImage ogImageAlt themeColorDark themeColorLight skipLink footer menuOpen menuClose', 'site');
+  const site = strings(c.site, 'title jobTitle alternateName shortTitle description url lang locale author ogImage ogImageAlt themeColorDark themeColorLight skipLink footer menuOpen menuClose', 'site');
+  if (site.title?.length > 65) errors.push('site.title: must be ≤ 65 characters');
+  if (site.description?.length > 160) errors.push('site.description: must be ≤ 160 characters');
+  if (!/^https:\/\/www\.linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/.test(c.contact?.linkedin ?? '')) errors.push('contact.linkedin: expected https://www.linkedin.com/in/<handle>/');
   strings(site.themeToggle, 'toDark toLight', 'site.themeToggle');
   array(site.nav, 'site.nav').forEach((n, i) => {
     n = strings(n, 'label href', `site.nav[${i}]`);
@@ -29,11 +32,11 @@ export function validateContent(c) {
   const protocol = (value, pattern, field) => { if (typeof value !== 'string' || !pattern.test(value)) errors.push(`${field}: invalid URL protocol`); };
   protocol(hero.ctaSecondary?.href, /^mailto:/, 'hero.ctaSecondary.href');
   protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
-  for (const k of ['github', 'website']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
-  const about = strings(c.about, 'title', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
+  for (const k of ['github', 'website', 'linkedin']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
+  const about = strings(c.about, 'title factsLabel', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
   strings(c.sections, 'skills experience experienceMoreLabel services process', 'sections');
   strings(c.a11y, 'newTab', 'a11y');
-  strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel location', 'contact');
+  strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel linkedin linkedinLabel location', 'contact');
   const nf = strings(c.notFound, 'title code message', 'notFound'); strings(nf.cta, 'label href', 'notFound.cta');
   const intro = strings(c.projectsIntro, 'title lead filterLabel allLabel repoLinkLabel privateNote emptyState kindFilterLabel countSingular countPlural resetLabel roleLabel stackLabel', 'projectsIntro');
   strings(intro.kindLabels, 'case-study open-source', 'projectsIntro.kindLabels');

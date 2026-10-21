@@ -13,15 +13,19 @@
 | T-009 | ShiftCodes brand colours + animated logo hero | M | T-006 | done |
 | T-015 | Vertical rhythm + section continuity (spine) | M | T-007 | done |
 | T-016 | Real career history (LinkedIn): experience, hero/about/stats, new case study | M | T-015 | done |
-| T-010 | W-1 Signal field: hero particle constellation + raise JS/CSS caps | M | T-015 | todo |
-| T-011 | W-2 Compile type: glyph decode + name flow | S | T-010 | todo |
-| T-012 | W-3 Live cards: cursor spotlight + rim signal | S | T-010 | todo |
+| T-017 | About/section heads stacked (owner) | S | T-016 | done |
+| T-010 | W-1 Signal field: hero particle constellation + raise JS/CSS caps | M | T-015 | done |
+| T-011 | W-2 Compile type: glyph decode + name flow | S | T-010 | done |
+| T-012 | W-3 Live cards: cursor spotlight + rim signal | S | T-010 | done |
 | T-013 | W-4 Journey timeline section (content, validation, render, CSS, draw JS) | M | T-010 | todo |
 | T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | todo |
+| T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
+| T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | todo |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds its own new test file; run one after another if RAM is tight).
 Wow order (max 2 Codex runs at once): T-015 → T-010 (alone; raises caps) → (T-011 ∥ T-013) → (T-012 ∥ T-014; T-014 only after T-013). T-012 is disjoint from all others and can fill any free slot after T-010.
+SEO order: T-016 → T-017 → T-018 (may run ∥ T-010/T-011/T-012; never ∥ T-013/T-014/T-019) → T-019 (after T-018 and T-010; may run ∥ T-011/T-012; never ∥ T-013/T-014). Simplest: put T-018 → T-019 before T-013, or after T-014.
 
 ### Lead tasks outside Codex (Codex may not edit `.company/` or touch the remote)
 - After T-001 is approved: delete `.company/content.json` (moved to `src/content.json`).
@@ -77,3 +81,22 @@ Wow order (max 2 Codex runs at once): T-015 → T-010 (alone; raises caps) → (
   - T-013 adds a test that runs `checkConfidential` (hostname rule + private denylist when present) on the rendered Journey section, and asserts that its only hrefs are `github.com/TPCT`. Pre-check: `timeline.json` has 0 denylist hits.
   - The T-007 carry-over (tap-to-replay on touch via `60-motion.js`) is not in the wow tickets, because the wow round never edits `60-motion.js`. It stays open as a separate follow-up.
 - 2026-10-21 PM: Owner supplied full LinkedIn experience (.company/private/experience.md, gitignored) → source of truth. PO writes .company/content-career.json (experience as real career history grouped by company, stats/hero/about with owner's public LinkedIn numbers) and re-bases .company/timeline.json on dated roles. Implemented as T-016 (content + Experience renderer) after T-015, before T-013 (timeline render). Company names allowed (public on LinkedIn); still no internal URLs/private repo names; royal-family mention generalised.
+- 2026-10-21 TL: SEO round (owner: "site isn't SEO-friendly") → T-018 (metadata + JSON-LD) and T-019 (per-project pages). architecture.md §15.
+  - Title is "Islam Elsayed — Senior Full-Stack Engineer | Laravel, Python" (60 chars). The requested 88-char version would be truncated by Google, so "systems architect" and "FastAPI" moved into the 154-char description. Validation errors on a title over 65 or a description over 160.
+  - JSON-LD becomes one @graph: WebSite, ProfilePage, Person, Organization, ItemList. Nodes link by `#id`, and project nodes use `#project-<id>`, the same id on the home and project pages.
+    - Organization logo = /icon-512.png (the committed S mark).
+    - No alumniOf (no source) and no hasOccupation (redundant with jobTitle/knowsAbout).
+    - New `site.jobTitle` "Senior Full-Stack Engineer & Systems Architect" and `site.alternateName` "TPCT".
+  - theme-color stays a single meta that follows the active theme (via JS), not a media-scoped dark/light pair: the site is dark by default whatever the OS preference, so a light meta under prefers-color-scheme: light would mismatch the page.
+  - LinkedIn is https://www.linkedin.com/in/tpct/. It goes in the contact links, the footer and Person.sameAs. `rel="me"` is on the GitHub and LinkedIn links (anchors and head links); ShiftCodes is the company, so no `me`.
+  - `build({ now })` gives a deterministic build date for sitemap lastmod and ProfilePage dateModified.
+  - Project pages live at /work/<id>/ (the existing validated ids are used as slugs).
+    - Title is "<name> — <kind> | Islam Elsayed", falling back to "<name> | Islam Elsayed" when over 65 chars. The description is the summary, cut at a word boundary to 160 chars.
+    - og:type is article, with the shared OG image.
+    - Prev/next follow the home order, without wrap-around.
+    - The JSON-LD breadcrumb has 2 levels (Home → Project), because /#work is a fragment of the home page and not its own page. The visible breadcrumb shows Home / Work / Project.
+  - Confidentiality rule refined: case-study cards and pages may link only internally (/work/<id>/). There is still no external or repo link for private work.
+  - T-019 waits for T-010's CSS cap raise: about 2.9 KB of raw headroom is left now, and 85-project.css is capped at 3 KB.
+  - Lighthouse mobile (SEO 100, Perf ≥ 90, A11y ≥ 95) is a reviewer gate run with the local Playwright Chromium via `npx -y lighthouse@12` (never a repo dependency). The cross-origin canonical flag on localhost is accepted; SEO 100 is confirmed on the live URLs after deploy.
+- 2026-10-21 PM: T-020 (urgent, owner via coordinator): Google Search Console verification meta added in a clean worktree from origin/main and pushed alone (71dfe24); live verified. Local main must pull/rebase before the next push.
+- 2026-10-21 PM: T-010/T-011/T-012/T-017/T-018 shipped in ONE commit (files interleaved: content.json/validate.mjs shared by T-017+T-018; shipping speed prioritised per coordinator). Lighthouse mobile local: Perf 97, A11y 100, BP 100, SEO 92 (robots-txt audit blocked by CSP connect-src 'none' → follow-up: connect-src 'self' in T-019).

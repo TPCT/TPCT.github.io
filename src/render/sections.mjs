@@ -6,11 +6,13 @@ function section(id, index, short, title, body, data = '') {
   return `<section id="${id}" tabindex="-1" aria-labelledby="${id}-title"${data}><div class="container"><header class="section-head" data-reveal><p class="section-head__index" aria-hidden="true">${index} / ${esc(short)}</p><h2 id="${id}-title">${esc(title)}</h2></header>${body}</div></section>`;
 }
 const tags = (items, label) => `<ul class="tags"${label ? ` aria-label="${attr(label)}"` : ''}>${items.map(s => `<li class="tag">${esc(s)}</li>`).join('')}</ul>`;
-function external(url, label, className = '', newTab = '') {
-  return `<a href="${attr(url)}"${className ? ` class="${className}"` : ''} ${externalAttrs()}>${esc(label)}${icon('arrow-up-right')}<span class="vh"> ${esc(newTab)}</span></a>`;
+function external(url, label, className = '', newTab = '', me = false) {
+  return `<a href="${attr(url)}"${className ? ` class="${className}"` : ''} ${externalAttrs({ me })}>${esc(label)}${icon('arrow-up-right')}<span class="vh"> ${esc(newTab)}</span></a>`;
 }
 export function renderAbout(c) {
-  return section('about', '01', navLabel(c, 'about'), c.about.title, `<div class="about__body" data-reveal>${c.about.paragraphs.map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${esc(p)}</p>`).join('')}</div>`);
+  const paragraphs = `<div class="about__text">${c.about.paragraphs.map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${esc(p)}</p>`).join('')}</div>`;
+  const facts = `<aside class="about__facts" aria-label="${attr(c.about.factsLabel)}" data-reveal><dl class="about__stats">${(c.stats ?? []).map(s => `<div class="about__fact"><dt>${esc(s.label)}</dt><dd>${esc(s.value)}</dd></div>`).join('')}</dl>${tags([c.hero.location, ...c.hero.roles.slice(0, 2)])}</aside>`;
+  return section('about', '01', navLabel(c, 'about'), c.about.title, `<div class="about__body" data-reveal>${paragraphs}${facts}</div>`);
 }
 function careerDates(role, now) {
   const monthIndex = value => { const [year, month] = value.split('-').map(Number); return year * 12 + month - 1; };
@@ -58,5 +60,5 @@ export function renderProcess(c) {
 }
 export function renderContact(c) {
   const s = c.contact;
-  return section('contact', '07', navLabel(c, 'contact'), s.title, `<p class="lead" data-reveal>${esc(s.lead)}</p><p class="label" id="email-label">${esc(s.emailLabel)}</p><div class="contact__email-row" data-reveal><a class="contact__email" href="mailto:${attr(s.email)}" aria-describedby="email-label">${esc(s.email.split('@')[0])}<wbr><span class="email__domain">@${esc(s.email.split('@')[1])}</span></a><button type="button" class="btn btn--secondary copy-btn" hidden data-label-copy="${attr(s.copyLabel)}" data-label-copied="${attr(s.copiedLabel)}">${icon('copy')}${icon('check')}<span>${esc(s.copyLabel)}</span></button></div><span class="vh" role="status" aria-live="polite" id="copy-status"></span><ul class="contact__links" data-reveal><li>${external(s.website, s.websiteLabel, '', c.a11y.newTab)}</li><li>${external(s.github, s.githubLabel, '', c.a11y.newTab)}</li><li>${esc(s.location)}</li></ul>`);
+  return section('contact', '07', navLabel(c, 'contact'), s.title, `<p class="lead" data-reveal>${esc(s.lead)}</p><p class="label" id="email-label">${esc(s.emailLabel)}</p><div class="contact__email-row" data-reveal><a class="contact__email" href="mailto:${attr(s.email)}" aria-describedby="email-label">${esc(s.email.split('@')[0])}<wbr><span class="email__domain">@${esc(s.email.split('@')[1])}</span></a><button type="button" class="btn btn--secondary copy-btn" hidden data-label-copy="${attr(s.copyLabel)}" data-label-copied="${attr(s.copiedLabel)}">${icon('copy')}${icon('check')}<span>${esc(s.copyLabel)}</span></button></div><span class="vh" role="status" aria-live="polite" id="copy-status"></span><ul class="contact__links" data-reveal><li>${external(s.website, s.websiteLabel, '', c.a11y.newTab)}</li><li>${external(s.github, s.githubLabel, '', c.a11y.newTab, true)}</li><li>${external(s.linkedin, s.linkedinLabel, '', c.a11y.newTab, true)}</li><li>${esc(s.location)}</li></ul>`);
 }

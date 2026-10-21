@@ -1,0 +1,32 @@
+:root, [data-theme="dark"] { --spot: rgb(138 91 255 / .22); }
+[data-theme="light"] { --spot: rgb(110 43 251 / .10); }
+.card { --card-pad: 22px; }
+@media (min-width: 768px) { .card { --card-pad: 26px; } }   /* mirrors the existing padding; padding itself is unchanged */
+
+/* Spotlight: compositor-only (translate), physical coordinates because pointer coordinates are physical */
+.card::before { content: ""; position: absolute; z-index: 0; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px;
+  border-radius: 50%; background: radial-gradient(circle, var(--spot) 0%, transparent 62%); pointer-events: none;
+  translate: var(--sx, -999px) var(--sy, -999px); opacity: 0; transition: opacity var(--dur-2) var(--ease-out); }
+.card.is-spot::before { opacity: 1; }
+.motion-paused .card::before { opacity: 0; }
+
+/* Rim signal: a 1.5px conic ring drawn on the inner edge of the plate */
+@property --rim-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.card > article::before { content: ""; position: absolute; z-index: -1; inset: calc(-1 * var(--card-pad)); padding: 1.5px;
+  border-radius: calc(var(--r-plate) - 1px); pointer-events: none; opacity: 0; transition: opacity 300ms var(--ease-out);
+  background: conic-gradient(from var(--rim-angle), transparent 0deg, var(--logo-a) 40deg, var(--cyan) 80deg, transparent 140deg, transparent 220deg, var(--logo-b) 260deg, transparent 320deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.card[data-featured="true"] > article::before { opacity: .4; }
+.card:focus-within > article::before { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .card:hover > article::before { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rim-spin { to { --rim-angle: 360deg; } }
+  .motion .card:focus-within > article::before { animation: rim-spin 3.2s linear infinite; }
+  @media (hover: hover) and (pointer: fine) { .motion .card:hover > article::before { animation: rim-spin 3.2s linear infinite; } }
+  .motion-paused .card > article::before { animation-play-state: paused; }
+}
+@supports not ((mask-composite: exclude) or (-webkit-mask-composite: xor)) { .card > article::before { display: none; } }
+@media (forced-colors: active) { .card::before, .card > article::before { display: none; } }
+
+/* Layering: spotlight z 0 < sheen z 1 < article z 2; rim z -1 stays inside the article stacking context. */

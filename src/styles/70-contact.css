@@ -22,7 +22,8 @@
 .contact__links svg { margin-inline-start: auto; transition: translate var(--dur-2) var(--ease-out); }
 .contact__links a:hover svg { translate: 2px -2px; }
 .contact__links li:last-child { align-items: center; padding-inline: 18px; border: 1px dashed var(--border); border-radius: var(--r-card); color: var(--fg2); }
-@media (min-width: 768px) { #contact > .container { padding: 48px; } .contact__links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 768px) { #contact > .container { padding: 48px; } .contact__links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 1024px) { .contact__links { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (min-width: 1024px) { #contact > .container { padding: 56px 64px; } }
 @media (forced-colors: active) {
   #contact > .container, .contact__links a, .contact__links li:last-child { border: 1px solid CanvasText; }

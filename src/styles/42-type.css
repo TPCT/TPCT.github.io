@@ -1,0 +1,15 @@
+.dc-src { position: relative; }
+.dc { position: absolute; inset-block-start: 0; inset-inline-start: 0; white-space: nowrap; pointer-events: none; }
+.dc-noise { color: var(--brand); }
+.is-decoding > .dc-src > .dc-txt { opacity: 0; }
+
+/* Name flow: the gradient word slowly flows. Only the approved --grad-name stops are used (ux-prism §3.4 rule 1). */
+@property --flow { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+:root, [data-theme="dark"] { --grad-flow: linear-gradient(100deg, #C9B8FF 0%, #8A5BFF 25%, #8FA0FF 50%, #8A5BFF 75%, #C9B8FF 100%); }
+[data-theme="light"] { --grad-flow: linear-gradient(100deg, #6E2BFB 0%, #5A1FE0 25%, #3346C4 50%, #5A1FE0 75%, #6E2BFB 100%); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes name-flow { 0%, 15% { --flow: 0%; } 85%, 100% { --flow: 100%; } }
+  .motion .hero h1 .w--accent > span { background-image: var(--grad-flow); background-size: 200% 100%; background-position: var(--flow) 50%; }
+  .motion .hero h1 .w--accent { animation: name-flow 8s var(--ease-in-out) 2s infinite alternate; }
+  .motion-paused .hero h1 .w--accent, .hero:has(.sc-hero.is-idle) h1 .w--accent { animation-play-state: paused; }
+}
