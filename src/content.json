@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Islam Elsayed — Systems Architect & Senior Full-Stack Engineer",
+    "title": "Islam Elsayed — CEO @ ShiftCodes · Senior Engineer",
     "shortTitle": "Islam Elsayed",
-    "description": "Islam Elsayed, founder of ShiftCodes, is a systems architect and senior full-stack engineer in Alexandria, Egypt. He designs and builds ERP, analytics, SaaS and learning systems for clients in Egypt and the Middle East.",
+    "description": "CEO @ ShiftCodes, technical team lead and consultant, and senior full-stack engineer. 9+ years shipping production software across the Middle East and US.",
     "url": "https://tpct.github.io",
     "lang": "en",
     "locale": "en_US",
     "author": "Islam Elsayed",
     "ogImage": "/assets/og-image.png",
-    "ogImageAlt": "Islam Elsayed — Founder @ ShiftCodes, Systems Architect, Senior Full-Stack Engineer",
+    "ogImageAlt": "Islam Elsayed — CEO @ ShiftCodes · Technical Team Lead & Consultant · Senior Full-Stack Engineer",
     "themeColorDark": "#110D1F",
     "themeColorLight": "#EEEBFA",
     "nav": [
@@ -46,12 +46,12 @@
     "eyebrow": "ShiftCodes / Engineering",
     "name": "Islam Elsayed",
     "roles": [
-      "Founder @ ShiftCodes",
-      "Systems Architect",
+      "CEO @ ShiftCodes",
+      "Technical Team Lead & Consultant",
       "Senior Full-Stack Engineer"
     ],
-    "headline": "Building production software for complex operations.",
-    "subheadline": "I design and ship the systems businesses run on: ERP, analytics, SaaS and learning platforms. They're built to keep working when the operation can't stop.",
+    "headline": "Leading teams that ship production systems.",
+    "subheadline": "Since 2017 I've built the platforms operations run on: national analytics, multi-tenant SaaS, food-tech and banking. Python, PHP and .NET, built to keep working at scale.",
     "domains": [
       "ERP",
       "Analytics",
@@ -62,7 +62,7 @@
       "Infrastructure"
     ],
     "location": "Alexandria, Egypt",
-    "reach": "Egypt → Middle East",
+    "reach": "9+ years · Middle East & US",
     "ctaPrimary": {
       "label": "View selected work",
       "href": "#work"
@@ -84,23 +84,27 @@
   "about": {
     "title": "About",
     "paragraphs": [
-      "I'm Islam Elsayed, a systems architect and senior full-stack engineer based in Alexandria, Egypt, and the founder of ShiftCodes. I build production software for organisations across Egypt and the Middle East, including enterprise ERP, government analytics, banking and insurance, learning platforms and multi-tenant SaaS.",
-      "My work starts with the real operation: how people approve, inspect, sell, ship and report. I model that operation before I write code. The result is software with clear permissions, auditable workflows and data that stays correct under retries, failures and growth.",
-      "I work mainly in PHP (Laravel, Filament, Yii2) and Python (FastAPI, Django), with React, Next.js and Livewire on the front end, Oracle, PostgreSQL, MySQL and Redis underneath, and Docker and Linux in production. Most of this work is private because it runs real client operations, so the case studies below describe the systems without exposing them."
+      "I'm Islam Elsayed, CEO of ShiftCodes and a senior technical team lead and consultant based in Alexandria, Egypt. Since 2017 I have shipped production software for companies in Egypt, Jordan, the UAE, Saudi Arabia and the US, from a national waste analytics platform in Saudi Arabia to multi-tenant SaaS, a food-tech restaurant platform and websites for banks and high-profile Jordanian clients.",
+      "I've worked as a CTO, a team lead and a senior engineer, and I start from the real operation before I write code. That has meant moving a multi-tenant platform from microservices to a modular monolith and cutting server costs from $15k to $2k, taking Oracle fetches over 100M+ rows from 3 s to 500 ms, and building a headless CMS that cut project delivery from about a month to 4 days.",
+      "I work mainly in Python (FastAPI, Django, Flask), PHP (Laravel, Filament, Yii2, Symfony) and .NET Core, with React, Next.js, Livewire and Flutter on the front end, Oracle, PostgreSQL, MySQL and Redis underneath, and Docker, GitHub Actions and Linux in production. Most of this work is private because it runs real client operations, so the case studies below describe the systems without exposing them."
     ]
   },
   "stats": [
     {
-      "value": "40%+",
-      "label": "faster loads delivered on a national analytics platform in Saudi Arabia"
+      "value": "9+",
+      "label": "years shipping production software, since 2017"
     },
     {
-      "value": "7",
-      "label": "domains shipped: ERP, analytics, banking, insurance, LMS, SaaS and infrastructure"
+      "value": "~250",
+      "label": "freelance projects delivered in Python and PHP"
     },
     {
-      "value": "2016",
-      "label": "writing and publishing code on GitHub since"
+      "value": "3 s → 500 ms",
+      "label": "data fetches over 100M+ rows on a national analytics platform in Saudi Arabia"
+    },
+    {
+      "value": "$15k → $2k",
+      "label": "server costs after re-architecting a multi-tenant platform as a modular monolith"
     }
   ],
   "skills": [
@@ -179,11 +183,241 @@
   ],
   "experience": [
     {
-      "role": "Founder, Systems Architect & Lead Engineer",
-      "org": "ShiftCodes",
+      "org": "Monglish International Academy",
+      "location": "Alexandria, Egypt · Hybrid",
+      "type": "Contract",
+      "roles": [
+        {
+          "title": "Senior Technical Team Lead & Technical Consultant",
+          "start": "2026-08",
+          "end": null,
+          "highlights": [
+            "Manage the technical staff and lead engineering hands-on."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Edulixa360",
+      "location": "Saudi Arabia · Remote",
+      "type": "Contract",
+      "roles": [
+        {
+          "title": "Senior Technical Team Lead & Technical Consultant",
+          "start": "2026-08",
+          "end": null,
+          "highlights": [
+            "Lead the technical team and its delivery, from technical direction down to hands-on work."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "ShiftCodes Digital Technologies",
       "orgUrl": "https://shiftcodes.net",
+      "location": "Cairo, Egypt · Remote",
+      "type": "Self-employed",
+      "roles": [
+        {
+          "title": "Chief Executive Officer",
+          "start": "2026-03",
+          "end": null,
+          "highlights": [
+            "Founded and run ShiftCodes, a software studio building ERP, analytics, SaaS and learning systems."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Raqmix",
+      "location": "Cairo, Egypt · Remote",
+      "type": "Full-time",
+      "roles": [
+        {
+          "title": "Development Team Lead",
+          "start": "2025-10",
+          "end": "2026-04",
+          "highlights": [
+            "Led the Python development teams."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Everything To Gain",
+      "location": "Texas, US · Remote",
+      "type": "Contract",
+      "roles": [
+        {
+          "title": "Senior Software Engineer",
+          "start": "2025-10",
+          "end": "2026-04",
+          "highlights": [
+            "Built multi-tenant apps in Laravel, FastAPI and .NET on a clean-architecture modular monolith, with secure REST APIs for PayPal, MasterCard and HyperPay.",
+            "Shipped scraping and automation pipelines (Playwright, Scrapy, Puppeteer) and CI/CD on GitHub Actions and Docker, and mentored the team through code review."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Kearney",
+      "orgUrl": "https://www.kearney.com",
+      "location": "UAE · Remote",
+      "type": "Contract",
+      "roles": [
+        {
+          "title": "Django Developer",
+          "start": "2025-06",
+          "end": "2025-09",
+          "highlights": [
+            "Refactored a government platform for stability and scalability and hardened its environment."
+          ]
+        },
+        {
+          "title": "Senior Software Engineer",
+          "start": "2024-06",
+          "end": "2026-01",
+          "highlights": [
+            "Led full-stack development of a national waste analytics platform in Saudi Arabia (Django, React), with real-time maps, SSO and multi-schema Oracle databases holding 100M+ rows.",
+            "Oracle multi-view optimisation cut large data fetches from 3 s to 500 ms."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "IPXBit Tech Solution",
+      "location": "UAE · Remote",
+      "type": "Contract",
+      "roles": [
+        {
+          "title": "Chief Technology Officer",
+          "start": "2025-03",
+          "end": "2025-09",
+          "highlights": [
+            "Designed a multi-tenant, multi-database architecture and moved from microservices to a modular monolith with a database per module, cutting server costs from $15k to $2k.",
+            "Led the UI/UX, frontend, backend and mobile teams."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "dot.jo",
+      "location": "Jordan · Remote",
+      "type": "Full-time",
+      "roles": [
+        {
+          "title": "Senior Full-Stack Developer (Team Leader)",
+          "start": "2023-05",
+          "end": "2025-06",
+          "highlights": [
+            "Built a headless CMS on Filament that any frontend or mobile app can use, cutting project delivery from about a month to 4 days.",
+            "Led a Yii2 team across 25+ projects, including 3 bank websites and work for high-profile Jordanian clients, with legacy refactoring and security hardening alongside DevOps."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Venu Dine",
+      "location": "Cairo, Egypt",
+      "type": "Full-time",
+      "roles": [
+        {
+          "title": "Chief Technology Officer",
+          "start": "2022-11",
+          "end": "2023-09",
+          "highlights": [
+            "Owned the full backend architecture in FastAPI and Laravel, plus the Flutter mobile and web apps, for a food-tech platform.",
+            "REST APIs for a multi-vendor restaurant system served 200k+ daily requests with 100% uptime."
+          ]
+        },
+        {
+          "title": "Senior Software Engineer",
+          "start": "2022-09",
+          "end": "2023-09",
+          "highlights": [
+            "OpenAPI specs and mock servers shared with the Flutter team sped up integration by 40%."
+          ]
+        },
+        {
+          "title": "Senior Back End Developer",
+          "start": "2022-09",
+          "end": "2023-01",
+          "highlights": [
+            "Upgraded Laravel 5 to 7 and built FastAPI services and Selenium-based automation."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Stackdeans",
+      "location": "On-site",
+      "type": "Full-time",
+      "roles": [
+        {
+          "title": "Full Stack Engineer",
+          "start": "2021-01",
+          "end": "2022-08",
+          "highlights": [
+            "Shipped 10+ Laravel sites with Stripe and AI features, lifting conversions by 25%.",
+            "Built reusable MVC components, optimised SQL and caching, and set up Docker-based CI/CD."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "WeDoAcc",
+      "location": "Remote",
+      "type": "Part-time",
+      "roles": [
+        {
+          "title": "Full Stack Engineer",
+          "start": "2019-01",
+          "end": "2022-09",
+          "highlights": [
+            "Built a productized accounting suite (invoicing, billing, reporting) and a CRM in Laravel.",
+            "Introduced a service-repository pattern that sped up feature delivery by 30%."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Aqua Web",
       "location": "Alexandria, Egypt",
-      "summary": "I founded ShiftCodes and lead it as a software engineering studio. I own architecture and delivery end to end for clients in Egypt and the Middle East, from discovery and data modelling through production rollout and ongoing work."
+      "type": "Full-time",
+      "roles": [
+        {
+          "title": "Full Stack Engineer",
+          "start": "2018-09",
+          "end": "2019-09",
+          "highlights": [
+            "Built 20+ modular MVC apps on a PHP core and Laravel 5, cutting code duplication by 40%."
+          ]
+        },
+        {
+          "title": "Web Developer (part-time)",
+          "start": "2017-03",
+          "end": "2018-09",
+          "highlights": [
+            "Delivered about 8 projects as a junior full-stack developer."
+          ]
+        }
+      ]
+    },
+    {
+      "org": "Freelance",
+      "location": "Remote",
+      "type": "Freelance",
+      "roles": [
+        {
+          "title": "Freelance Software Engineer",
+          "start": "2017-01",
+          "end": "2026-06",
+          "highlights": [
+            "Delivered ~250 projects in Python (FastAPI, Django, Flask) and PHP (Laravel, Symfony, CodeIgniter).",
+            "Built data-extraction and automation tooling, including API integration work for web and mobile apps."
+          ]
+        }
+      ]
     }
   ],
   "services": [
@@ -268,19 +502,22 @@
       "name": "National Waste Analytics Platform",
       "kind": "case-study",
       "category": "Analytics & AI",
-      "summary": "Government analytics for a national waste-management program in Saudi Arabia. It consolidates operational data into KPIs and dashboards that decision-makers rely on.",
+      "summary": "Government analytics for a national waste-management program in Saudi Arabia. It brings operational data together into real-time maps, KPIs and dashboards that decision-makers rely on.",
       "highlights": [
-        "Oracle multi-schema analytics across operational data sources",
-        "ETL pipelines and KPI aggregation feeding operational dashboards",
-        "Query and aggregation work that made dashboard loads 40%+ faster"
+        "Led full-stack development on Django and React, with real-time maps and SSO",
+        "Multi-schema Oracle databases holding 100M+ rows",
+        "Oracle multi-view optimisation that cut large data fetches from 3 s to 500 ms",
+        "Refactored for stability and scalability, and hardened the environment"
       ],
       "stack": [
+        "Django",
+        "React",
         "Oracle",
-        "SQL",
-        "ETL"
+        "SQL"
       ],
-      "role": "Systems architect & lead engineer",
-      "featured": true
+      "role": "Full-stack lead",
+      "featured": true,
+      "year": 2025
     },
     {
       "id": "aic-operations-suite",
@@ -345,6 +582,29 @@
       ],
       "role": "Systems architect & lead engineer",
       "featured": true
+    },
+    {
+      "id": "multi-vendor-restaurant-platform",
+      "name": "Multi-Vendor Restaurant Platform",
+      "kind": "case-study",
+      "category": "APIs & Backend",
+      "summary": "A food-tech platform where many restaurants share one ordering and menu system, with mobile and web apps on top of a single backend.",
+      "highlights": [
+        "REST APIs for a multi-vendor restaurant system serving 200k+ daily requests with 100% uptime",
+        "Full backend architecture across FastAPI and Laravel services",
+        "Flutter mobile and web apps tuned for fast menu performance",
+        "OpenAPI specs and mock servers that sped up Flutter integration by 40%"
+      ],
+      "stack": [
+        "FastAPI",
+        "Python",
+        "Laravel",
+        "PHP",
+        "Flutter"
+      ],
+      "role": "CTO & backend architect",
+      "year": 2023,
+      "featured": false
     },
     {
       "id": "multi-school-lms",
@@ -698,9 +958,13 @@
     "skills": "Stack",
     "experience": "Experience",
     "services": "Services",
-    "process": "Process"
+    "process": "Process",
+    "experienceMoreLabel": "Earlier roles"
   },
   "a11y": {
     "newTab": "(opens in new tab)"
+  },
+  "timelineIntro": {
+    "lead": "From the first public commit in 2016 to leading ShiftCodes: the companies, client systems, open-source work and milestones along the way."
   }
 }

@@ -30,16 +30,30 @@ export function validateContent(c) {
   protocol(hero.ctaSecondary?.href, /^mailto:/, 'hero.ctaSecondary.href');
   protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
   for (const k of ['github', 'website']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
-  if (Array.isArray(c.experience)) c.experience.forEach((v, i) => protocol(v?.orgUrl, /^https:\/\//, `experience[${i}].orgUrl`));
   const about = strings(c.about, 'title', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
-  strings(c.sections, 'skills experience services process', 'sections');
+  strings(c.sections, 'skills experience experienceMoreLabel services process', 'sections');
   strings(c.a11y, 'newTab', 'a11y');
   strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel location', 'contact');
   const nf = strings(c.notFound, 'title code message', 'notFound'); strings(nf.cta, 'label href', 'notFound.cta');
   const intro = strings(c.projectsIntro, 'title lead filterLabel allLabel repoLinkLabel privateNote emptyState kindFilterLabel countSingular countPlural resetLabel roleLabel stackLabel', 'projectsIntro');
   strings(intro.kindLabels, 'case-study open-source', 'projectsIntro.kindLabels');
   array(c.skills, 'skills').forEach((s, i) => { s = strings(s, 'group', `skills[${i}]`); stringArray(s.items, `skills[${i}].items`); });
-  for (const [key, fields] of [['experience', 'role org orgUrl location summary'], ['services', 'title desc'], ['process', 'step desc']]) array(c[key], key).forEach((v, i) => strings(v, fields, `${key}[${i}]`));
+  for (const [key, fields] of [['services', 'title desc'], ['process', 'step desc']]) array(c[key], key).forEach((v, i) => strings(v, fields, `${key}[${i}]`));
+  array(c.experience, 'experience').forEach((entry, i) => {
+    const path = `experience[${i}]`;
+    entry = strings(entry, 'org location type', path);
+    if (entry.orgUrl !== undefined) protocol(entry.orgUrl, /^https:\/\//, `${path}.orgUrl`);
+    array(entry.roles, `${path}.roles`).forEach((role, j) => {
+      const rp = `${path}.roles[${j}]`;
+      role = strings(role, 'title start', rp);
+      const month = /^\d{4}-(0[1-9]|1[0-2])$/;
+      if (!month.test(role.start ?? '')) errors.push(`${rp}.start: expected YYYY-MM with valid month`);
+      if (role.end !== null && (typeof role.end !== 'string' || !month.test(role.end))) errors.push(`${rp}.end: expected YYYY-MM with valid month or null`);
+      if (month.test(role.start) && month.test(role.end) && role.end < role.start) errors.push(`${rp}.end: must be >= start`);
+      stringArray(role.highlights, `${rp}.highlights`);
+      if (Array.isArray(role.highlights) && role.highlights.length > 3) errors.push(`${rp}.highlights: expected 1–3 items`);
+    });
+  });
   if (c.stats !== undefined) array(c.stats, 'stats', false).forEach((s, i) => strings(s, 'value label', `stats[${i}]`));
   const categories = array(c.categories, 'categories'); stringArray(c.categories, 'categories');
   if (new Set(categories).size !== categories.length) errors.push('categories: must be unique');

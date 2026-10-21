@@ -107,3 +107,22 @@ test('spine progress is clamped, frame-throttled and respects motion changes', a
   preference.matches = true; top = 1000;
   events.change(); queued(); assert.equal(progress, 1);
 });
+
+test('stat count-up animates simple numbers and leaves composite values static', async () => {
+  const source = await readFile(new URL('../src/scripts/60-motion.js', import.meta.url), 'utf8');
+  for (const reduce of [false, true]) {
+    const ctx = context(reduce), animated = [], frames = [];
+    const values = ['9+', '~250', '3 s → 500 ms', '$15k → $2k'];
+    const nodes = values.map(textContent => ({ textContent, offsetWidth: 80, style: { set minWidth(value) {} }, replaceChildren() { animated.push(textContent); } }));
+    const stats = { querySelectorAll: () => nodes, getBoundingClientRect: () => ({ top: 100, bottom: 300 }) };
+    ctx.document.querySelector = selector => selector === '.stats' ? stats : null;
+    ctx.document.createElement = () => ({ setAttribute() {} });
+    ctx.setTimeout = fn => { fn(); return 0; };
+    ctx.requestAnimationFrame = fn => { frames.push(fn); return 0; };
+    vm.runInNewContext(source, ctx);
+    assert.deepEqual(animated, reduce ? [] : ['9+', '~250']);
+    for (const fn of frames) fn(1400);
+    assert.equal(nodes[2].textContent, values[2]);
+    assert.equal(nodes[3].textContent, values[3]);
+  }
+});

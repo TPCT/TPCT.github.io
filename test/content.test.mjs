@@ -44,6 +44,20 @@ test('original copy is unchanged apart from §9 additions and owner updates', as
     "repoUrl": "https://github.com/TPCT/ashurbank.iq",
     "featured": true
   });
+  const career = JSON.parse(await readFile(new URL('../.company/content-career.json', import.meta.url), 'utf8'));
+  for (const key of ['experience', 'stats', 'timelineIntro']) original[key] = career[key];
+  Object.assign(original.hero, career.hero, { reach: '9+ years · Middle East & US' });
+  Object.assign(original.about, career.about);
+  Object.assign(original.site, {
+    title: 'Islam Elsayed — CEO @ ShiftCodes · Senior Engineer',
+    description: 'CEO @ ShiftCodes, technical team lead and consultant, and senior full-stack engineer. 9+ years shipping production software across the Middle East and US.',
+    ogImageAlt: 'Islam Elsayed — CEO @ ShiftCodes · Technical Team Lead & Consultant · Senior Full-Stack Engineer'
+  });
+  for (const project of original.projects) Object.assign(project, career.projectPatches[project.id]);
+  for (const addition of career.projectsAdd) {
+    const { _insertAfter, ...project } = addition;
+    original.projects.splice(original.projects.findIndex(p => p.id === _insertAfter) + 1, 0, project);
+  }
   const stripped = structuredClone(c);
   for (const [key, values] of Object.entries(additions)) {
     if (['sections', 'a11y'].includes(key)) delete stripped[key];
@@ -63,3 +77,17 @@ test('Prism theme and motion labels validate', () => {
   const bad = structuredClone(c); delete bad.hero.motionToggle.pause;
   assert.match(validateContent(bad).errors.join('\n'), /hero\.motionToggle\.pause/);
 });
+
+test('career content has four stats and validates grouped roles', () => {
+  assert.equal(c.stats.length, 4);
+  assert.equal(c.experience.length, 13);
+  assert.deepEqual(validateContent(c).errors, []);
+});
+for (const [name, mutate, message] of [
+  ['bad month', x => { x.experience[0].roles[0].start = '2026-13'; }, /experience\[0\]\.roles\[0\]\.start: expected YYYY-MM with valid month/],
+  ['end before start', x => { x.experience[0].roles[0].end = '2026-01'; }, /end: must be >= start/],
+  ['missing roles', x => { delete x.experience[0].roles; }, /experience\[0\]\.roles: required array/],
+  ['empty roles', x => { x.experience[0].roles = []; }, /roles: must not be empty/],
+  ['insecure org URL', x => { x.experience[0].orgUrl = 'http://example.com'; }, /orgUrl: invalid URL protocol/],
+  ['missing earlier roles label', x => { delete x.sections.experienceMoreLabel; }, /experienceMoreLabel: required non-empty string/]
+]) test(name, () => { const bad = structuredClone(c); mutate(bad); assert.match(validateContent(bad).errors.join('\n'), message); });

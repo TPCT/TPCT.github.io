@@ -31,8 +31,8 @@
   document.addEventListener('focusin',e=>{const s=e.target.closest('.is-pending');
   if(s)t(s)});
   addEventListener('beforeprint',s)}const o=document.querySelector('.stats');
-  if(o){const e=()=>o.querySelectorAll('.stat__value').forEach((e,t)=>{const s=e.textContent.trim(),n=s.match(/^(\D*)(\d+)(.*)$/);
-  if(!n)return;
+  if(o){const e=()=>o.querySelectorAll('.stat__value').forEach((e,t)=>{const s=e.textContent.trim(),n=s.match(/^(~?)(\d+)([+%]?)$/);
+if(!n)return;
   setTimeout(()=>{const t=+n[2],o=t>=1e3?t-10:0,i=document.createElement('span'),r=document.createElement('span');
   e.style.minWidth=e.offsetWidth+'px';
   i.setAttribute('aria-hidden','true');

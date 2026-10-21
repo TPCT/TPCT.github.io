@@ -12,6 +12,7 @@
 | T-008 | Prism OG image, favicons, render-images.mjs (no local paths) | S | T-005 | done (re-skin in T-008b) |
 | T-009 | ShiftCodes brand colours + animated logo hero | M | T-006 | done |
 | T-015 | Vertical rhythm + section continuity (spine) | M | T-007 | done |
+| T-016 | Real career history (LinkedIn): experience, hero/about/stats, new case study | M | T-015 | done |
 | T-010 | W-1 Signal field: hero particle constellation + raise JS/CSS caps | M | T-015 | todo |
 | T-011 | W-2 Compile type: glyph decode + name flow | S | T-010 | todo |
 | T-012 | W-3 Live cards: cursor spotlight + rim signal | S | T-010 | todo |

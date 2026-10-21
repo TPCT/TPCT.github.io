@@ -15,7 +15,7 @@ test('projects render complete cards, filters and section hierarchy', async t =>
   const html = await readFile(`${outDir}/index.html`, 'utf8');
   const cards = [...html.matchAll(/<li class="card card--[^>]+>[\s\S]*?<\/article><\/li>/g)].map(m => m[0]);
   assert.equal(cards.length, c.projects.length);
-  assert.equal(cards.length, 19);
+  assert.equal(c.projects.length, 20);
   assert.deepEqual(cards.map(card => card.match(/<h3 id="p-([^"]+)"/)[1]), sortProjects(c.projects).map(p => p.id));
   for (const p of c.projects) {
     const card = cards.find(card => card.includes(`id="p-${p.id}"`));
@@ -30,16 +30,18 @@ test('projects render complete cards, filters and section hierarchy', async t =>
       assert.ok(card.includes(`<span class="vh"> : ${esc(p.name)} ${esc(c.a11y.newTab)}</span>`));
     }
     if (p.year === undefined) assert.doesNotMatch(card, /card__year/);
+    else assert.ok(card.includes(`<span class="card__year">${esc(p.year)}</span>`));
   }
   assert.doesNotMatch(html, /undefined|null|class="card__year"><\/span>|style="|\son[a-z]+\s*=/i);
-  for (const id of ['national-waste-analytics', 'food-manufacturing-erp', 'ocr-omr']) assert.doesNotMatch(cards.find(card => card.includes(`id="p-${id}"`)), /card__year/);
+  for (const id of ['food-manufacturing-erp', 'ocr-omr']) assert.doesNotMatch(cards.find(card => card.includes(`id="p-${id}"`)), /card__year/);
+  assert.equal(c.projects.find(p => p.id === 'national-waste-analytics').year, 2025);
   const chips = [...html.matchAll(/<button type="button" class="chip"[^>]+data-(category|kind)="([^"]+)"><span class="chip__label">([^<]+)<\/span><span class="chip__count">(\d+)<\/span><\/button>/g)];
-  assert.deepEqual(chips.filter(m => m[1] === 'category').map(m => [m[2], Number(m[4])]), [['all', 19], ...c.categories.map((category, i) => [slugify(category), [4, 3, 3, 1, 3, 2, 3][i]])]);
+  assert.deepEqual(chips.filter(m => m[1] === 'category').map(m => [m[2], Number(m[4])]), [['all', c.projects.length], ...c.categories.filter(category => c.projects.some(p => p.category === category)).map(category => [slugify(category), c.projects.filter(p => p.category === category).length])]);
   assert.deepEqual(
     chips.filter(m => m[1] === 'category').slice(1).map(m => [m[2], Number(m[4])]),
     c.categories.filter(cat => c.projects.some(p => p.category === cat)).map(cat => [slugify(cat), c.projects.filter(p => p.category === cat).length])
   );
-  assert.deepEqual(chips.filter(m => m[1] === 'kind').map(m => [m[2], Number(m[4])]), [['all', 19], ['case-study', 11], ['open-source', 8]]);
+  assert.deepEqual(chips.filter(m => m[1] === 'kind').map(m => [m[2], Number(m[4])]), [['all', c.projects.length], ...['case-study', 'open-source'].map(kind => [kind, c.projects.filter(p => p.kind === kind).length])]);
   const ids = ['top', 'about', 'experience', 'skills', 'work', 'services', 'process', 'contact'];
   const positions = ids.map(id => html.indexOf(`<section id="${id}"`));
   assert.ok(positions.every((position, i) => position >= 0 && (!i || position > positions[i - 1])));

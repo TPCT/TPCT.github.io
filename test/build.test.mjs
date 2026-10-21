@@ -34,7 +34,7 @@ test('build emits scaffold, accessible hero and exact CSP script', async t => {
   for (const part of ['hook-top', 'hook-bottom', 'lt', 'slash', 'gt']) assert.ok(hero.includes(`id="hero-sc-${part}"`));
   assert.equal((hero.match(/<path id="hero-sc-/g) ?? []).length, 5);
   assert.match(html, /class="brand__mark"/);
-  assert.equal((hero.match(/class="stat__value"/g) ?? []).length, 3);
+  assert.equal((hero.match(/class="stat__value"/g) ?? []).length, 4);
   assert.equal((hero.match(/<a /g) ?? []).length, 3);
   assert.ok(!renderHero({ ...c, stats: [] }).includes('class="stats"'));
   assert.match(html, /site\.css\?v=[a-f0-9]{10}/); assert.match(html, /site\.js\?v=[a-f0-9]{10}/);

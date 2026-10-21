@@ -65,3 +65,21 @@ test('section partials gate every keyframe and animation on motion preference', 
     assert.doesNotMatch(remainder, /@keyframes|\banimation\s*:/, name);
   }
 });
+
+test('career is grouped with native earlier roles and deterministic inclusive dates', async () => {
+  const { renderExperience, renderCard } = await import('../src/render/sections.mjs');
+  const html = renderExperience(c, new Date('2026-10-21T00:00:00Z'));
+  assert.match(html, /<ol class="career">/);
+  assert.equal((html.match(/class="career__org"/g) ?? []).length, 13);
+  assert.equal((html.split('<details')[0].match(/class="career__org"/g) ?? []).length, 6);
+  assert.match(html, /<details class="career__more"><summary>Earlier roles<\/summary>/);
+  assert.match(html, /<time datetime="2017-03">Mar 2017<\/time>/);
+  assert.match(html, /Present · 3 mos/);
+  assert.match(html, /1 yr 7 mos/);
+  assert.doesNotMatch(html, /exp__summary/);
+  assert.equal((html.match(/class="career__now"/g) ?? []).length, 3);
+  const project = c.projects.find(p => p.id === 'multi-vendor-restaurant-platform');
+  assert.doesNotMatch(renderCard(project, c), /<a\b/);
+  assert.match(renderCard(c.projects.find(p => p.id === 'national-waste-analytics'), c), /class="card__year">2025</);
+  assert.equal(c.projects.find(p => p.id === 'aic-operations-suite').year, 2026);
+});

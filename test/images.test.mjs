@@ -7,7 +7,7 @@ const c = JSON.parse(await readFile(new URL('src/content.json', root), 'utf8'));
 const localPaths = new RegExp(['file:' + '//', '/ho' + 'me/', '/Us' + 'ers/', '(?<![A-Za-z])[A-Za-z]:' + '\\\\'].join('|'));
 test('OG SVG uses Prism fonts and content without local paths', async () => {
   const svg = await readFile(new URL('src/images/og-image.svg', root), 'utf8');
-  for (const value of ["url('../../public/assets/fonts/outfit-var.woff2')", "url('../../public/assets/fonts/jakarta-var.woff2')", '#1A1726', ...c.hero.name.split(/\s+/).map(esc), esc(c.hero.roles[0]), ...c.hero.domains.map(esc), esc(new URL(c.site.url).host)]) assert.ok(svg.includes(value), value);
+  for (const value of ["url('../../public/assets/fonts/outfit-var.woff2')", "url('../../public/assets/fonts/jakarta-var.woff2')", '#1A1726', ...c.hero.name.split(/\s+/).map(esc), ...c.hero.roles.map(esc), ...c.hero.domains.map(esc), esc(new URL(c.site.url).host)]) assert.ok(svg.includes(value), value);
   assert.doesNotMatch(svg, localPaths);
   for (const value of ['file:', '/tm' + 'p/', 'arch' + 'ivo', 'Deja' + 'Vu']) assert.ok(!svg.includes(value), value);
 });

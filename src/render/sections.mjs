@@ -12,8 +12,22 @@ function external(url, label, className = '', newTab = '') {
 export function renderAbout(c) {
   return section('about', '01', navLabel(c, 'about'), c.about.title, `<div class="about__body" data-reveal>${c.about.paragraphs.map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${esc(p)}</p>`).join('')}</div>`);
 }
-export function renderExperience(c) {
-  return section('experience', '02', c.sections.experience, c.sections.experience, `<ol class="experience">${c.experience.map(e => `<li data-reveal><h3>${esc(e.role)}</h3><p class="exp__org">${external(e.orgUrl, e.org, 'text-link', c.a11y.newTab)}</p><p class="exp__loc">${esc(e.location)}</p><p class="exp__summary">${esc(e.summary)}</p></li>`).join('')}</ol>`);
+function careerDates(role, now) {
+  const monthIndex = value => { const [year, month] = value.split('-').map(Number); return year * 12 + month - 1; };
+  const time = value => {
+    const [year, month] = value.split('-').map(Number);
+    const label = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1)));
+    return `<time datetime="${attr(value)}">${esc(label)}</time>`;
+  };
+  const months = Math.max(1, (role.end ? monthIndex(role.end) : now.getUTCFullYear() * 12 + now.getUTCMonth()) - monthIndex(role.start) + 1);
+  const years = Math.floor(months / 12), rest = months % 12;
+  const duration = [years ? `${years} ${years === 1 ? 'yr' : 'yrs'}` : '', rest ? `${rest} ${rest === 1 ? 'mo' : 'mos'}` : ''].filter(Boolean).join(' ');
+  return `${time(role.start)} – ${role.end ? time(role.end) : 'Present'} · ${duration}`;
+}
+export function renderExperience(c, now = new Date()) {
+  const company = e => `<li class="career__org" data-reveal><div class="career__head"><h3>${e.orgUrl ? external(e.orgUrl, e.org, 'text-link', c.a11y.newTab) : esc(e.org)}</h3><p class="career__meta">${esc(e.type)} · ${esc(e.location)}</p></div><ol class="career__roles">${e.roles.map(r => `<li class="career__role"><p class="career__title">${esc(r.title)}${r.end === null ? ' <span class="career__now">Now</span>' : ''}</p><p class="career__dates">${careerDates(r, now)}</p><ul class="career__points">${r.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul></li>`).join('')}</ol></li>`;
+  const list = entries => `<ol class="career">${entries.map(company).join('')}</ol>`;
+  return section('experience', '02', c.sections.experience, c.sections.experience, `${list(c.experience.slice(0, 6))}<details class="career__more"><summary>${esc(c.sections.experienceMoreLabel)}</summary>${list(c.experience.slice(6))}</details>`);
 }
 export function renderSkills(c) {
   return section('skills', '03', navLabel(c, 'skills'), c.sections.skills, `<div class="skills">${c.skills.map((s, i) => `<div class="skill-group" data-reveal><div class="skill-group__head"><span aria-hidden="true">S${i + 1}</span><h3>${esc(s.group)}</h3></div>${tags(s.items)}</div>`).join('')}</div>`);
