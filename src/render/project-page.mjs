@@ -1,4 +1,4 @@
-import { esc, attr, projectPath } from '../lib/html.mjs';
+import { esc, attr, externalAttrs, projectPath } from '../lib/html.mjs';
 import { icon } from '../lib/icons.mjs';
 import { projectGraph } from '../lib/schema.mjs';
 import { renderHead } from './head.mjs';
@@ -28,8 +28,8 @@ export function renderProjectPage(c, p, { assets, prev = null, next = null }) {
 <dl class="project__facts">${fact(s.roleLabel, p.role)}${p.year === undefined ? '' : fact(pp.yearLabel, p.year)}${fact(pp.typeLabel, s.kindLabels[p.kind])}${fact(pp.categoryLabel, p.category)}</dl>
 <section class="project__block" aria-labelledby="project-hl"><h2 id="project-hl">${esc(pp.highlightsTitle)}</h2><ul class="project__highlights">${p.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul></section>
 <section class="project__block" aria-labelledby="project-stack"><h2 id="project-stack">${esc(pp.stackTitle)}</h2><ul class="tags" aria-label="${attr(s.stackLabel)}">${p.stack.map(x => `<li class="tag">${esc(x)}</li>`).join('')}</ul></section>
-${privateWork ? `<p class="card__private">${icon('lock', 16)}${esc(s.privateNote)}</p>` : `<p class="project__cta"><a class="btn btn--primary" href="${attr(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${icon('git-branch', 18)}${esc(s.repoLinkLabel)}<span class="vh"> : ${esc(p.name)} ${esc(c.a11y.newTab)}</span>${icon('arrow-up-right', 16)}</a></p>`}
-<nav class="project__pager" aria-label="${attr(pp.pagerLabel)}">${neighbour(prev, 'prev', pp.prevLabel)}${neighbour(next, 'next', pp.nextLabel)}</nav>
-<a class="text-link project__back" href="/#work">${esc(pp.backLabel)}</a></div></article>`;
+<div class="project__actions">${privateWork ? `<p class="card__private">${icon('lock', 16)}<span title="${attr(s.privateNote)}">${esc(s.privateNote)}</span></p>` : `<a class="card__more" href="${attr(p.repoUrl)}" ${externalAttrs()}>${icon('git-branch', 16)}${esc(s.repoLinkLabel)}<span class="vh"> : ${esc(p.name)} ${esc(c.a11y.newTab)}</span>${icon('arrow-up-right', 16)}</a>`}
+<a class="card__repo project__back" href="/#work">${icon('arrow-left', 16)}${esc(pp.backLabel)}</a></div>
+<nav class="project__pager" aria-label="${attr(pp.pagerLabel)}">${neighbour(prev, 'prev', pp.prevLabel)}${neighbour(next, 'next', pp.nextLabel)}</nav></div></article>`;
   return renderPage(c, { head, header: renderHeader(c, { home: false }), main, footer: renderFooter(c) });
 }

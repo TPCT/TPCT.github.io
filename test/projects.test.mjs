@@ -21,6 +21,10 @@ test('projects render complete cards, filters and section hierarchy', async t =>
     const card = cards.find(card => card.includes(`id="p-${p.id}"`));
     assert.ok(card.includes(`data-category="${slugify(p.category)}"`));
     assert.ok(card.includes(`data-featured="${p.featured}"`));
+    const actions = card.match(/<footer class="card__foot"><p class="card__role">.*?<\/p><div class="card__actions">(.*?)<\/div><\/footer>/s)?.[1];
+    assert.ok(actions);
+    assert.deepEqual([...actions.matchAll(/<(a|p) class="(card__more|card__repo|card__private)"/g)].map(m => [m[1], m[2]]), [['a', 'card__more'], [p.kind === 'case-study' ? 'p' : 'a', p.kind === 'case-study' ? 'card__private' : 'card__repo']]);
+    assert.match(actions, /icon-arrow-right/);
     if (p.kind === 'case-study') {
       assert.equal((card.match(/<a\b/g) || []).length, 1);
       assert.ok(card.includes(`href="/work/${p.id}/"`));
@@ -66,4 +70,30 @@ test('case-study repoUrl is ignored and content is escaped', () => {
   assert.deepEqual([...card.matchAll(/href="([^"]+)"/g)].map(m => m[1]), [`/work/${p.id}/`]);
   assert.ok(card.includes('&lt;script&gt;&quot;&amp;'));
   assert.ok(card.includes(esc(c.projectsIntro.privateNote)));
+});
+
+test('card and project actions share spaced, responsive pill styles', async () => {
+  const css = await readFile(new URL('../src/styles/60-work.css', import.meta.url), 'utf8');
+  const row = css.match(/\.card__actions, \.project__actions \{([^}]+)\}/)[1];
+  assert.match(row, /display: flex;/);
+  assert.match(row, /flex-wrap: wrap;/);
+  assert.match(row, /gap: 12px;/);
+  assert.match(css, /\.card__more \{[^}]*background: var\(--primary-skin\)/);
+  assert.match(css, /\.card__repo \{[^}]*background: var\(--control\)/);
+  assert.match(css, /@media \(min-width: 1024px\) \{ \.card__actions, \.project__actions \{ gap: 16px;/);
+  assert.match(css, /@media \(max-width: 400px\) \{ \.card__actions > \*, \.project__actions > \* \{ flex: 1 1 100%; justify-content: center;/);
+});
+
+
+test('mobile private notes fit one line and back arrows nudge left', async () => {
+  const css = await readFile(new URL('../src/styles/60-work.css', import.meta.url), 'utf8');
+  const mobile = css.match(/@media \(max-width: 400px\) \{.*?\.card__private \{([^}]+)\}/s)?.[1];
+  assert.ok(mobile);
+  assert.match(mobile, /font-size: \.8125rem;/);
+  assert.match(mobile, /padding-inline: 12px;/);
+  assert.match(mobile, /text-align: center;/);
+  assert.match(mobile, /line-height: 1\.25;/);
+  assert.match(css, /\.card__private span \{ min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; \}/);
+  assert.match(css, /\.project__back:hover \.icon-arrow-left \{ translate: -2px 0; \}/);
+  assert.match(css, /\.card__more:hover \.icon-arrow-right \{ translate: 2px 0; \}/);
 });

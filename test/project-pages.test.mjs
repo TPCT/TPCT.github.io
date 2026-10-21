@@ -47,6 +47,10 @@ test('static project pages, discovery, metadata, graph and confidentiality', asy
     if (p.kind === 'case-study') { assert.ok(!('codeRepository' in node)); assert.deepEqual(external, []); }
     else { assert.equal(node.codeRepository, p.repoUrl); assert.deepEqual(external, [p.repoUrl]); }
     assert.match(main, /href="\/#work"/);
+    const actions = main.match(/<div class="project__actions">(.*?)<\/div>/s)?.[1];
+    assert.ok(actions);
+    assert.deepEqual([...actions.matchAll(/<(a|p) class="([^" ]+)/g)].map(m => [m[1], m[2]]), [[p.kind === 'case-study' ? 'p' : 'a', p.kind === 'case-study' ? 'card__private' : 'card__more'], ['a', 'card__repo']]);
+    assert.match(actions, /class="card__repo project__back" href="\/#work"><svg class="icon-arrow-left"[^>]*>.*?<\/svg>Back to all work<\/a>/s);
     assert.match(main, /<nav class="crumbs"[^>]*>.*?aria-current="page"/s);
     for (const [direction, neighbour] of [['prev', ordered[i - 1]], ['next', ordered[i + 1]]]) {
       if (neighbour) assert.ok(main.includes(`rel="${direction}" href="${projectPath(neighbour)}"`));

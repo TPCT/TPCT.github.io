@@ -22,6 +22,7 @@
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
 | T-028 | Remove Experience section (owner) | S | T-025 | done |
+| T-029 | Card actions row spacing + button system (owner) | S | T-028 | done |
 | T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | done |
 | T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | done |
 | T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | done |
