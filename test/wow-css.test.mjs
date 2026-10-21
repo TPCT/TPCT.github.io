@@ -15,7 +15,7 @@ test('stack marquee duplicates decorative rows and preserves accessible skills',
   const css = await readFile(`${outDir}/assets/site.css`, 'utf8');
   const skills = html.match(/<section id="skills"[^>]*>(.*?)<\/section>/s)?.[1];
   assert.ok(skills);
-  assert.match(skills, />04 \/ /);
+  assert.match(skills, />03 \/ /);
   assert.equal((skills.match(/class="marquee" aria-hidden="true"/g) ?? []).length, 1);
   const marquee = skills.slice(skills.indexOf('<div class="marquee"'), skills.indexOf('<div class="skills">'));
   assert.ok(skills.indexOf('</header>') < skills.indexOf('<div class="marquee"'));

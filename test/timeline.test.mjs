@@ -60,10 +60,10 @@ test('built Journey meets structure, accessibility, confidentiality and spine co
   const css = await readFile(path.join(outDir, 'assets/site.css'), 'utf8');
   const section = html.match(/<section id="timeline"[\s\S]*?<\/section>/)[0];
   const ids = [...html.matchAll(/<section id="([^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(ids, ['top', 'about', 'experience', 'timeline', 'skills', 'work', 'services', 'process', 'contact']);
+  assert.deepEqual(ids, ['top', 'about', 'timeline', 'skills', 'work', 'services', 'process', 'contact']);
   const nav = html.match(/<nav\b[^>]*id="primary-nav"[\s\S]*?<\/nav>/)[0];
   assert.deepEqual([...nav.matchAll(/href="#([^"]+)"[^>]*>([^<]+)/g)].map(m => [m[1], m[2]]), [['about', 'About'], ['timeline', 'Journey'], ['skills', 'Stack'], ['work', 'Work'], ['services', 'Services'], ['contact', 'Contact']]);
-  assert.deepEqual([...html.matchAll(/class="section-head__index"[^>]*>(\d{2}) \//g)].map(m => m[1]), ['01', '02', '03', '04', '05', '06', '07', '08']);
+  assert.deepEqual([...html.matchAll(/class="section-head__index"[^>]*>(\d{2}) \//g)].map(m => m[1]), ['01', '02', '03', '04', '05', '06', '07']);
   const items = [...section.matchAll(/<li class="tl__item ([^"]+)">([\s\S]*?)<\/li>/g)];
   assert.equal(items.length, 15);
   for (const [i, item] of c.timeline.entries()) {

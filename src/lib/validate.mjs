@@ -64,7 +64,7 @@ export function validateContent(c) {
     if (!(Array.isArray(c.experience) ? c.experience : []).some(e => typeof e?.org === 'string' && e.org.toLowerCase().includes(normalized))) errors.push(`about.companies[${i}]: not found in experience`);
   });
   for (const key of ['paragraphs', 'factsLabel']) if (Object.hasOwn(about, key)) errors.push('about.paragraphs: removed, use lead/intro/pillars');
-  strings(c.sections, 'skills experience experienceMoreLabel timeline services process', 'sections');
+  strings(c.sections, 'skills timeline services process', 'sections');
   const timelineIntro = strings(c.timelineIntro, 'title lead linkLabel', 'timelineIntro');
   strings(timelineIntro.kindLabels, 'company client open-source milestone', 'timelineIntro.kindLabels');
   let previousYear;

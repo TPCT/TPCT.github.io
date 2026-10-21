@@ -40,7 +40,6 @@
     let paused=B.paused();
     new MutationObserver(()=>{const p=B.paused();if(p===paused)return;paused=p;if(p)stop();else if(fine)start()}).observe(e,{attributes:true,attributeFilter:['class']});
     d.fonts?.ready.then(B.refresh);
-    d.addEventListener('toggle',ev=>{if(ev.target.matches?.('details.career__more'))B.refresh()},true);
     addEventListener('beforeprint',()=>{B.mm.revert();stop()});
     const next=()=>{if(queue.length){run(queue.shift());setTimeout(next,0)}else{done=true;ST.sort();ST.refresh()}};
     const flush=()=>{e.classList.add('bold');setTimeout(next,0)};

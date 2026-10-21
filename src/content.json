@@ -989,10 +989,8 @@
   },
   "sections": {
     "skills": "Stack",
-    "experience": "Experience",
     "services": "Services",
     "process": "Process",
-    "experienceMoreLabel": "Earlier roles",
     "timeline": "Journey"
   },
   "a11y": {

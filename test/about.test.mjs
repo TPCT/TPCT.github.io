@@ -13,6 +13,7 @@ test('built About has the statement, pillars and accessible company rail', async
   t.after(() => rm(outDir, { recursive: true, force: true }));
   await build({ outDir });
   const html = await readFile(`${outDir}/index.html`, 'utf8');
+  assert.doesNotMatch(html, /id="experience"/);
   const about = html.match(/<section id="about"[^]*?<\/section>/)?.[0];
   assert.ok(about);
   const lead = about.match(/<p class="about__lead" data-reveal>(.*?)<\/p>/)[1];

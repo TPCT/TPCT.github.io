@@ -21,6 +21,7 @@
 | T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | done |
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
+| T-028 | Remove Experience section (owner) | S | T-025 | done |
 | T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | done |
 | T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | done |
 | T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | done |
@@ -135,3 +136,4 @@ Bold lead pre-step: commit + push `public/assets/vendor/` (currently untracked) 
   - `toggle` refresh hook uses a capture listener (the event does not bubble).
   - Every bold ticket includes a throwaway Playwright check outside the repo (CSP violations + console errors = 0, plus its behaviour), using the local Chromium/playwright-core paths from T-003.
 - 2026-10-21 PM: Follow-up from T-024 r2: guard curtain-cancel path (await a.ready.catch → finish()) so the name can never stay hidden → T-027 (runs with T-025).
+- 2026-10-21 PM: Owner: remove the Experience section → T-028 (data kept for About strip + JSON-LD; sections renumbered 01–07).

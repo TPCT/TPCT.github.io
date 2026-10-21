@@ -12,7 +12,7 @@ import { renderPage } from '../src/render/layout.mjs';
 import { renderHeader } from '../src/render/header.mjs';
 import { renderHero } from '../src/render/hero.mjs';
 import { renderFooter } from '../src/render/footer.mjs';
-import { renderAbout, renderExperience, renderTimeline, renderSkills, renderWork, renderServices, renderProcess, renderContact } from '../src/render/sections.mjs';
+import { renderAbout, renderTimeline, renderSkills, renderWork, renderServices, renderProcess, renderContact } from '../src/render/sections.mjs';
 const REPO_ROOT = fileURLToPath(new URL('../', import.meta.url));
 function sitemapXml(entries) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries.map(({ loc, lastmod }) => `<url><loc>${esc(loc)}</loc><lastmod>${esc(lastmod)}</lastmod></url>`).join('')}</urlset>\n`;
@@ -32,7 +32,7 @@ export async function build({ outDir = 'dist', root = REPO_ROOT, now = new Date(
   await mkdir(outDir, { recursive: true });
   try { await cp(path.join(root, 'public'), outDir, { recursive: true }); } catch (e) { if (e.code !== 'ENOENT') throw e; }
   await mkdir(path.join(outDir, 'assets'), { recursive: true });
-  const main = [renderHero, renderAbout, renderExperience, renderTimeline, renderSkills, renderWork, renderServices, renderProcess, renderContact].map(render => render(c)).join('');
+  const main = [renderHero, renderAbout, renderTimeline, renderSkills, renderWork, renderServices, renderProcess, renderContact].map(render => render(c)).join('');
   // Count rendered sections so the explicit grid also spans future sections without JS.
   const sectionCount = (main.match(/<section\b/g) ?? []).length;
   const assets = {};

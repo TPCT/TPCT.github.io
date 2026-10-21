@@ -5,7 +5,7 @@ import { validateContent } from '../src/lib/validate.mjs';
 const c = JSON.parse(await readFile(new URL('../src/content.json', import.meta.url), 'utf8'));
 export const additions = {
   site: { menuOpen: 'Open menu', menuClose: 'Close menu' },
-  sections: { skills: 'Stack', experience: 'Experience', services: 'Services', process: 'Process' },
+  sections: { skills: 'Stack', services: 'Services', process: 'Process' },
   hero: { domainsLabel: 'Domains' },
   projectsIntro: { kindFilterLabel: 'Filter projects by type', countSingular: 'project', countPlural: 'projects', resetLabel: 'Show all projects', roleLabel: 'Role', stackLabel: 'Stack' },
   a11y: { newTab: '(opens in new tab)' }
@@ -88,6 +88,11 @@ for (const [name, mutate, message] of [
   ['end before start', x => { x.experience[0].roles[0].end = '2026-01'; }, /end: must be >= start/],
   ['missing roles', x => { delete x.experience[0].roles; }, /experience\[0\]\.roles: required array/],
   ['empty roles', x => { x.experience[0].roles = []; }, /roles: must not be empty/],
-  ['insecure org URL', x => { x.experience[0].orgUrl = 'http://example.com'; }, /orgUrl: invalid URL protocol/],
-  ['missing earlier roles label', x => { delete x.sections.experienceMoreLabel; }, /experienceMoreLabel: required non-empty string/]
+  ['insecure org URL', x => { x.experience[0].orgUrl = 'http://example.com'; }, /orgUrl: invalid URL protocol/]
 ]) test(name, () => { const bad = structuredClone(c); mutate(bad); assert.match(validateContent(bad).errors.join('\n'), message); });
+
+test('removed Experience labels are not required', () => {
+  assert.equal(c.sections.experience, undefined);
+  assert.equal(c.sections.experienceMoreLabel, undefined);
+  assert.deepEqual(validateContent(c).errors, []);
+});

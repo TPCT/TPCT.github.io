@@ -1,23 +1,4 @@
 .lead { font-size: var(--fs-lead); line-height: var(--lh-snug); font-weight: 500; max-width: 68ch; }
-.career { position: relative; list-style: none; padding: 0 0 0 var(--space-5); margin: 0; max-width: 860px; }
-.career::before { content: ""; position: absolute; inset-inline-start: 4px; inset-block: 0; width: 2px; background: var(--brand-line); }
-.career__org { position: relative; padding: var(--space-5); background: var(--plate); border: 1px solid var(--rim); border-radius: var(--r-plate); box-shadow: var(--shadow-card); overflow-wrap: anywhere; }
-.career__org + .career__org { margin-block-start: var(--space-4); }
-.career__org::before { content: ""; position: absolute; inset-inline-start: -24px; inset-block-start: 30px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
-.career__head h3 { font-family: var(--font-display); }
-.career__meta, .career__dates { color: var(--muted); font-size: var(--fs-small); margin-block-start: var(--space-1); }
-.career__roles { list-style: none; padding: 0; margin: var(--space-4) 0 0; }
-.career__roles:has(> li + li) { border-inline-start: 2px solid var(--brand-line); padding-inline-start: var(--space-4); }
-.career__role { position: relative; }
-.career__role + .career__role { margin-block-start: var(--space-5); }
-.career__roles:has(> li + li) > li::before { content: ""; position: absolute; inset-inline-start: -21px; inset-block-start: 8px; width: 8px; height: 8px; background: var(--brand); border-radius: 50%; }
-.career__title { font-weight: 700; }
-.career__now { display: inline-block; padding: 2px 8px; border-radius: var(--r-pill); background: var(--brand-tint); color: var(--brand); font-size: var(--fs-small); }
-.career__points { list-style: disc; padding-inline-start: var(--space-4); margin-block-start: var(--space-2); color: var(--fg2); }
-.career__points li + li { margin-block-start: var(--space-2); }
-.career__more { max-width: 860px; margin-block-start: var(--space-4); }
-.career__more summary { width: fit-content; cursor: pointer; padding: 12px 20px; background: var(--plate); border: 1px solid var(--rim); border-radius: var(--r-ctl); color: var(--fg); font-weight: 600; }
-.career__more[open] summary { margin-block-end: var(--space-4); }
 .skills { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 .skill-group { background: var(--plate); border: 1px solid var(--rim); border-radius: var(--r-plate); box-shadow: var(--shadow-card); padding: 22px; display: flex; flex-direction: column; gap: 16px; }
 .skill-group__head { display: flex; align-items: center; gap: 12px; margin: 0; }
@@ -64,6 +45,6 @@
   @media (prefers-reduced-motion: no-preference) { .motion .process.is-pending::after { scale: 0 1; } }
 }
 @media (forced-colors: active) {
-  .career__org, .career__more summary, .skill-group, .services > li, .process > li::before, .skill-group__head > span, .services__index { border: 1px solid CanvasText; }
-  .career::before, .process::after { background: CanvasText; }
+  .skill-group, .services > li, .process > li::before, .skill-group__head > span, .services__index { border: 1px solid CanvasText; }
+  .process::after { background: CanvasText; }
 }

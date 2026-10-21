@@ -46,10 +46,10 @@ test('projects render complete cards, filters and section hierarchy', async t =>
     c.categories.filter(cat => c.projects.some(p => p.category === cat)).map(cat => [slugify(cat), c.projects.filter(p => p.category === cat).length])
   );
   assert.deepEqual(chips.filter(m => m[1] === 'kind').map(m => [m[2], Number(m[4])]), [['all', c.projects.length], ...['case-study', 'open-source'].map(kind => [kind, c.projects.filter(p => p.kind === kind).length])]);
-  const ids = ['top', 'about', 'experience', 'timeline', 'skills', 'work', 'services', 'process', 'contact'];
+  const ids = ['top', 'about', 'timeline', 'skills', 'work', 'services', 'process', 'contact'];
   const positions = ids.map(id => html.indexOf(`<section id="${id}"`));
   assert.ok(positions.every((position, i) => position >= 0 && (!i || position > positions[i - 1])));
-  assert.equal((html.match(/<h2\b/g) || []).length, 8);
+  assert.equal((html.match(/<h2\b/g) || []).length, 7);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   for (const id of ids.slice(1)) assert.ok(html.includes(`aria-labelledby="${id}-title"`));
   assert.match(html, /class="filters" hidden/);

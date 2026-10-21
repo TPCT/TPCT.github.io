@@ -14,6 +14,7 @@ test('SEO, 404, discovery files and committed assets', async t => {
   t.after(() => rm(outDir, { recursive: true, force: true }));
   await build({ outDir });
   const html = await readFile(path.join(outDir, 'index.html'), 'utf8');
+  assert.doesNotMatch(html, /id="experience"/);
   assert.ok(html.includes(`<title>${esc(c.site.title)}</title>`));
   assert.ok(html.includes(`<meta name="description" content="${attr(c.site.description)}">`));
   assert.ok(html.includes('<meta name="google-site-verification" content="PsjjRMzW2cVBwfM-sNSoLjfU_tR097ytc5RXKuP5dNE">'));

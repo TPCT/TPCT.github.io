@@ -22,6 +22,5 @@ test('styles use the violet palette and retain layout fixes', async () => {
   const css = (await Promise.all((await readdir('src/styles')).map(f => readFile(`src/styles/${f}`, 'utf8')))).join('\n');
   assert.doesNotMatch(css, /F299C4|A8125A|EC8DBB|7FD3E3|157E95|242 153 196|168 18 90|127 211 227/i);
   assert.match(css, /--logo-b: #6E2BFB/);
-  assert.match(css, /\.career__head h3\s*\{[^}]*font-family: var\(--font-display\)/);
-  assert.match(css, /\.career__meta, \.career__dates\s*\{[^}]*color: var\(--muted\)/);
+  assert.doesNotMatch(css, /\.career/);
 });

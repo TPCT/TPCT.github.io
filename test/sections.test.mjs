@@ -13,10 +13,14 @@ test('Prism sections retain markup contracts and CSS budgets', async t => {
   t.after(() => rm(outDir, { recursive: true, force: true }));
   await build({ outDir });
   const html = await readFile(`${outDir}/index.html`, 'utf8');
+  assert.doesNotMatch(html, /id="experience"|class="career/);
+  assert.deepEqual([...html.matchAll(/class="section-head__index"[^>]*>(\d{2}) \/ ([^<]+)/g)].map(m => [m[1], m[2]]), [
+    ['01', 'About'], ['02', 'Journey'], ['03', 'Stack'], ['04', 'Work'], ['05', 'Services'], ['06', 'Process'], ['07', 'Contact']
+  ]);
   const nf = await readFile(`${outDir}/404.html`, 'utf8');
   const css = await readFile(`${outDir}/assets/site.css`, 'utf8');
   assert.ok((html.match(/\bdata-reveal\b/g) ?? []).length >= 30);
-  assert.equal((html.match(/<header class="section-head" data-reveal>/g) ?? []).length, 8);
+  assert.equal((html.match(/<header class="section-head" data-reveal>/g) ?? []).length, 7);
   const cards = html.match(/<li class="card card--[^>]*>/g) ?? [];
   assert.equal(cards.length, c.projects.length);
   for (const card of cards) assert.ok(card.endsWith(' data-reveal>'));
@@ -32,6 +36,7 @@ test('Prism sections retain markup contracts and CSS budgets', async t => {
   await t.test('legacy token migration', () => {
     assert.doesNotMatch(css, new RegExp('(?<![\\w-])--(' + names.join('|') + ')(?![\\w-])'));
   });
+  assert.doesNotMatch(css, /\.career|#experience|\.experience/);
   assert.ok(!css.includes('font-stretch'));
   assert.equal((css.match(/@keyframes card-in\b/g) ?? []).length, 1);
   assert.match(css, /@keyframes card-in\s*\{\s*from\s*\{[^}]*scale: \.94/);
@@ -66,18 +71,8 @@ test('section partials gate every keyframe and animation on motion preference', 
   }
 });
 
-test('career is grouped with native earlier roles and deterministic inclusive dates', async () => {
-  const { renderExperience, renderCard } = await import('../src/render/sections.mjs');
-  const html = renderExperience(c, new Date('2026-10-21T00:00:00Z'));
-  assert.match(html, /<ol class="career">/);
-  assert.equal((html.match(/class="career__org"/g) ?? []).length, 13);
-  assert.equal((html.split('<details')[0].match(/class="career__org"/g) ?? []).length, 6);
-  assert.match(html, /<details class="career__more"><summary>Earlier roles<\/summary>/);
-  assert.match(html, /<time datetime="2017-03">Mar 2017<\/time>/);
-  assert.match(html, /Present · 3 mos/);
-  assert.match(html, /1 yr 7 mos/);
-  assert.doesNotMatch(html, /exp__summary/);
-  assert.equal((html.match(/class="career__now"/g) ?? []).length, 3);
+test('project card contracts remain unchanged', async () => {
+  const { renderCard } = await import('../src/render/sections.mjs');
   const project = c.projects.find(p => p.id === 'multi-vendor-restaurant-platform');
   const card = renderCard(project, c);
   assert.equal((card.match(/<a\b/g) ?? []).length, 1);

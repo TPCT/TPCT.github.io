@@ -12,7 +12,7 @@ test('atmosphere source stays within budget, CSP rules and chapter moods', async
   const table = source.match(/M=(\{(?:\w+:\[[\d.,]+\],?)+\})/)[1];
   const parsed = Object.fromEntries([...table.matchAll(/(\w+):\[([\d.,]+)\]/g)].map(([, id, values]) => [id, values.split(',').map(Number)]));
   assert.deepEqual(parsed, {
-    top: [0, 0, 0], about: [0, 0, 0], experience: [1, .25, 0], timeline: [1, .25, 0],
+    top: [0, 0, 0], about: [0, 0, 0], timeline: [1, .25, 0],
     skills: [.2, 1, 0], work: [.2, 1, 0], services: [.6, .55, .35], process: [.6, .55, .35], contact: [.45, .8, 1]
   });
 });
