@@ -1,3 +1,4 @@
+#timeline { overflow-x: clip; min-width: 0; }
 .tl__lead { color: var(--fg2); margin-block-end: var(--space-6); }
 .tl { --tl-x: 14px; --tl-pad: 40px; position: relative; }
 .timeline { position: relative; display: grid; gap: 20px; padding-inline-start: var(--tl-pad); }

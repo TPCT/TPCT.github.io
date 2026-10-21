@@ -93,6 +93,7 @@ test('built Journey meets structure, accessibility, confidentiality and spine co
   };
   assert.equal(background('.timeline::before'), background('.spine__track'));
   assert.equal(background('.timeline::after'), background('.spine__fill'));
+  assert.match(css, /#timeline \{ overflow-x: clip; min-width: 0; \}/);
   assert.match(css, /\.tl__lead \{[^}]*margin-block-end: var\(--space-6\)/);
   assert.match(css, /scale: 1 var\(--tl-p, 1\)/);
   await mkdir(path.join(root, 'dist'));
