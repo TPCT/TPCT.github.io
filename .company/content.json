@@ -1,0 +1,460 @@
+{
+  "site": {
+    "title": "Islam Elsayed — Systems Architect & Senior Full-Stack Engineer",
+    "shortTitle": "Islam Elsayed",
+    "description": "Islam Elsayed, founder of ShiftCodes, is a systems architect and senior full-stack engineer in Alexandria, Egypt. He designs and builds ERP, analytics, SaaS and learning systems for clients in Egypt and the Middle East.",
+    "url": "https://tpct.github.io",
+    "lang": "en",
+    "locale": "en_US",
+    "author": "Islam Elsayed",
+    "ogImage": "/assets/og-image.png",
+    "ogImageAlt": "Islam Elsayed — Founder @ ShiftCodes, Systems Architect, Senior Full-Stack Engineer",
+    "themeColorDark": "#0B0B12",
+    "themeColorLight": "#FAFAFC",
+    "nav": [
+      { "label": "About", "href": "#about" },
+      { "label": "Stack", "href": "#skills" },
+      { "label": "Work", "href": "#work" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "skipLink": "Skip to content",
+    "themeToggle": {
+      "toDark": "Switch to dark theme",
+      "toLight": "Switch to light theme"
+    },
+    "footer": "© Islam Elsayed · ShiftCodes. Built as a static site and hosted on GitHub Pages."
+  },
+  "hero": {
+    "eyebrow": "ShiftCodes / Engineering",
+    "name": "Islam Elsayed",
+    "roles": ["Founder @ ShiftCodes", "Systems Architect", "Senior Full-Stack Engineer"],
+    "headline": "Building production software for complex operations.",
+    "subheadline": "I design and ship the systems businesses run on: ERP, analytics, SaaS and learning platforms. They're built to keep working when the operation can't stop.",
+    "domains": ["ERP", "Analytics", "Banking", "Insurance", "LMS", "SaaS", "Infrastructure"],
+    "location": "Alexandria, Egypt",
+    "reach": "Egypt → Middle East",
+    "ctaPrimary": { "label": "View selected work", "href": "#work" },
+    "ctaSecondary": { "label": "Start a conversation", "href": "mailto:eslamjackie@outlook.com" },
+    "ctaTertiary": { "label": "GitHub", "href": "https://github.com/TPCT" }
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "I'm Islam Elsayed, a systems architect and senior full-stack engineer based in Alexandria, Egypt, and the founder of ShiftCodes. I build production software for organisations across Egypt and the Middle East, including enterprise ERP, government analytics, banking and insurance, learning platforms and multi-tenant SaaS.",
+      "My work starts with the real operation: how people approve, inspect, sell, ship and report. I model that operation before I write code. The result is software with clear permissions, auditable workflows and data that stays correct under retries, failures and growth.",
+      "I work mainly in PHP (Laravel, Filament, Yii2) and Python (FastAPI, Django), with React, Next.js and Livewire on the front end, Oracle, PostgreSQL, MySQL and Redis underneath, and Docker and Linux in production. Most of this work is private because it runs real client operations, so the case studies below describe the systems without exposing them."
+    ]
+  },
+  "stats": [
+    { "value": "40%+", "label": "faster loads delivered on a national analytics platform in Saudi Arabia" },
+    { "value": "7", "label": "domains shipped: ERP, analytics, banking, insurance, LMS, SaaS and infrastructure" },
+    { "value": "2016", "label": "writing and publishing code on GitHub since" }
+  ],
+  "skills": [
+    { "group": "Languages", "items": ["PHP", "Python", "JavaScript", "TypeScript", "C#", "Dart", "C"] },
+    { "group": "Backend & Frameworks", "items": ["Laravel", "Filament", "Yii2", "Django", "FastAPI", "Node.js", ".NET"] },
+    { "group": "Frontend & Mobile", "items": ["React", "Next.js", "Livewire", "Blade", "Vue.js", "Tailwind CSS", "Flutter"] },
+    { "group": "Data", "items": ["Oracle", "PostgreSQL", "MySQL", "MariaDB", "MongoDB", "Redis", "Firestore"] },
+    { "group": "Infrastructure", "items": ["Docker", "Docker Compose", "Linux", "Nginx", "Apache", "CI/CD", "GitHub Actions"] },
+    { "group": "Architecture & Delivery", "items": ["REST APIs", "Modular monoliths", "Multi-tenancy", "RBAC", "Idempotent workflows", "ETL & KPI pipelines", "Automation"] }
+  ],
+  "experience": [
+    {
+      "role": "Founder, Systems Architect & Lead Engineer",
+      "org": "ShiftCodes",
+      "orgUrl": "https://shiftcodes.net",
+      "location": "Alexandria, Egypt",
+      "summary": "I founded ShiftCodes and lead it as a software engineering studio. I own architecture and delivery end to end for clients in Egypt and the Middle East, from discovery and data modelling through production rollout and ongoing work."
+    }
+  ],
+  "services": [
+    {
+      "title": "ERP & Operations Systems",
+      "desc": "Procurement, production, warehouses, distribution, POS and HR, modelled on how the business actually runs. Every system comes with role-based permissions and an audit trail."
+    },
+    {
+      "title": "Analytics & Data Platforms",
+      "desc": "Multi-schema data, ETL pipelines, KPI aggregation and operational dashboards that load fast and that teams trust."
+    },
+    {
+      "title": "SaaS & Multi-Tenant Platforms",
+      "desc": "Tenant isolation, plans and subscriptions, configurable pipelines and automation, built to onboard the next customer without a rewrite."
+    },
+    {
+      "title": "Learning Platforms",
+      "desc": "LMS products with role-focused panels for administrators, staff and learners, real-time features and scalable media storage."
+    },
+    {
+      "title": "APIs & Integrations",
+      "desc": "Secure REST APIs, payment gateways, OAuth, webhooks and messaging integrations. Idempotency and validation are designed in from day one."
+    },
+    {
+      "title": "Infrastructure & Delivery",
+      "desc": "Dockerised services on Linux, CI/CD pipelines with health checks and rollback, and hardened deployments that are easy to operate."
+    }
+  ],
+  "process": [
+    { "step": "Discover", "desc": "Map the real operation: people, approvals, exceptions and the numbers that matter." },
+    { "step": "Model", "desc": "Turn it into a data model, roles and workflows before any screen is designed." },
+    { "step": "Architect", "desc": "Choose boundaries, integrations and failure handling that fit the scale and the team." },
+    { "step": "Ship", "desc": "Deliver in small, tested increments straight to production." },
+    { "step": "Evolve", "desc": "Measure, harden and extend the system as the operation grows." }
+  ],
+  "categories": [
+    "Enterprise & ERP",
+    "Analytics & AI",
+    "FinTech & Banking",
+    "Education",
+    "SaaS & Platforms",
+    "APIs & Backend",
+    "Developer Tools"
+  ],
+  "projectsIntro": {
+    "title": "Selected work",
+    "lead": "Case studies are private client systems, described without code, URLs or client data. Open-source projects link to their public repositories on GitHub.",
+    "filterLabel": "Filter projects by category",
+    "allLabel": "All",
+    "kindLabels": { "case-study": "Case study", "open-source": "Open source" },
+    "repoLinkLabel": "View on GitHub",
+    "privateNote": "Private client work, so no public code",
+    "emptyState": "No projects in this category yet."
+  },
+  "projects": [
+    {
+      "id": "national-waste-analytics",
+      "name": "National Waste Analytics Platform",
+      "kind": "case-study",
+      "category": "Analytics & AI",
+      "summary": "Government analytics for a national waste-management program in Saudi Arabia. It consolidates operational data into KPIs and dashboards that decision-makers rely on.",
+      "highlights": [
+        "Oracle multi-schema analytics across operational data sources",
+        "ETL pipelines and KPI aggregation feeding operational dashboards",
+        "Query and aggregation work that made dashboard loads 40%+ faster"
+      ],
+      "stack": ["Oracle", "SQL", "ETL"],
+      "role": "Systems architect & lead engineer",
+      "featured": true
+    },
+    {
+      "id": "aic-operations-suite",
+      "name": "AIC Operations Suite",
+      "kind": "case-study",
+      "category": "Enterprise & ERP",
+      "summary": "A digital ecosystem for AIC, a food-safety, quality and auditing consultancy. It connects the back office, auditors in the field and client companies on one platform.",
+      "highlights": [
+        "Central admin system with granular roles and permissions",
+        "Cross-platform mobile apps for auditors and for client companies",
+        "Portals and automation that replace manual audit and reporting steps"
+      ],
+      "stack": ["Laravel", "PHP", "Flutter", "Python", "TypeScript", "Docker"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": true
+    },
+    {
+      "id": "factory-operations",
+      "name": "Factory Operations & Quality Inspections",
+      "kind": "case-study",
+      "category": "Enterprise & ERP",
+      "summary": "A single admin platform for running daily factory operations. It covers scheduled inspections, issue tracking, review workflows and performance reporting, scoped by department and site.",
+      "highlights": [
+        "Versioned inspection templates with numeric acceptance limits, scheduled by operating day, shift, time zone and exceptions without duplicate runs",
+        "Issues tied to a site and asset persist across days and block sign-off until the fix is approved",
+        "Publishable, versioned workflow editor for filling, review and corrective tasks, with deadlines and escalation",
+        "KPI dashboards for coverage, compliance, on-time rate and median/P90 handling time, with CSV export"
+      ],
+      "stack": ["Laravel", "PHP", "PostgreSQL", "Laravel Octane"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": false
+    },
+    {
+      "id": "food-manufacturing-erp",
+      "name": "Food Manufacturing ERP",
+      "kind": "case-study",
+      "category": "Enterprise & ERP",
+      "summary": "An enterprise ERP for a food manufacturer that covers the full chain, from buying raw materials to distributing finished goods and handling returns.",
+      "highlights": [
+        "Procurement and production management",
+        "Multi-warehouse inventory and stock movements",
+        "Distribution and returns flows with operational controls"
+      ],
+      "stack": ["Laravel", "PHP", "Vue.js"],
+      "role": "Systems architect & lead engineer",
+      "featured": true
+    },
+    {
+      "id": "multi-school-lms",
+      "name": "Multi-School Learning Platform",
+      "kind": "case-study",
+      "category": "Education",
+      "summary": "A modular-monolith LMS for an education business that runs several virtual schools on one platform.",
+      "highlights": [
+        "Five role-focused admin panels on a single modular codebase",
+        "Queued and real-time workloads with Redis, Horizon and Reverb",
+        "PostgreSQL core with S3-compatible object storage for learning media"
+      ],
+      "stack": ["Laravel", "Filament", "PostgreSQL", "Redis", "Docker"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": true
+    },
+    {
+      "id": "gaming-marketplace",
+      "name": "Gaming Community Catalog & Gifting Platform",
+      "kind": "case-study",
+      "category": "SaaS & Platforms",
+      "summary": "A web platform for a gaming community that replaced a chat-bot workflow. It adds a searchable item catalog, a wallet, gifting and paid top-ups.",
+      "highlights": [
+        "Catalog search with custom filters, price-range sliders and URL-based pagination",
+        "Discord OAuth sign-in with hashed sessions, CSRF and origin protection",
+        "Idempotent orders with duplicate prevention and safe recovery of interrupted purchases",
+        "Stripe Checkout top-ups and real-time order events over WebSockets"
+      ],
+      "stack": ["FastAPI", "Python", "Next.js", "TypeScript", "MongoDB", "Redis", "Stripe"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": true
+    },
+    {
+      "id": "b2b-crm",
+      "name": "Multi-Tenant B2B CRM",
+      "kind": "case-study",
+      "category": "SaaS & Platforms",
+      "summary": "A full-stack CRM for SaaS operators. A platform owner manages tenants, plans and subscriptions, and each tenant runs its own sales pipeline from lead to closed deal.",
+      "highlights": [
+        "Tenant lifecycle management: create, suspend, reactivate and configure per tenant",
+        "Configurable pipelines, custom fields and automation workflows",
+        "Role-based access control and background jobs across tenants"
+      ],
+      "stack": ["Python", "TypeScript", "Docker"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": true
+    },
+    {
+      "id": "multi-tenant-pos",
+      "name": "Multi-Tenant POS & Inventory",
+      "kind": "case-study",
+      "category": "Enterprise & ERP",
+      "summary": "A point-of-sale system for retail and restaurants. Company and branch data are isolated, and inventory, invoicing and reporting are built in.",
+      "highlights": [
+        "Product catalog, stock tracking and low-stock alerts",
+        "Invoicing, customer loyalty, suppliers and purchase orders",
+        "Restaurant table reservations and table-based sales",
+        "Multi-language UI, granular RBAC and PDF/Excel reports"
+      ],
+      "stack": ["Laravel", "PHP", "React", "JWT", "PostgreSQL"],
+      "role": "Lead engineer",
+      "year": 2025,
+      "featured": false
+    },
+    {
+      "id": "ad-break-recommender",
+      "name": "Video Ad-Break Recommender",
+      "kind": "case-study",
+      "category": "Analytics & AI",
+      "summary": "A production FastAPI service for video publishers. It analyses each video and recommends where ad breaks should go, then learns from how audiences actually retain.",
+      "highlights": [
+        "Combines scene changes, transcript, silence, motion and topic signals",
+        "Optional LLM verification of proposed break points",
+        "Retention-based learning from performance snapshots",
+        "Per-channel OAuth integration with scheduled analysis jobs"
+      ],
+      "stack": ["Python", "FastAPI", "MySQL", "FFmpeg", "OpenAI API"],
+      "role": "Systems architect & lead engineer",
+      "year": 2026,
+      "featured": false
+    },
+    {
+      "id": "ocr-omr",
+      "name": "OCR & OMR Document Processing",
+      "kind": "case-study",
+      "category": "Analytics & AI",
+      "summary": "Automated reading of scanned documents and forms, which replaces manual data entry with machine extraction.",
+      "highlights": [
+        "OCR text extraction from scanned documents",
+        "Optical mark recognition for scanned forms",
+        "Python services ready to plug into existing workflows"
+      ],
+      "stack": ["Python", "Computer vision"],
+      "role": "Lead engineer",
+      "featured": false
+    },
+    {
+      "id": "financial-websites",
+      "name": "Bank & Insurer Corporate Websites",
+      "kind": "case-study",
+      "category": "FinTech & Banking",
+      "summary": "Corporate websites for banks, an Islamic insurer and education institutions in Jordan and Iraq.",
+      "highlights": [
+        "Public web presence for regulated financial institutions",
+        "Server-rendered builds on Laravel and Yii2",
+        "Containerised builds for repeatable deployments"
+      ],
+      "stack": ["Laravel", "Yii2", "PHP", "Docker"],
+      "role": "Full-stack engineer",
+      "year": 2025,
+      "featured": false
+    },
+    {
+      "id": "jendock",
+      "name": "JenDock",
+      "kind": "open-source",
+      "category": "Developer Tools",
+      "summary": "Self-hosted CI/CD for Docker Compose apps on your own server, compatible with Jenkinsfiles. It builds, deploys and rolls back automatically when a release is unhealthy.",
+      "highlights": [
+        "Declarative Jenkinsfile subset with stages, parallel branches, when and post blocks. Unsupported syntax is rejected with a positioned message",
+        "HMAC-verified GitHub webhooks, one pinned commit per run and live step logs",
+        "Health checks with automatic rollback, plus separate Development and Production environments",
+        "GitHub-style web UI, REST API and an MCP endpoint for AI agents"
+      ],
+      "stack": ["Python", "TypeScript", "Docker", "Docker Compose"],
+      "role": "Author",
+      "year": 2026,
+      "repoUrl": "https://github.com/TPCT/JenDock",
+      "featured": true
+    },
+    {
+      "id": "tpct-mac-theme",
+      "name": "TPCT Mac",
+      "kind": "open-source",
+      "category": "Developer Tools",
+      "summary": "A macOS-style desktop for GNOME: one theme for GTK4/libadwaita, GTK3 and GNOME Shell, plus a Shell extension with a global menu bar and desktop widgets.",
+      "highlights": [
+        "Light and dark themes that follow the system switch automatically",
+        "Global menu for GTK apps and for dbusmenu apps such as Chromium, Electron and JetBrains",
+        "Desktop widgets: clock, weather, calendar, world clock, now playing, photos and battery",
+        "One-step installer that also themes the dock, Qt apps and Firefox"
+      ],
+      "stack": ["JavaScript", "SCSS", "Python", "Shell"],
+      "role": "Author",
+      "year": 2026,
+      "repoUrl": "https://github.com/TPCT/tpct-mac-theme",
+      "featured": true
+    },
+    {
+      "id": "idempotent-session-ingest",
+      "name": "Idempotent Exercise Session Ingest",
+      "kind": "open-source",
+      "category": "APIs & Backend",
+      "summary": "A Firebase Functions endpoint that ingests exercise-session events correctly under retries, duplicates and out-of-order delivery.",
+      "highlights": [
+        "Idempotency keys prevent duplicate events on retries",
+        "Out-of-order events still produce correct session aggregates",
+        "Atomic event upsert and aggregation in Firestore transactions",
+        "Payload validation plus logging and metrics for production monitoring"
+      ],
+      "stack": ["TypeScript", "Firebase Functions", "Firestore"],
+      "role": "Author",
+      "year": 2026,
+      "repoUrl": "https://github.com/TPCT/palm-resources-01",
+      "featured": false
+    },
+    {
+      "id": "consistency-score",
+      "name": "Explainable 28-Day Consistency Score",
+      "kind": "open-source",
+      "category": "APIs & Backend",
+      "summary": "A transparent 0–100 score for exercise consistency over the last 28 days. It is designed to be easy to explain and easy to render on mobile.",
+      "highlights": [
+        "Frequency (0–50), regularity (0–30) and recency (0–20) components",
+        "Deterministic, non-medical scoring that users can understand",
+        "Firestore query layer with a typed scoring module"
+      ],
+      "stack": ["TypeScript", "Firestore"],
+      "role": "Author",
+      "year": 2026,
+      "repoUrl": "https://github.com/TPCT/palm-resources-02",
+      "featured": false
+    },
+    {
+      "id": "order-payment-api",
+      "name": "Order & Payment API",
+      "kind": "open-source",
+      "category": "FinTech & Banking",
+      "summary": "A RESTful Laravel API for users, products, orders and payments, secured with JWT and returning a consistent JSON envelope.",
+      "highlights": [
+        "JWT authentication on every endpoint except registration and login",
+        "Order and payment resources with a uniform data/meta response format",
+        "Documented endpoints with request and response examples"
+      ],
+      "stack": ["Laravel", "PHP", "JWT", "REST"],
+      "role": "Author",
+      "year": 2025,
+      "repoUrl": "https://github.com/TPCT/order-payment-api",
+      "featured": false
+    },
+    {
+      "id": "social-media-scheduler",
+      "name": "Social Media Scheduler",
+      "kind": "open-source",
+      "category": "SaaS & Platforms",
+      "summary": "A Laravel application for scheduling, publishing and tracking posts across multiple social platforms.",
+      "highlights": [
+        "Scheduled, automated publishing with platform-specific validation",
+        "Per-day rate limiting to keep the publishing schedule healthy",
+        "Dashboard analytics: posts per platform, success rates and status distribution",
+        "API access backed by a test suite for the API and models"
+      ],
+      "stack": ["Laravel", "PHP", "JavaScript"],
+      "role": "Author",
+      "year": 2025,
+      "repoUrl": "https://github.com/TPCT/social-media-scheduler",
+      "featured": false
+    },
+    {
+      "id": "egyptian-national-id",
+      "name": "Egyptian National ID Validator API",
+      "kind": "open-source",
+      "category": "APIs & Backend",
+      "summary": "A Django REST Framework API that validates Egyptian national ID numbers and extracts the details encoded in them.",
+      "highlights": [
+        "Extracts birth date, age, gender and governorate of registration",
+        "API-key authentication, rate limiting and response caching",
+        "Interactive Swagger docs and an admin panel for keys and services"
+      ],
+      "stack": ["Python", "Django", "Django REST Framework"],
+      "role": "Author",
+      "year": 2025,
+      "repoUrl": "https://github.com/TPCT/Egyptian-National-ID",
+      "featured": false
+    },
+    {
+      "id": "simple-compiler",
+      "name": "Simple Compiler",
+      "kind": "open-source",
+      "category": "Developer Tools",
+      "summary": "A compiler for a small assembly-style language, written in C as the toolchain for a home-made 16-bit computer.",
+      "highlights": [
+        "Register-based instruction set with MOV, ADD, SUB, MUL and DIV",
+        "Operand checks that tell registers apart from literal values"
+      ],
+      "stack": ["C", "CMake"],
+      "role": "Author",
+      "year": 2019,
+      "repoUrl": "https://github.com/TPCT/simple_compiler",
+      "featured": false
+    }
+  ],
+  "contact": {
+    "title": "Let's build something that runs the business",
+    "lead": "Have an operation that needs reliable software, or a system that has outgrown its first version? Send a short description and I'll reply by email.",
+    "email": "eslamjackie@outlook.com",
+    "emailLabel": "Email me",
+    "copyLabel": "Copy email",
+    "copiedLabel": "Email copied",
+    "website": "https://shiftcodes.net",
+    "websiteLabel": "ShiftCodes",
+    "github": "https://github.com/TPCT",
+    "githubLabel": "GitHub · TPCT",
+    "location": "Alexandria, Egypt"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "code": "404",
+    "message": "This page doesn't exist or has moved.",
+    "cta": { "label": "Back to the homepage", "href": "/" }
+  }
+}
