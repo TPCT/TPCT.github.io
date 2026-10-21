@@ -21,8 +21,8 @@
 | T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | done |
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
-| T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | todo |
-| T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | todo |
+| T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | done |
+| T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | done |
 | T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | todo |
 | T-025 | B-4 Story: pillar fan, pinned Process story, horizontal Work rail (desktop) | M | T-022, T-023 (round 3) | todo |
 | T-026 | B-5 Atmosphere: section colour morphs + split-line heading reveals | S | T-023 (T-022 for About lines) | todo |

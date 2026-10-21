@@ -56,7 +56,7 @@ test('projects render complete cards, filters and section hierarchy', async t =>
   assert.match(html, /class="btn btn--secondary copy-btn" hidden/);
   assert.ok(html.includes(`href="mailto:${c.contact.email}" aria-describedby="email-label">${c.contact.email.split('@')[0]}<wbr><span class="email__domain">@${c.contact.email.split('@')[1]}</span></a>`));
   assert.ok(html.includes('id="copy-status"'));
-  assert.ok((await readFile(`${outDir}/assets/site.js`)).length < 30000);
+  assert.ok((await readFile(`${outDir}/assets/site.js`)).length <= 39704);
 });
 
 test('case-study repoUrl is ignored and content is escaped', () => {

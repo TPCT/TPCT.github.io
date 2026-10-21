@@ -105,12 +105,20 @@
   },
   "about": {
     "title": "About",
-    "factsLabel": "Key facts",
-    "paragraphs": [
-      "I'm Islam Elsayed, CEO of ShiftCodes and a senior technical team lead and consultant based in Alexandria, Egypt. Since 2017 I have shipped production software for companies in Egypt, Jordan, the UAE, Saudi Arabia and the US, from a national waste analytics platform in Saudi Arabia to multi-tenant SaaS, a food-tech restaurant platform and websites for banks and high-profile Jordanian clients.",
-      "I've worked as a CTO, a team lead and a senior engineer, and I start from the real operation before I write code. That has meant moving a multi-tenant platform from microservices to a modular monolith and cutting server costs from $15k to $2k, taking Oracle fetches over 100M+ rows from 3 s to 500 ms, and building a headless CMS that cut project delivery from about a month to 4 days.",
-      "I work mainly in Python (FastAPI, Django, Flask), PHP (Laravel, Filament, Yii2, Symfony) and .NET Core, with React, Next.js, Livewire and Flutter on the front end, Oracle, PostgreSQL, MySQL and Redis underneath, and Docker, GitHub Actions and Linux in production. Most of this work is private because it runs real client operations, so the case studies below describe the systems without exposing them."
-    ]
+    "lead": [
+      "I start with how the business really runs,",
+      "then build the software it can rely on."
+    ],
+    "intro": "I'm Islam Elsayed, CEO of ShiftCodes. I've led and built production systems for companies in Egypt, Jordan, the UAE, Saudi Arabia and the US.",
+    "pillarsLabel": "How I work",
+    "pillars": [
+      { "icon": "layers", "title": "Architecture", "text": "I model the operation first, then draw boundaries that let the system grow without a rewrite." },
+      { "icon": "users", "title": "Leadership", "text": "As CTO and team lead I set the technical direction, review the code and stay hands-on." },
+      { "icon": "gauge", "title": "Scale", "text": "National analytics, multi-tenant SaaS and high-traffic APIs that stay fast as the data grows." },
+      { "icon": "shield-check", "title": "Trust", "text": "Banks, government programmes and private companies trust me with live systems, so most of this work stays private." }
+    ],
+    "companiesLabel": "Worked with",
+    "companies": ["Kearney", "dot.jo", "IPXBit", "Venu Dine", "Everything To Gain", "Raqmix", "Monglish", "Edulixa360", "ShiftCodes", "Stackdeans", "WeDoAcc", "Aqua Web"]
   },
   "stats": [
     {

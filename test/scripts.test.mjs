@@ -60,7 +60,7 @@ test('built scripts respect the bundle budget and tolerate missing hooks', async
   t.after(() => rm(outDir, { recursive: true, force: true }));
   await build({ outDir });
   const source = await readFile(path.join(outDir, 'assets/site.js'), 'utf8');
-  assert.ok(Buffer.byteLength(source) <= 26392);
+  assert.ok(Buffer.byteLength(source) <= 39704);
   for (const reduce of [true, false]) {
     const ctx = context(reduce);
     assert.doesNotThrow(() => vm.runInNewContext(source, ctx));

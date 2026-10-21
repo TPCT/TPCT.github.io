@@ -80,4 +80,6 @@ deployment. In repository **Settings → Pages → Source**, select **GitHub Act
 - Outfit (SIL OFL 1.1, `public/assets/fonts/OFL-Outfit.txt`).
 - Plus Jakarta Sans (SIL OFL 1.1, `public/assets/fonts/OFL-PlusJakartaSans.txt`).
 - Icons from Lucide: ISC licence.
+- GSAP 3.15.0 (gsap.min.js, ScrollTrigger.min.js): GreenSock Standard "No Charge" License, public/assets/vendor/LICENSE-gsap.txt.
+- Lenis 1.3.27: MIT, public/assets/vendor/LICENSE-lenis.txt. Vendor files are unmodified; checksums in public/assets/vendor/SHA256SUMS.
 - Site content © Islam Elsayed, all rights reserved.

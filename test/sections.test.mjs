@@ -39,8 +39,8 @@ test('Prism sections retain markup contracts and CSS budgets', async t => {
   assert.match(css, /\[hidden\]\s*\{\s*display:\s*none\s*!important;?\s*\}/);
   assert.ok((css.match(/(?<!-webkit-)backdrop-filter:\s*var\(--glass-blur\)/g) ?? []).length <= 3);
   await t.test('CSS byte budget', () => {
-    assert.ok(Buffer.byteLength(css) <= 81920, `CSS is ${Buffer.byteLength(css)} bytes`);
-    assert.ok(zlib.gzipSync(css).length <= 18432, `Gzipped CSS is ${zlib.gzipSync(css).length} bytes`);
+    assert.ok(Buffer.byteLength(css) <= 94208, `CSS is ${Buffer.byteLength(css)} bytes`);
+    assert.ok(zlib.gzipSync(css).length <= 21504, `Gzipped CSS is ${zlib.gzipSync(css).length} bytes`);
   });
 });
 

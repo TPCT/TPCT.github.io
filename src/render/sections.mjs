@@ -10,9 +10,10 @@ function external(url, label, className = '', newTab = '', me = false) {
   return `<a href="${attr(url)}"${className ? ` class="${className}"` : ''} ${externalAttrs({ me })}>${esc(label)}${icon('arrow-up-right')}<span class="vh"> ${esc(newTab)}</span></a>`;
 }
 export function renderAbout(c) {
-  const paragraphs = `<div class="about__text">${c.about.paragraphs.map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${esc(p)}</p>`).join('')}</div>`;
-  const facts = `<aside class="about__facts" aria-label="${attr(c.about.factsLabel)}" data-reveal><dl class="about__stats">${(c.stats ?? []).map(s => `<div class="about__fact"><dt>${esc(s.label)}</dt><dd>${esc(s.value)}</dd></div>`).join('')}</dl>${tags([c.hero.location, ...c.hero.roles.slice(0, 2)])}</aside>`;
-  return section('about', '01', navLabel(c, 'about'), c.about.title, `<div class="about__body" data-reveal>${paragraphs}${facts}</div>`);
+  const lead = c.about.lead.map((line, i) => `<span class="about__line${i === 1 ? ' about__line--accent' : ''}"><span>${esc(line)}</span></span>`).join(' ');
+  const pillars = c.about.pillars.map((p, i) => `<li class="pillar"><span class="pillar__icon">${icon(p.icon, 24)}</span><span class="pillar__index" aria-hidden="true">${esc(String(i + 1).padStart(2, '0'))}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join('');
+  const companies = c.about.companies.map(name => `<li>${esc(name)}</li>`).join('');
+  return section('about', '01', navLabel(c, 'about'), c.about.title, `<div class="about"><p class="about__lead" data-reveal>${lead}</p><p class="about__intro" data-reveal>${esc(c.about.intro)}</p><ul class="pillars" aria-label="${attr(c.about.pillarsLabel)}" data-reveal>${pillars}</ul><div class="clients" data-reveal><p class="label" id="clients-label">${esc(c.about.companiesLabel)}</p><div class="clients__rail"><ul class="clients__list" aria-labelledby="clients-label">${companies}</ul><ul class="clients__list clients__list--dup" aria-hidden="true">${companies}</ul></div></div></div>`);
 }
 function careerDates(role, now) {
   const monthIndex = value => { const [year, month] = value.split('-').map(Number); return year * 12 + month - 1; };

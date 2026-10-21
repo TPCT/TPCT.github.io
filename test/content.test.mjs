@@ -47,7 +47,7 @@ test('original copy is unchanged apart from §9 additions and owner updates', as
   const career = JSON.parse(await readFile(new URL('../.company/content-career.json', import.meta.url), 'utf8'));
   for (const key of ['experience', 'stats', 'timelineIntro']) original[key] = career[key];
   Object.assign(original.hero, career.hero, { reach: '9+ years · Middle East & US' });
-  Object.assign(original.about, career.about);
+  original.about = structuredClone(c.about); // About is owned by ux-bold §2 since T-022
   Object.assign(original.site, {
     title: 'Islam Elsayed — CEO @ ShiftCodes · Senior Engineer',
     description: 'CEO @ ShiftCodes, technical team lead and consultant, and senior full-stack engineer. 9+ years shipping production software across the Middle East and US.',

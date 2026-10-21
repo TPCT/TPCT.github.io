@@ -1,3 +1,5 @@
+import { hasIcon } from './icons.mjs';
+
 export function validateContent(c) {
   const errors = [], warnings = [];
   const object = (v, p) => {
@@ -33,7 +35,35 @@ export function validateContent(c) {
   protocol(hero.ctaSecondary?.href, /^mailto:/, 'hero.ctaSecondary.href');
   protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
   for (const k of ['github', 'website', 'linkedin']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
-  const about = strings(c.about, 'title factsLabel', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
+  const about = strings(c.about, 'title intro pillarsLabel companiesLabel', 'about');
+  if (about.intro?.length > 200) errors.push('about.intro: must be ≤ 200 characters');
+  if (!Array.isArray(about.lead) || about.lead.length !== 2 || about.lead.some(line => typeof line !== 'string' || !line.trim())) errors.push('about.lead: expected exactly 2 lines');
+  if (Array.isArray(about.lead)) about.lead.forEach((line, i) => {
+    if (line?.length > 60) errors.push(`about.lead[${i}]: must be ≤ 60 characters`);
+  });
+  if (!Array.isArray(about.pillars) || about.pillars.length < 3 || about.pillars.length > 4) errors.push('about.pillars: expected 3–4 items');
+  const stackPatterns = (Array.isArray(c.skills) ? c.skills : []).flatMap(s => Array.isArray(s?.items) ? s.items : []).filter(item => typeof item === 'string' && item).map(item => new RegExp('(?<![A-Za-z0-9])' + item.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![A-Za-z0-9])', 'i'));
+  if (Array.isArray(about.pillars)) about.pillars.forEach((pillar, i) => {
+    const path = `about.pillars[${i}]`;
+    pillar = strings(pillar, 'title text', path);
+    if (!hasIcon(pillar.icon)) errors.push(`${path}.icon: unknown icon`);
+    if (pillar.title?.length > 24) errors.push(`${path}.title: must be ≤ 24 characters`);
+    if (pillar.text?.length > 120) errors.push(`${path}.text: must be ≤ 120 characters`);
+    if (typeof pillar.text === 'string') {
+      if ((Array.isArray(c.stats) ? c.stats : []).some(s => typeof s?.value === 'string' && pillar.text.includes(s.value))) errors.push(`${path}.text: repeats a hero stat`);
+      if (stackPatterns.some(pattern => pattern.test(pillar.text))) errors.push(`${path}.text: repeats a Stack item`);
+    }
+  });
+  if (!Array.isArray(about.companies) || about.companies.length < 6 || about.companies.length > 16) errors.push('about.companies: expected 6–16 items');
+  const companies = new Set();
+  if (Array.isArray(about.companies)) about.companies.forEach((name, i) => {
+    if (typeof name !== 'string' || !name.trim()) { errors.push(`about.companies[${i}]: required non-empty string`); return; }
+    const normalized = name.toLowerCase();
+    if (companies.has(normalized)) errors.push(`about.companies: duplicate "${name}"`);
+    companies.add(normalized);
+    if (!(Array.isArray(c.experience) ? c.experience : []).some(e => typeof e?.org === 'string' && e.org.toLowerCase().includes(normalized))) errors.push(`about.companies[${i}]: not found in experience`);
+  });
+  for (const key of ['paragraphs', 'factsLabel']) if (Object.hasOwn(about, key)) errors.push('about.paragraphs: removed, use lead/intro/pillars');
   strings(c.sections, 'skills experience experienceMoreLabel timeline services process', 'sections');
   const timelineIntro = strings(c.timelineIntro, 'title lead linkLabel', 'timelineIntro');
   strings(timelineIntro.kindLabels, 'company client open-source milestone', 'timelineIntro.kindLabels');

@@ -51,7 +51,7 @@ export async function build({ outDir = 'dist', root = REPO_ROOT, now = new Date(
     await writeFile(path.join(dir, 'index.html'), renderProjectPage(c, p, { assets, prev: ordered[i - 1] ?? null, next: ordered[i + 1] ?? null }));
   }
   const head = renderHead(c, { page: 'home', title: c.site.title, description: c.site.description, path: '/', jsonLd: homeGraph(c, { dateModified: lastmod, projectUrl: p => new URL(projectPath(p), c.site.url).href }), assets });
-  await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, spine: true, footer: renderFooter(c) }));
+  await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, spine: true, home: true, footer: renderFooter(c) }));
   const url = new URL('/', c.site.url).href;
   await writeFile(path.join(outDir, '404.html'), render404(c, { assets }));
   await writeFile(path.join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml', url).href}\n`);
