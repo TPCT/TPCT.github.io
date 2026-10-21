@@ -8,7 +8,7 @@
 | T-004 | GitHub Pages workflow + README | S | T-003 (after T-002) | done |
 | T-005 | Prism foundation: fonts, tokens, header, hero | M | T-004 | done |
 | T-006 | Prism sections, cards, filters, contact, footer, 404 CSS + data-reveal markup | M | T-005 | done |
-| T-007 | Prism motion JS: 60-motion, 61-pointer, filter FLIP, theme reveal, motion toggle | M | T-005 | todo |
+| T-007 | Prism motion JS: 60-motion, 61-pointer, filter FLIP, theme reveal, motion toggle | M | T-005 | done |
 | T-008 | Prism OG image, favicons, render-images.mjs (no local paths) | S | T-005 | done (re-skin in T-008b) |
 | T-009 | ShiftCodes brand colours + animated logo hero | M | T-006 | done |
 
@@ -44,3 +44,6 @@ Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds it
 - 2026-10-21 TL: `localStorage.motion` stores `'paused' | 'running'`; motion toggle uses label swap, no `aria-pressed` (ux-prism §9).
 - 2026-10-21 PM: Owner change: palette must come from the ShiftCodes logo, and the hero "prism" becomes the ShiftCodes logo mark, animated and moving; owner also asked for mouse animation ("الماسو" read as "الماوس" = mouse → pointer-driven parallax/tilt + cursor glow in T-007). Logo source taken from the owner's company repo (`seeders/assets/shiftcodes-logo-source.jpg`), committed as `src/images/brand/shiftcodes-logo-source.jpg`; brand violet sampled #6E2BFB. Ticket T-009 (tokens + vector logo + animated hero mark + exp__loc fix); then T-007 (motion + pointer JS incl. logo parallax and cursor glow), then T-008b (favicon/OG with the S mark). T-005/T-006/T-008 work is approved but stays uncommitted until T-009 recolours it (the berry palette was rejected).
 - 2026-10-21 PM: T-005 not pushed alone: its changes are interleaved with T-006/T-008/T-009 in shared files (content.json, tests, tokens, hero) and Codex is editing T-009 in the same tree now; the owner also rejected the berry palette T-005 ships. Push happens right after the T-009 review gate. History left as is (no force-push).
+- 2026-10-21 PM: Owner asks for more eye-catching animation ("wow" round → .company/ux-wow.md, built on top of T-007) and an animated career/projects timeline section. Timeline content = real milestones only, from repo creation dates + existing case studies (PO → .company/timeline.json, sources in .company/timeline-sources.md; private names never published).
+- 2026-10-21 PM: Dates from the owner (user, 2026-10-21): KSA analytics platform = 2025 (added to timeline; case study gets year 2025), AIC project = 2026 (timeline entry confirmed; case study year 2026). Food ERP: no date → not in timeline.
+- 2026-10-21 PM: T-007 non-blocking carried to wow round: tap-to-replay on touch (move replay handler to 60-motion.js); 30-filter.js near its 5,000-byte cap.

@@ -15,7 +15,12 @@
   button.hidden = false;
   button.addEventListener('click', function () {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    update(next);
+    if (typeof document.startViewTransition === 'function' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const r = button.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+      root.style.setProperty('--vt-x', x + 'px'); root.style.setProperty('--vt-y', y + 'px');
+      root.style.setProperty('--vt-r', Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 'px');
+      document.startViewTransition(() => update(next));
+    } else update(next);
     try { localStorage.setItem('theme', next); } catch {}
   });
 })();

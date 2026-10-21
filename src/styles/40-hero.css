@@ -118,6 +118,7 @@
   .js .sc-hero .sc-part--lt path { animation: sc-lt-in 420ms var(--ease-out) 950ms backwards; }
   .js .sc-hero .sc-part--gt path { animation: sc-gt-in 420ms var(--ease-out) 950ms backwards; }
   .js .sc-hero .sc-part--slash path { animation: sc-slash-in 420ms var(--ease-out) 1050ms backwards, sc-cursor 2.4s ease-in-out 1950ms infinite; }
+  .sc-hero.is-replay .sc-mark path { animation: none !important; }
   .js .sc-hero .sc-sheen { animation: sc-sheen 6s linear 1950ms infinite; }
   .js .sc-hero__halo::before { animation: sc-ring 28s linear 1950ms infinite; }
   .js .sc-hero__shard { animation: shard-float 7s ease-in-out 1950ms infinite alternate; }

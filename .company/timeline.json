@@ -1,0 +1,98 @@
+[
+  {
+    "year": 2016,
+    "title": "First code on GitHub",
+    "kind": "milestone",
+    "text": "Opened the TPCT GitHub account and started publishing small Python and PHP utilities."
+  },
+  {
+    "year": 2019,
+    "title": "C, compilers and embedded systems",
+    "kind": "open-source",
+    "text": "Wrote a compiler in C for an assembly-style language targeting a home-made 16-bit computer. Alongside it: AVR drivers, an EEPROM programmer and reusable C libraries.",
+    "link": "https://github.com/TPCT/simple_compiler"
+  },
+  {
+    "year": 2021,
+    "title": "A PHP MVC framework from scratch",
+    "kind": "open-source",
+    "text": "Built a lightweight PHP MVC framework and used it to deliver a trains system as a final project. This was the start of the move from scripts to structured web applications.",
+    "link": "https://github.com/TPCT/simple-mvc"
+  },
+  {
+    "year": 2023,
+    "title": "Laravel product and client work",
+    "kind": "client",
+    "text": "Began building client products on Laravel, including a backend platform and the first web build for an Islamic insurer."
+  },
+  {
+    "year": 2024,
+    "title": "Bank & Insurer Corporate Websites",
+    "kind": "client",
+    "text": "Delivered corporate web platforms for financial and education institutions in Jordan and Iraq, starting with a bank in Iraq."
+  },
+  {
+    "year": 2025,
+    "title": "ShiftCodes delivering client systems",
+    "kind": "company",
+    "text": "The first ShiftCodes-branded client projects shipped early in 2025. From then on, client work runs through ShiftCodes."
+  },
+  {
+    "year": 2025,
+    "title": "National Waste Analytics Platform",
+    "kind": "client",
+    "text": "Government analytics for a national waste-management program in Saudi Arabia: Oracle multi-schema ETL and KPI dashboards, with dashboard loads made 40%+ faster."
+  },
+  {
+    "year": 2025,
+    "title": "Bilingual Banking CMS open-sourced",
+    "kind": "open-source",
+    "text": "Published the Arabic/English Laravel and Filament CMS behind a bank's public website, with RBAC, audit logging and Excel import/export.",
+    "link": "https://github.com/TPCT/ashurbank.iq"
+  },
+  {
+    "year": 2025,
+    "title": "Multi-Tenant POS & Inventory",
+    "kind": "client",
+    "text": "Led a point-of-sale system for retail and restaurants with isolated company and branch data and built-in inventory, invoicing and reporting."
+  },
+  {
+    "year": 2025,
+    "title": "Open-source APIs",
+    "kind": "open-source",
+    "text": "Released a JWT-secured Laravel Order & Payment API and a Django REST validator for Egyptian national ID numbers.",
+    "link": "https://github.com/TPCT/Egyptian-National-ID"
+  },
+  {
+    "year": 2026,
+    "title": "Enterprise ERP & Multi-Tenant B2B CRM",
+    "kind": "company",
+    "text": "ShiftCodes took on enterprise operations systems: ERP for complex operations and a multi-tenant CRM with per-tenant pipelines, plans and automation."
+  },
+  {
+    "year": 2026,
+    "title": "AIC Operations Suite",
+    "kind": "client",
+    "text": "Architected a digital ecosystem for a food-safety and auditing consultancy, connecting the back office, field auditors and client companies through an admin system, mobile apps and portals. It later grew to include factory operations and quality inspections."
+  },
+  {
+    "year": 2026,
+    "title": "Multi-School Learning Platform",
+    "kind": "client",
+    "text": "Designed a modular-monolith LMS that runs several virtual schools on one platform, with five role-focused panels and real-time, queued workloads."
+  },
+  {
+    "year": 2026,
+    "title": "JenDock",
+    "kind": "open-source",
+    "text": "Released self-hosted, Jenkinsfile-compatible CI/CD for Docker Compose apps. It deploys and rolls back automatically when health checks fail.",
+    "link": "https://github.com/TPCT/JenDock"
+  },
+  {
+    "year": 2026,
+    "title": "TPCT Mac",
+    "kind": "open-source",
+    "text": "Released a macOS-style desktop for GNOME: a unified GTK4/GTK3/Shell theme with a global menu bar and desktop widgets.",
+    "link": "https://github.com/TPCT/tpct-mac-theme"
+  }
+]
