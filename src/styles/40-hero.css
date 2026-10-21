@@ -78,24 +78,22 @@
   @keyframes word-up { from { transform: translateY(105%); } }
   @keyframes header-in { from { opacity: .001; transform: translateY(-10px); } }
   @keyframes chip-in { from { opacity: .001; transform: scale(.8); } }
-  .js .hero .eyebrow { animation: rise 900ms var(--ease-rise) 60ms; animation-fill-mode: both; }
-  .js .hero__headline { animation: rise 900ms var(--ease-rise) 520ms; animation-fill-mode: both; }
-  .js .hero__sub { animation: rise 900ms var(--ease-rise) 600ms; animation-fill-mode: both; }
-  .js .schematic { animation: rise 900ms var(--ease-rise) 650ms; animation-fill-mode: both; }
-  .js .schematic__domains li { animation: chip-in 500ms var(--ease-spring) calc(800ms + var(--i) * 40ms); animation-fill-mode: both; }
-  .js .motion-toggle { animation: fade-in 400ms linear 1200ms; animation-fill-mode: both; }
-  .js .stats { animation: rise 900ms var(--ease-rise) 820ms; animation-fill-mode: both; }
-  .js .hero h1 .w:nth-of-type(1) > span { animation: word-up 1000ms var(--ease-rise) 120ms; animation-fill-mode: both; }
-  .js .roles li:nth-child(1) { animation: rise 800ms var(--ease-rise) 380ms; animation-fill-mode: both; }
-  .js .hero h1 .w:nth-of-type(2) > span { animation: word-up 1000ms var(--ease-rise) 220ms; animation-fill-mode: both; }
-  .js .roles li:nth-child(2) { animation: rise 800ms var(--ease-rise) 440ms; animation-fill-mode: both; }
-  .js .hero h1 .w:nth-of-type(3) > span { animation: word-up 1000ms var(--ease-rise) 320ms; animation-fill-mode: both; }
-  .js .roles li:nth-child(3) { animation: rise 800ms var(--ease-rise) 500ms; animation-fill-mode: both; }
-  .js .hero h1 .w:nth-of-type(4) > span { animation: word-up 1000ms var(--ease-rise) 420ms; animation-fill-mode: both; }
-  .js .roles li:nth-child(4) { animation: rise 800ms var(--ease-rise) 560ms; animation-fill-mode: both; }
-  .js .hero__ctas > :nth-child(1) { animation: rise 800ms var(--ease-rise) 700ms; animation-fill-mode: both; }
-  .js .hero__ctas > :nth-child(2) { animation: rise 800ms var(--ease-rise) 770ms; animation-fill-mode: both; }
-  .js .hero__ctas > :nth-child(3) { animation: rise 800ms var(--ease-rise) 840ms; animation-fill-mode: both; }
+  .js .hero .eyebrow { animation: rise 900ms var(--ease-rise) calc(60ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero__headline { animation: rise 900ms var(--ease-rise) calc(520ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero__sub { animation: rise 900ms var(--ease-rise) calc(600ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .schematic { animation: rise 900ms var(--ease-rise) calc(650ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .schematic__domains li { animation: chip-in 500ms var(--ease-spring) calc(800ms + var(--i) * 40ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .motion-toggle { animation: fade-in 400ms linear calc(1200ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .stats { animation: rise 900ms var(--ease-rise) calc(820ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero h1 .w:nth-of-type(1) > span { animation: word-up 1000ms var(--ease-rise) calc(120ms + var(--intro-offset) + var(--kinetic-wait)); animation-fill-mode: both; }
+  .js .hero h1 .w:nth-of-type(2) > span { animation: word-up 1000ms var(--ease-rise) calc(220ms + var(--intro-offset) + var(--kinetic-wait)); animation-fill-mode: both; }
+  .js .hero h1 .w:nth-of-type(3) > span { animation: word-up 1000ms var(--ease-rise) calc(320ms + var(--intro-offset) + var(--kinetic-wait)); animation-fill-mode: both; }
+  .js .hero h1 .w:nth-of-type(4) > span { animation: word-up 1000ms var(--ease-rise) calc(420ms + var(--intro-offset) + var(--kinetic-wait)); animation-fill-mode: both; }
+  .js .hero__ctas > :nth-child(1) { animation: rise 800ms var(--ease-rise) calc(700ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero__ctas > :nth-child(2) { animation: rise 800ms var(--ease-rise) calc(770ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero__ctas > :nth-child(3) { animation: rise 800ms var(--ease-rise) calc(840ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .roles { animation: rise 800ms var(--ease-rise) calc(380ms + var(--intro-offset)); animation-fill-mode: both; }
+  .js .hero h1.is-kinetic .w > span, .hero h1.is-kinetic .w > span { animation: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,3 +1,4 @@
+@property --sy { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --shift { syntax: '<number>'; inherits: true; initial-value: 0; }
 .sc-hero { transition: --shift 520ms var(--ease-spring); }
 .sc-hero .sc-part--hook-top    { transform: translate(calc(var(--px) * 10px + var(--shift) * 14px), calc(var(--py) * 10px - var(--shift) * 14px)); }
@@ -15,3 +16,13 @@
     .motion .sc-hero { animation: hero-exit linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
   }
 }
+
+.sc-hero { --sy: 0; }
+.sc-hero__shard { translate: calc(var(--px) * var(--z) * 22px) calc(var(--py) * var(--z) * 22px - var(--sy) * var(--z) * 320px); }
+.sc-hero__halo  { translate: calc(var(--px) * -6px) calc(var(--py) * -6px); }
+@media (prefers-reduced-motion: no-preference) {
+  .bold .sc-hero { animation: none; }
+}
+.bold .sc-hero { scale: calc(1 - var(--sy) * .18); opacity: calc(1 - var(--sy) * .75); }
+.bold .sc-hero__mark { translate: 0 calc(var(--sy) * -90px); }
+.bold .sc-hero__halo { scale: calc(1 + var(--sy) * .3); }

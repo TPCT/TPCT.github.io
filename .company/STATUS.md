@@ -23,9 +23,9 @@
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
 | T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | done |
 | T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | done |
-| T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | todo |
+| T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | done |
 | T-025 | B-4 Story: pillar fan, pinned Process story, horizontal Work rail (desktop) | M | T-022, T-023 (round 3) | todo |
-| T-026 | B-5 Atmosphere: section colour morphs + split-line heading reveals | S | T-023 (T-022 for About lines) | todo |
+| T-026 | B-5 Atmosphere: section colour morphs + split-line heading reveals | S | T-023 (T-022 for About lines) | done |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds its own new test file; run one after another if RAM is tight).
@@ -134,3 +134,4 @@ Bold lead pre-step: commit + push `public/assets/vendor/` (currently untracked) 
   - Pillar text vs Stack items uses `(?<![A-Za-z0-9])…(?![A-Za-z0-9])` instead of `\b…\b` (items like `C#`).
   - `toggle` refresh hook uses a capture listener (the event does not bubble).
   - Every bold ticket includes a throwaway Playwright check outside the repo (CSP violations + console errors = 0, plus its behaviour), using the local Chromium/playwright-core paths from T-003.
+- 2026-10-21 PM: Follow-up from T-024 r2: guard curtain-cancel path (await a.ready.catch → finish()) so the name can never stay hidden → T-027 (runs with T-025).

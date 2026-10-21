@@ -1,0 +1,57 @@
+:root { --intro-offset: 0ms; }
+.intro { --intro-offset: 700ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .intro .intro-screen { display: grid; place-items: center; position: fixed; inset: 0; z-index: 90; pointer-events: none;
+    background-color: var(--canvas); background-image: var(--field);
+    animation: intro-out 300ms var(--ease-in-out) 700ms both; }
+  .intro .intro__svg { width: clamp(88px, 14vw, 132px); height: auto; overflow: visible; animation: intro-lift 300ms var(--ease-in-out) 700ms both; }
+  .intro .intro__svg path { fill-opacity: 0; stroke: var(--brand); stroke-width: 5; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+    animation: intro-draw 520ms var(--ease-in-out) var(--d, 0ms) both, intro-fill 260ms var(--ease-out) 460ms both; }
+  .intro .sc-part--hook-bottom path { --d: 80ms; }
+  .intro .sc-part--lt path { --d: 200ms; }
+  .intro .sc-part--slash path { --d: 260ms; }
+  .intro .sc-part--gt path { --d: 320ms; }
+  @keyframes intro-draw { to { stroke-dashoffset: 0; } }
+  @keyframes intro-fill { to { fill-opacity: 1; stroke-opacity: 0; } }
+  @keyframes intro-lift { to { transform: translateY(-28px) scale(.86); opacity: 0; } }
+  @keyframes intro-out { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+}
+@media print, (forced-colors: active) { .intro-screen { display: none !important; } }
+
+:root { --kinetic-wait: 0ms; }
+.kinetic { --kinetic-wait: 800ms; }
+.hero h1.is-kinetic .w { perspective: 640px; }
+.hero h1.is-kinetic .w > span { display: inline-block; }
+.hero h1.is-kinetic .ch { display: inline-block; will-change: transform; }
+.hero h1.is-kinetic .w--accent > span { background: none; }
+.hero h1.is-kinetic .w--accent .ch { background-image: var(--grad-name); background-size: calc(var(--ww) * 1px) 100%; background-position: calc(var(--cx) * -1px) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+:root { --roles-start: calc(2.4s + var(--intro-offset)); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes role-cycle {
+    0%, 26%   { opacity: 1; transform: none; }
+    30%, 96%  { opacity: 0; transform: translateY(-70%) rotateX(75deg); }
+    96.01%    { opacity: 0; transform: translateY(70%) rotateX(-75deg); }
+    100%      { opacity: 1; transform: none; }
+  }
+  @keyframes role-hold { from, to { opacity: 0; } }
+  .js .roles { display: grid; perspective: 600px; }
+  .js .roles li { grid-area: 1 / 1; color: var(--fg); backface-visibility: hidden; transform-origin: 50% 50% -.4em;
+    animation: role-cycle 9s var(--ease-in-out) infinite both; }
+  .js .roles li:nth-child(1) { animation-delay: var(--roles-start); }
+  .js .roles li:nth-child(n+2) { animation: role-cycle 9s var(--ease-in-out) infinite both, role-hold var(--roles-start) linear; }
+  .js .roles li:nth-child(2) { animation-delay: calc(var(--roles-start) - 6s), 0s; }
+  .js .roles li:nth-child(3) { animation-delay: calc(var(--roles-start) - 3s), 0s; }
+  .js .roles li + li::before { content: none; }
+  .js .roles:hover li { animation-play-state: paused; }
+  .motion-paused .roles { display: flex; }
+  .motion-paused .roles li { grid-area: auto; animation: none; color: var(--fg2); }
+  .motion-paused .roles li:first-child { color: var(--fg); }
+  .motion-paused .roles li + li::before { content: "·" / ""; }
+}
+/* Restore the word gradient after the temporary character nodes are removed. */
+.hero h1.is-kinetic .w--accent > span:not(:has(.ch)) { background-image: var(--grad-name); -webkit-background-clip: text; background-clip: text; }
+@media (prefers-reduced-motion: no-preference) {
+  .motion .hero h1.is-kinetic .w--accent > span:not(:has(.ch)) { background-image: var(--grad-flow); }
+}
