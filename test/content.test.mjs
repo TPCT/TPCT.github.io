@@ -18,7 +18,8 @@ test('original copy is unchanged apart from §9 additions and owner updates', as
   let original;
   try { original = JSON.parse(await readFile(new URL('../.company/content.json', import.meta.url), 'utf8')); }
   catch (e) { if (e.code === 'ENOENT') return t.skip('Lead removed original content source'); throw e; }
-  original.hero.ctaSecondary.href = 'mailto:th3professionalcod3r@gmail.com';
+  original.hero.ctaSecondary.href = '#contact';
+  original.contact.mailAppLabel = 'Open in mail app';
   original.contact.email = 'th3professionalcod3r@gmail.com';
   original.projects = original.projects.filter(p => p.id !== 'idempotent-session-ingest');
   original.projects.splice(original.projects.findIndex(p => p.id === 'order-payment-api') + 1, 0, {
@@ -95,4 +96,15 @@ test('removed Experience labels are not required', () => {
   assert.equal(c.sections.experience, undefined);
   assert.equal(c.sections.experienceMoreLabel, undefined);
   assert.deepEqual(validateContent(c).errors, []);
+});
+
+test('secondary CTA accepts contact anchors and rejects executable URLs; mail app label is required', () => {
+  const copy = structuredClone(c);
+  copy.hero.ctaSecondary.href = '#contact';
+  assert.deepEqual(validateContent(copy).errors, []);
+  copy.hero.ctaSecondary.href = 'javascript:alert(1)';
+  assert.ok(validateContent(copy).errors.some(e => e.includes('hero.ctaSecondary.href')));
+  copy.hero.ctaSecondary.href = '#contact';
+  delete copy.contact.mailAppLabel;
+  assert.ok(validateContent(copy).errors.some(e => e.includes('contact.mailAppLabel')));
 });

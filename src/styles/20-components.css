@@ -11,6 +11,8 @@
 .btn--primary:hover::before, .btn--primary:hover::after { opacity: 1; }
 .btn--primary:hover { box-shadow: var(--primary-shadow), var(--primary-glow); }
 .btn--primary.is-magnet { transition-duration: 160ms, var(--dur-1), var(--dur-2), var(--dur-1); }
+.btn--ghost { background: transparent; border: 1px solid var(--control-rim); color: var(--fg); box-shadow: none; }
+.btn--ghost:hover { background: var(--brand-tint); }
 .btn--secondary:hover { color: var(--brand); translate: 0 -1px; box-shadow: var(--control-shadow), 0 8px 18px -10px rgb(0 0 0 / .45); }
 [data-theme="light"] .btn--secondary:hover { box-shadow: var(--control-shadow), 0 8px 18px -10px rgb(70 45 160 / .30); }
 .hero__ctas .btn { min-height: 52px; padding-inline: 28px; }

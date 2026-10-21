@@ -32,7 +32,7 @@ export function validateContent(c) {
   for (const k of ['roles', 'domains']) stringArray(hero[k], `hero.${k}`);
   for (const k of ['ctaPrimary', 'ctaSecondary', 'ctaTertiary']) strings(hero[k], 'label href', `hero.${k}`);
   const protocol = (value, pattern, field) => { if (typeof value !== 'string' || !pattern.test(value)) errors.push(`${field}: invalid URL protocol`); };
-  protocol(hero.ctaSecondary?.href, /^mailto:/, 'hero.ctaSecondary.href');
+  protocol(hero.ctaSecondary?.href, /^(?:#[^\s]+|mailto:)/, 'hero.ctaSecondary.href');
   protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
   for (const k of ['github', 'website', 'linkedin']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
   const about = strings(c.about, 'title intro pillarsLabel companiesLabel', 'about');
@@ -86,7 +86,7 @@ export function validateContent(c) {
     previousYear = year;
   });
   strings(c.a11y, 'newTab', 'a11y');
-  strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel linkedin linkedinLabel location', 'contact');
+  strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel mailAppLabel website websiteLabel github githubLabel linkedin linkedinLabel location', 'contact');
   const nf = strings(c.notFound, 'title code message', 'notFound'); strings(nf.cta, 'label href', 'notFound.cta');
   strings(c.projectPage, 'breadcrumbLabel homeLabel workLabel highlightsTitle stackTitle yearLabel typeLabel categoryLabel pagerLabel prevLabel nextLabel backLabel caseStudyLink openSourceLink', 'projectPage');
   const intro = strings(c.projectsIntro, 'title lead filterLabel allLabel repoLinkLabel privateNote emptyState kindFilterLabel countSingular countPlural resetLabel roleLabel stackLabel', 'projectsIntro');

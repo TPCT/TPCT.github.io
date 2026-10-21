@@ -12,8 +12,9 @@
 .roles li + li::before { content: "·" / ""; margin-inline: .55em; color: var(--muted); }
 .hero__headline { margin-block-start: 28px; max-width: 26ch; font: 600 var(--fs-lead)/var(--lh-snug) var(--font-display); color: var(--fg); }
 .hero__sub { margin-block-start: 14px; max-width: 56ch; color: var(--fg2); }
-.hero__ctas { display: flex; flex-wrap: wrap; align-items: center; margin-block-start: 32px; gap: 12px 14px; }
-.hero__ctas .btn { width: 100%; }
+.hero__ctas { display: flex; flex-wrap: wrap; align-items: center; margin-block-start: 32px; gap: 12px; }
+.hero__ctas .btn { width: auto; }
+@media (max-width: 480px) { .hero__ctas .btn { width: 100%; } }
 .sc-hero { --px: 0; --py: 0; position: relative; width: min(100%, 300px); aspect-ratio: 1; margin-inline: auto; perspective: 900px; }
 .sc-hero > * { position: absolute; pointer-events: none; }
 .sc-hero__mark { width: 64%; inset: 10% 18% auto; transform: rotateX(calc(var(--py) * -8deg)) rotateY(calc(var(--px) * 8deg)); }
@@ -48,7 +49,6 @@
 @media (min-width: 400px) { .roles li { white-space: nowrap; } }
 @media (min-width: 768px) {
   .hero { padding-block: 56px 0; }
-  .hero__ctas .btn { width: auto; }
   .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block-start: 72px; }
   .stats li { padding: 28px 24px; }
   .stats li:first-child { padding-inline-start: 0; }

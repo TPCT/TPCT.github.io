@@ -91,7 +91,7 @@
     },
     "ctaSecondary": {
       "label": "Start a conversation",
-      "href": "mailto:th3professionalcod3r@gmail.com"
+      "href": "#contact"
     },
     "ctaTertiary": {
       "label": "GitHub",
@@ -969,6 +969,7 @@
     "email": "th3professionalcod3r@gmail.com",
     "emailLabel": "Email me",
     "copyLabel": "Copy email",
+    "mailAppLabel": "Open in mail app",
     "copiedLabel": "Email copied",
     "website": "https://shiftcodes.net",
     "websiteLabel": "ShiftCodes",

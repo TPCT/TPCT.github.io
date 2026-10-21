@@ -80,3 +80,27 @@ test('project card contracts remain unchanged', async () => {
   assert.match(renderCard(c.projects.find(p => p.id === 'national-waste-analytics'), c), /class="card__year">2025</);
   assert.equal(c.projects.find(p => p.id === 'aic-operations-suite').year, 2026);
 });
+
+test('hero and contact share the CTA button system', async () => {
+  const { renderHero } = await import('../src/render/hero.mjs');
+  const { renderContact } = await import('../src/render/sections.mjs');
+  const hero = renderHero(c).match(/<div class="hero__ctas">([\s\S]*?)<\/div>/)[1];
+  assert.equal((hero.match(/class="btn /g) ?? []).length, 3);
+  assert.match(hero, /class="btn btn--secondary" href="#contact"/);
+  assert.match(hero, /class="btn btn--ghost"[^>]*target="_blank"/);
+  assert.doesNotMatch(hero, /text-link/);
+  const contact = renderContact(c);
+  assert.match(contact, /class="contact__email-card"/);
+  assert.match(contact, /class="btn btn--secondary copy-btn" hidden/);
+  assert.match(contact, /class="btn btn--ghost" href="mailto:[^"]+"/);
+  const socials = contact.match(/<ul class="contact__links"[^>]*>([\s\S]*?)<\/ul>/)[1];
+  assert.equal((socials.match(/class="btn btn--ghost"/g) ?? []).length, 3);
+  assert.equal((socials.match(/rel="me noopener noreferrer"/g) ?? []).length, 2);
+  const css = await readFile(new URL('../src/styles/40-hero.css', import.meta.url), 'utf8');
+  assert.match(css, /\.hero__ctas\s*\{[^}]*display: flex;[^}]*flex-wrap: wrap;[^}]*gap: 12px;/);
+});
+
+test('hero CTA rows stay within the text column', async () => {
+  const css = await readFile(new URL('../src/styles/40-hero.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(css, /\.hero__ctas\s*\{[^}]*\bwidth:\s*max-content\b/);
+});
