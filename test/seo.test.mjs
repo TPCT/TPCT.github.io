@@ -15,6 +15,7 @@ test('SEO, 404, discovery files and committed assets', async t => {
   const html = await readFile(path.join(outDir, 'index.html'), 'utf8');
   assert.ok(html.includes(`<title>${esc(c.site.title)}</title>`));
   assert.ok(html.includes(`<meta name="description" content="${attr(c.site.description)}">`));
+  assert.ok(html.includes('<meta name="google-site-verification" content="PsjjRMzW2cVBwfM-sNSoLjfU_tR097ytc5RXKuP5dNE">'));
   assert.ok(html.includes('<link rel="canonical" href="https://tpct.github.io/">'));
   for (const [key, value] of Object.entries({ 'og:type': 'website', 'og:site_name': c.site.shortTitle, 'og:title': c.site.title, 'og:description': c.site.description, 'og:url': 'https://tpct.github.io/', 'og:image': 'https://tpct.github.io/assets/og-image.png', 'og:image:type': 'image/png', 'og:image:width': '1200', 'og:image:height': '630', 'og:image:alt': c.site.ogImageAlt, 'og:locale': c.site.locale, 'twitter:card': 'summary_large_image', 'twitter:title': c.site.title, 'twitter:description': c.site.description, 'twitter:image': 'https://tpct.github.io/assets/og-image.png', 'twitter:image:alt': c.site.ogImageAlt })) assert.ok(html.includes(`<meta ${key.startsWith('og:') ? 'property' : 'name'}="${key}" content="${attr(value)}">`), key);
   for (const file of ['/favicon.svg', '/favicon-32.png', '/apple-touch-icon.png', '/site.webmanifest', '/assets/fonts/outfit-var.woff2', '/assets/fonts/jakarta-var.woff2']) assert.ok(html.includes(`href="${file}"`));
