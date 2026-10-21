@@ -3,7 +3,7 @@
   if (!('IntersectionObserver' in window)) return;
   const nav = document.getElementById('primary-nav');
   if (!nav) return;
-  const mapping = { about: 'about', experience: 'about', skills: 'skills', work: 'work', services: 'services', process: 'services', contact: 'contact' };
+  const mapping = { about: 'about', experience: 'about', timeline: 'timeline', skills: 'skills', work: 'work', services: 'services', process: 'services', contact: 'contact' };
   const links = Array.from(nav.querySelectorAll('a'));
   const ids = Array.from(document.querySelectorAll('section[id]')).map(section => section.id).filter(id => id === 'top' || Object.hasOwn(mapping, id));
   const active = new Set();

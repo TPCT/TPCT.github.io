@@ -34,7 +34,27 @@ export function validateContent(c) {
   protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
   for (const k of ['github', 'website', 'linkedin']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
   const about = strings(c.about, 'title factsLabel', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
-  strings(c.sections, 'skills experience experienceMoreLabel services process', 'sections');
+  strings(c.sections, 'skills experience experienceMoreLabel timeline services process', 'sections');
+  const timelineIntro = strings(c.timelineIntro, 'title lead linkLabel', 'timelineIntro');
+  strings(timelineIntro.kindLabels, 'company client open-source milestone', 'timelineIntro.kindLabels');
+  let previousYear;
+  array(c.timeline, 'timeline').forEach((item, i) => {
+    const path = `timeline[${i}]`;
+    item = strings(item, 'title text', path);
+    if (!['company', 'client', 'open-source', 'milestone'].includes(item.kind)) errors.push(`${path}.kind: invalid kind`);
+    if (!(Number.isInteger(item.year) && item.year >= 1990 && item.year <= 2100) &&
+        !(typeof item.year === 'string' && /^\d{4}(\s?[–-]\s?(\d{4}|now|present))?$/i.test(item.year))) errors.push(`${path}.year: invalid year`);
+    if (item.link !== undefined) {
+      if (typeof item.link === 'string') protocol(item.link, /^https:\/\//, `${path}.link`);
+      else {
+        const link = strings(item.link, 'label', `${path}.link`);
+        protocol(link.href, /^https:\/\//, `${path}.link.href`);
+      }
+    }
+    const year = Number(String(item.year).slice(0, 4));
+    if (year < previousYear) warnings.push(`timeline: years out of order at [${i}]`);
+    previousYear = year;
+  });
   strings(c.a11y, 'newTab', 'a11y');
   strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel linkedin linkedinLabel location', 'contact');
   const nf = strings(c.notFound, 'title code message', 'notFound'); strings(nf.cta, 'label href', 'notFound.cta');

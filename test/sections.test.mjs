@@ -16,7 +16,7 @@ test('Prism sections retain markup contracts and CSS budgets', async t => {
   const nf = await readFile(`${outDir}/404.html`, 'utf8');
   const css = await readFile(`${outDir}/assets/site.css`, 'utf8');
   assert.ok((html.match(/\bdata-reveal\b/g) ?? []).length >= 30);
-  assert.equal((html.match(/<header class="section-head" data-reveal>/g) ?? []).length, 7);
+  assert.equal((html.match(/<header class="section-head" data-reveal>/g) ?? []).length, 8);
   const cards = html.match(/<li class="card card--[^>]*>/g) ?? [];
   assert.equal(cards.length, c.projects.length);
   for (const card of cards) assert.ok(card.endsWith(' data-reveal>'));

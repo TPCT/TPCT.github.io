@@ -183,3 +183,6 @@ node -e "const a=require('./src/content.json').timeline,b=require('./.company/ti
 - Reduced motion or no JS → a fully drawn line, all nodes lit, no spark, no pulse, static visible cards. The pause toggle freezes the "now" pulse; the scroll-linked draw is not a loop. Card hover-lift only on `(hover: hover) and (pointer: fine)`.
 - Content stays visible at rest and without JS. JS only adds `is-drawing`/`is-lit`/`is-done`, and `focusin`/`beforeprint` finish the draw immediately.
 - Timeline copy must stay anonymised exactly as in the PO file. No client names beyond those already public in `src/content.json`, no hostnames other than `github.com/TPCT`.
+
+## Addendum (lead, 2026-10-21)
+`.company/timeline.json` was rewritten by the PO from the owner's real LinkedIn roles (15 entries, see `.company/timeline-sources.md`); `timelineIntro` may already exist in `src/content.json` (T-016 stored it) — reuse it. Per timeline-sources.md, the GitHub-link count is now 3 (not 6). national-waste-analytics already has year 2025 (T-016) — don't change it again. Section headings now stack (T-017) — follow that pattern.

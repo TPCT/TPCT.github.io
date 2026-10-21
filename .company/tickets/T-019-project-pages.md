@@ -217,3 +217,6 @@ npm run check:confidential
 - Per-project OG images.
 - Long-form case-study copy beyond the existing summary and highlights.
 - Changes to the 404 page.
+
+## Addendum (lead)
+Also change the CSP `connect-src` from `'none'` to `'self'` (Lighthouse robots-txt audit needs it; SEO 92 → 100). Update the CSP test accordingly.
