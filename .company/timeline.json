@@ -6,6 +6,18 @@
     "text": "Opened the TPCT GitHub account and started publishing small Python and PHP utilities."
   },
   {
+    "year": 2017,
+    "title": "First role at Aqua Web, first freelance clients",
+    "kind": "company",
+    "text": "Joined Aqua Web in Alexandria as a junior web developer and started freelancing. By 2019 I had built 20+ modular MVC apps there, and freelance work grew to ~250 projects in Python and PHP."
+  },
+  {
+    "year": 2019,
+    "title": "Full-stack engineer at WeDoAcc",
+    "kind": "company",
+    "text": "Built a productized accounting suite (invoicing, billing, reporting) and a CRM in Laravel. A service-repository pattern sped up feature delivery by 30%."
+  },
+  {
     "year": 2019,
     "title": "C, compilers and embedded systems",
     "kind": "open-source",
@@ -14,34 +26,33 @@
   },
   {
     "year": 2021,
-    "title": "A PHP MVC framework from scratch",
-    "kind": "open-source",
-    "text": "Built a lightweight PHP MVC framework and used it to deliver a trains system as a final project. This was the start of the move from scripts to structured web applications.",
-    "link": "https://github.com/TPCT/simple-mvc"
+    "title": "Full-stack engineer at Stackdeans",
+    "kind": "company",
+    "text": "Shipped 10+ Laravel sites with Stripe and AI features, lifting conversions by 25%, on reusable MVC components and Docker-based CI/CD."
+  },
+  {
+    "year": 2022,
+    "title": "CTO at Venu Dine",
+    "kind": "company",
+    "text": "Moved from senior back-end developer to CTO of a food-tech startup. I owned the FastAPI and Laravel backend and the Flutter apps, and its multi-vendor restaurant APIs served 200k+ daily requests with 100% uptime."
   },
   {
     "year": 2023,
-    "title": "Laravel product and client work",
-    "kind": "client",
-    "text": "Began building client products on Laravel, including a backend platform and the first web build for an Islamic insurer."
+    "title": "Team leader at dot.jo",
+    "kind": "company",
+    "text": "Led a Yii2 team in Jordan across 25+ projects, including 3 bank websites and high-profile Jordanian clients. A headless CMS built on Filament cut project delivery from about a month to 4 days."
   },
   {
     "year": 2024,
-    "title": "Bank & Insurer Corporate Websites",
-    "kind": "client",
-    "text": "Delivered corporate web platforms for financial and education institutions in Jordan and Iraq, starting with a bank in Iraq."
-  },
-  {
-    "year": 2025,
-    "title": "ShiftCodes delivering client systems",
+    "title": "Senior software engineer at Kearney",
     "kind": "company",
-    "text": "The first ShiftCodes-branded client projects shipped early in 2025. From then on, client work runs through ShiftCodes."
+    "text": "Joined Kearney on contract for government work: refactoring a platform for stability and scalability and hardening its environment."
   },
   {
     "year": 2025,
-    "title": "National Waste Analytics Platform",
-    "kind": "client",
-    "text": "Government analytics for a national waste-management program in Saudi Arabia: Oracle multi-schema ETL and KPI dashboards, with dashboard loads made 40%+ faster."
+    "title": "CTO at IPXBit",
+    "kind": "company",
+    "text": "Moved a multi-tenant platform from microservices to a modular monolith with a database per module, cutting server costs from $15k to $2k. I led the UI/UX, frontend, backend and mobile teams."
   },
   {
     "year": 2025,
@@ -52,34 +63,27 @@
   },
   {
     "year": 2025,
-    "title": "Multi-Tenant POS & Inventory",
+    "title": "National Waste Analytics Platform",
     "kind": "client",
-    "text": "Led a point-of-sale system for retail and restaurants with isolated company and branch data and built-in inventory, invoicing and reporting."
+    "text": "Led full-stack development of a national waste analytics platform in Saudi Arabia on Django and React, with real-time maps and SSO. Oracle multi-view optimisation over 100M+ rows cut data fetches from 3 s to 500 ms."
   },
   {
     "year": 2025,
-    "title": "Open-source APIs",
-    "kind": "open-source",
-    "text": "Released a JWT-secured Laravel Order & Payment API and a Django REST validator for Egyptian national ID numbers.",
-    "link": "https://github.com/TPCT/Egyptian-National-ID"
-  },
-  {
-    "year": 2026,
-    "title": "Enterprise ERP & Multi-Tenant B2B CRM",
+    "title": "Team lead at Raqmix, senior engineer at Everything To Gain",
     "kind": "company",
-    "text": "ShiftCodes took on enterprise operations systems: ERP for complex operations and a multi-tenant CRM with per-tenant pipelines, plans and automation."
+    "text": "Led Python development teams at Raqmix. At the same time I built multi-tenant Laravel, FastAPI and .NET apps for a US company, with PayPal, MasterCard and HyperPay integrations."
   },
   {
     "year": 2026,
-    "title": "AIC Operations Suite",
-    "kind": "client",
-    "text": "Architected a digital ecosystem for a food-safety and auditing consultancy, connecting the back office, field auditors and client companies through an admin system, mobile apps and portals. It later grew to include factory operations and quality inspections."
+    "title": "CEO of ShiftCodes",
+    "kind": "company",
+    "text": "Now leading ShiftCodes, my software studio, full-time. Its systems include the AIC Operations Suite, a multi-school learning platform, and ERP and multi-tenant CRM work."
   },
   {
     "year": 2026,
-    "title": "Multi-School Learning Platform",
-    "kind": "client",
-    "text": "Designed a modular-monolith LMS that runs several virtual schools on one platform, with five role-focused panels and real-time, queued workloads."
+    "title": "Technical lead for Monglish and Edulixa360",
+    "kind": "company",
+    "text": "Senior technical team lead and consultant for Monglish International Academy in Egypt and Edulixa360 in Saudi Arabia, managing the technical staff and leading hands-on."
   },
   {
     "year": 2026,
@@ -87,12 +91,5 @@
     "kind": "open-source",
     "text": "Released self-hosted, Jenkinsfile-compatible CI/CD for Docker Compose apps. It deploys and rolls back automatically when health checks fail.",
     "link": "https://github.com/TPCT/JenDock"
-  },
-  {
-    "year": 2026,
-    "title": "TPCT Mac",
-    "kind": "open-source",
-    "text": "Released a macOS-style desktop for GNOME: a unified GTK4/GTK3/Shell theme with a global menu bar and desktop widgets.",
-    "link": "https://github.com/TPCT/tpct-mac-theme"
   }
 ]

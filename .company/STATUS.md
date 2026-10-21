@@ -11,9 +11,16 @@
 | T-007 | Prism motion JS: 60-motion, 61-pointer, filter FLIP, theme reveal, motion toggle | M | T-005 | done |
 | T-008 | Prism OG image, favicons, render-images.mjs (no local paths) | S | T-005 | done (re-skin in T-008b) |
 | T-009 | ShiftCodes brand colours + animated logo hero | M | T-006 | done |
+| T-015 | Vertical rhythm + section continuity (spine) | M | T-007 | done |
+| T-010 | W-1 Signal field: hero particle constellation + raise JS/CSS caps | M | T-015 | todo |
+| T-011 | W-2 Compile type: glyph decode + name flow | S | T-010 | todo |
+| T-012 | W-3 Live cards: cursor spotlight + rim signal | S | T-010 | todo |
+| T-013 | W-4 Journey timeline section (content, validation, render, CSS, draw JS) | M | T-010 | todo |
+| T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | todo |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds its own new test file; run one after another if RAM is tight).
+Wow order (max 2 Codex runs at once): T-015 → T-010 (alone; raises caps) → (T-011 ∥ T-013) → (T-012 ∥ T-014; T-014 only after T-013). T-012 is disjoint from all others and can fill any free slot after T-010.
 
 ### Lead tasks outside Codex (Codex may not edit `.company/` or touch the remote)
 - After T-001 is approved: delete `.company/content.json` (moved to `src/content.json`).
@@ -47,3 +54,25 @@ Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds it
 - 2026-10-21 PM: Owner asks for more eye-catching animation ("wow" round → .company/ux-wow.md, built on top of T-007) and an animated career/projects timeline section. Timeline content = real milestones only, from repo creation dates + existing case studies (PO → .company/timeline.json, sources in .company/timeline-sources.md; private names never published).
 - 2026-10-21 PM: Dates from the owner (user, 2026-10-21): KSA analytics platform = 2025 (added to timeline; case study gets year 2025), AIC project = 2026 (timeline entry confirmed; case study year 2026). Food ERP: no date → not in timeline.
 - 2026-10-21 PM: T-007 non-blocking carried to wow round: tap-to-replay on touch (move replay handler to 60-motion.js); 30-filter.js near its 5,000-byte cap.
+- 2026-10-21 PM: Owner: section gaps too big + sections feel disconnected → T-015 (top priority, before wow round): one-pad rhythm (section-pad clamp(48px,2rem+3vw,88px), no double padding), continuous canvas, desktop violet scroll 'spine' with chapter nodes lighting up, overlapping reveals. Mobile: no spine, tighter rhythm.
+- 2026-10-21 UX (ux-wow.md Assumptions, logged by TL):
+  1. Five chunks: W-1 field, W-2 type, W-3 cards, W-4 Journey timeline (the owner's request, first-class), W-5 rhythm. Film grain, section dividers, letter shimmer, heading parallax and a separate experience-line draw were dropped (ux-wow §0).
+  2. Journey goes after Experience and before Stack. Indices renumber to 01–08. Nav "Journey" goes after "About". At 768–1023px the nav links get compact padding so 6 links fit.
+  3. Default timeline intro copy is "The journey so far" plus a factual lead. The PO's file has no intro keys, so the default stands.
+  4. Timeline `link` accepts a URL string or `{href, label}`. `year` accepts an integer or a range string.
+  5. The line draw is monotonic and JS-driven in all browsers (not CSS scroll-timelines), so node lighting stays in sync and Firefox gets it.
+  6. The constellation stays confined to the hero, starts 700ms after `load`, and degrades or disables itself on slow devices.
+  7. The cursor spotlight respects the motion toggle (consistent with T-007's cursor glow).
+  8. The marquee is gated on `.js` (set before paint) rather than `.motion`, to avoid CLS.
+  9. The `site.js` cap rises by 8,192 over the cap in force (rebase rule B + 8,192).
+  10. New CSS lives in per-chunk partials (41-, 42-, 43-, 55-, 56-, 61-), so chunks never edit the same stylesheet.
+- 2026-10-21 TL: Wow tickets T-010..T-014 written; all assume T-015 has landed.
+  - Caps: T-010 raises the site.js cap from B to B + 8,192. B is 17,500, or 18,200 if T-015 adds `62-spine.js`, so the new cap is 25,692 or 26,392. T-010 also raises the CSS caps in `sections.test.mjs` by +16,384 raw / +4,096 gzip (65,536/14,336 → 81,920/18,432), because about 15 KB of new CSS doesn't fit the old budget.
+  - The card spotlight state class is `is-spot`, not ux-wow's `is-lit`, to avoid clashing with T-015's chapter-node `.is-lit` and the timeline's `.tl__item.is-lit`.
+  - The Journey line uses the spine's exact track/fill gradients (`--brand-line` track; `--logo-a` → `--cyan` fill), not ux-wow §6.5's 4-stop gradient, so the timeline reads as a branch of the spine.
+  - `.tl__lead` and `.marquee` bottom margins use `--space-6`, to match T-015's section-head gap.
+  - The timeline content is copied verbatim from `.company/timeline.json`.
+  - Owner-supplied years (user, 2026-10-21) are applied in T-013: `national-waste-analytics` gets year 2025, and `aic-operations-suite` keeps 2026.
+  - T-013 adds a test that runs `checkConfidential` (hostname rule + private denylist when present) on the rendered Journey section, and asserts that its only hrefs are `github.com/TPCT`. Pre-check: `timeline.json` has 0 denylist hits.
+  - The T-007 carry-over (tap-to-replay on touch via `60-motion.js`) is not in the wow tickets, because the wow round never edits `60-motion.js`. It stays open as a separate follow-up.
+- 2026-10-21 PM: Owner supplied full LinkedIn experience (.company/private/experience.md, gitignored) → source of truth. PO writes .company/content-career.json (experience as real career history grouped by company, stats/hero/about with owner's public LinkedIn numbers) and re-bases .company/timeline.json on dated roles. Implemented as T-016 (content + Experience renderer) after T-015, before T-013 (timeline render). Company names allowed (public on LinkedIn); still no internal URLs/private repo names; royal-family mention generalised.

@@ -49,9 +49,9 @@
   .skills, .services { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 }
 @media (min-width: 1024px) {
-  #about > .container { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 24px; }
+  #about > .container { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 24px; }
   #about .section-head { display: contents; }
-  #about .section-head__index { grid-column: 1 / -1; justify-self: start; margin-block-end: var(--space-7); }
+  #about .section-head__index { grid-column: 1 / -1; justify-self: start; margin-block-end: var(--space-6); }
   #about h2 { grid-column: 1 / 5; align-self: start; position: sticky; inset-block-start: calc(var(--header-h) + 32px); margin: 0; }
   .about__body { grid-column: 5 / -1; padding: 40px; }
   .experience > li { grid-template-columns: 1fr 2fr; gap: 16px 24px; }

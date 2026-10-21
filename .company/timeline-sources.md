@@ -1,31 +1,41 @@
 # Timeline sources
 
-Every entry in `timeline.json` and the fact it rests on. Private work is described only by sector and creation month.
+Every entry in `timeline.json` and the fact it rests on. Revised 2026-10-21 by the Product Owner, with the owner's LinkedIn (`.company/private/experience.md`, abbreviated **EXP** with its row number) as the source of truth for roles, dates and numbers. Company names come from his public LinkedIn. Private client work is described only by sector.
+
+All 15 entries use the existing kinds (`company`, `client`, `open-source`, `milestone`). Employers use `company`, so **no new `role` kind is needed**, and `validate.mjs`/`kindLabels` stay unchanged.
 
 | # | Year | Entry | Evidence |
 |---|------|-------|----------|
-| 1 | 2016 | First code on GitHub | GitHub account TPCT created 2016-05-27. The earliest public repos are Python and PHP utilities from 2016-05 to 2016-07 (for example `TPCT-URLSHOTRENER`, 2016-07-13). The site stat says "since 2016". |
-| 2 | 2019 | C, compilers and embedded systems | `simple_compiler` created 2019-07-24. Its README describes a compiler for a home-made 16-bit computer. Also `EEPROM-PROGRAMMER` (2019-07-02), `C-LIBS` (2019-07-07), `BigNumbers` (2019-07-28) and `AVR` (2019-09-01, "some AVR drivers"). All are public. |
-| 3 | 2021 | A PHP MVC framework from scratch | `simple-mvc` created 2021-12-27 and `trains-system` created 2021-12-28 ("this is my final project"). Both are public PHP. |
-| 4 | 2023 | Laravel product and client work | Private client repository (Blade/Laravel backend), created 2023-10. Private client repository for an Islamic insurer, created 2023-12. |
-| 5 | 2024 | Bank & Insurer Corporate Websites | Private client repository for a bank in Iraq, created 2024-04. Several private client repositories with Jordan 2024 project codes, created 2024-05 to 2024-09. A private client repository for an education institution, created 2024-10. Wording follows the content.json case study "Bank & Insurer Corporate Websites" (Jordan and Iraq). |
-| 6 | 2025 | ShiftCodes delivering client systems | The earliest repositories with ShiftCodes naming are a batch of private client repositories created 2025-01-29. No ShiftCodes-named repository exists before 2025, so the entry does not claim a founding date. |
-| 7 | 2025 | Bilingual Banking CMS open-sourced | Public repo `ashurbank.iq` created 2025-05-10 (Laravel). The content.json project "Bilingual Banking CMS" has year 2025 and repoUrl `ashurbank.iq`. |
-| 8 | 2025 | Multi-Tenant POS & Inventory | The content.json case study has year 2025. Private POS and HR client repositories were created 2025-06. |
-| 9 | 2025 | Open-source APIs | `order-payment-api` created 2025-06-26 and `Egyptian-National-ID` created 2025-08-15. Both are public, and both are content.json projects with year 2025. |
-| 10 | 2026 | Enterprise ERP & Multi-Tenant B2B CRM | Private ERP repositories created 2026-02 and 2026-04. Private CRM repositories created 2025-12 and 2026-02. The content.json case study "Multi-Tenant B2B CRM" has year 2026. |
-| 11 | 2026 | AIC Operations Suite | Private admin, auditor-app and client-app repositories (Laravel, Flutter), created 2026-04. A private factory-operations repository, created 2026-09. The content.json case studies "AIC Operations Suite" and "Factory Operations & Quality Inspections" both have year 2026. |
-| 12 | 2026 | Multi-School Learning Platform | Private LMS repositories created 2026-04 and 2026-08. The README of the second describes a modular monolith with five role-focused panels. The content.json case study has year 2026. |
-| 13 | 2026 | JenDock | Public repo `JenDock` created 2026-10-10. The content.json project has year 2026. |
-| 14 | 2026 | TPCT Mac | Public repo `tpct-mac-theme` created 2026-10-17. The content.json project has year 2026. |
+| 1 | 2016 | First code on GitHub | GitHub account TPCT created 2016-05-27. The earliest public repos are Python and PHP utilities from 2016-05 to 2016-07. Kept from the previous version. |
+| 2 | 2017 | First role at Aqua Web, first freelance clients | EXP #13b: Web Developer at Aqua Web, Mar 2017, Alexandria. EXP #13: Full Stack Engineer, Sep 2018 – Sep 2019, 20+ modular MVC apps. EXP #4: freelance from Jan 2017, ~250 projects in Python and PHP. |
+| 3 | 2019 | Full-stack engineer at WeDoAcc | EXP #11: Jan 2019 – Sep 2022, part-time. The accounting suite, CRM and "+30% feature delivery" come from its highlight. |
+| 4 | 2019 | C, compilers and embedded systems | Public `simple_compiler` created 2019-07-24, plus `EEPROM-PROGRAMMER`, `C-LIBS` and `AVR` (2019). Kept from the previous version. |
+| 5 | 2021 | Full-stack engineer at Stackdeans | EXP #12: Jan 2021 – Aug 2022. "10+ Laravel sites", "Stripe and AI features", "conversions +25%" and "Docker CI/CD" come from its highlight. |
+| 6 | 2022 | CTO at Venu Dine | EXP #10c: Senior Back End Developer from Sep 2022. EXP #10: CTO Nov 2022 – Sep 2023. The FastAPI + Laravel + Flutter stack, "200k+ daily requests" and "100% uptime" come from its highlight. |
+| 7 | 2023 | Team leader at dot.jo | EXP #9: May 2023 – Jun 2025. "25+ projects", "3 bank websites", the Filament headless CMS and "~1 month → 4 days" come from its highlight. The royal family is described as "high-profile Jordanian clients" (rule). |
+| 8 | 2024 | Senior software engineer at Kearney | EXP #7: Senior Software Engineer, contract, from Jun 2024. The government refactor and hardening come from its highlight. The analytics work itself is dated 2025 (entry 11). |
+| 9 | 2025 | CTO at IPXBit | EXP #8: Mar 2025 – Sep 2025. "Microservices → modular monolith, DB per module", "$15k → $2k" and the four teams come from its highlight. |
+| 10 | 2025 | Bilingual Banking CMS open-sourced | Public repo `ashurbank.iq` created 2025-05-10. Kept from the previous version (content.json project year 2025). |
+| 11 | 2025 | National Waste Analytics Platform | EXP #7 / #7b highlight: national waste analytics, Django/React, real-time maps, SSO, 100M+ rows, 3 s → 500 ms. The note in EXP says "KSA analytics platform, 2025", and the owner confirmed 2025 earlier. **This replaces the former "40%+ faster loads" claim** everywhere (timeline, case study, stats). |
+| 12 | 2025 | Team lead at Raqmix, senior engineer at Everything To Gain | EXP #5 (Raqmix, Oct 2025 – Apr 2026, led Python teams) and EXP #6 (Everything To Gain, Texas US, Oct 2025 – Apr 2026). Laravel/FastAPI/.NET multi-tenant work and PayPal/MasterCard/HyperPay come from its highlight. |
+| 13 | 2026 | CEO of ShiftCodes | EXP #3: Chief Executive Officer, Mar 2026 – Present. The named systems are content.json case studies with year 2026 (AIC Operations Suite, Multi-School Learning Platform, Multi-Tenant B2B CRM) plus the undated ERP. "Full-time" follows from freelance ending Jun 2026 (EXP #4). |
+| 14 | 2026 | Technical lead for Monglish and Edulixa360 | EXP #1 and #2: Senior Technical Team Lead & Technical Consultant, Aug 2026 – Present, Alexandria (hybrid) and Saudi Arabia (remote). |
+| 15 | 2026 | JenDock | Public repo `JenDock` created 2026-10-10. Kept from the previous version. |
 
-## Deliberately left out
-- **National Waste Analytics Platform (KSA)** and **Food Manufacturing ERP**: neither has a year in content.json, and no fact links them to a specific year. They stay case-study only rather than getting an invented date.
-- Account generators, checkers, scrapers and bots (2016–2026): excluded by rule. The gaming community platform is excluded for the same reason, because its history is a chat-bot workflow.
-- Public repos named after internal ShiftCodes hostnames: never linked or cited, so no hostname is exposed.
-- 2017, 2018, 2020 and 2022 activity: too small or too close to excluded categories to count as milestones.
+Order inside a year follows start month: 2019 WeDoAcc (Jan) before the compiler (Jul); 2025 IPXBit (Mar), CMS (May), analytics (Kearney's 2025 role from Jun), Raqmix/ETG (Oct); 2026 ShiftCodes (Mar), Monglish/Edulixa360 (Aug), JenDock (Oct). Years never decrease.
 
-## Owner-supplied dates (user, 2026-10-21)
-- National Waste Analytics Platform (Saudi Arabia) = 2025 — added as a 2025 client entry.
-- AIC Operations Suite = 2026 — entry already 2026, confirmed.
-- Food Manufacturing ERP — no date supplied; stays out of the timeline (remains a case study).
+## Removed or folded in (vs the previous version)
+- **2021 PHP MVC framework**, **2025 Open-source APIs**, **2026 TPCT Mac**: dropped to keep the timeline at 15 and focused on the career. They are still in Selected work.
+- **2023 Laravel product and client work** and **2024 Bank & Insurer Corporate Websites**: replaced by the dot.jo entry, which is the real employer for that Jordan banking and web work.
+- **2025 ShiftCodes delivering client systems**: dropped. LinkedIn dates the CEO role to Mar 2026, so the 2026 entry carries ShiftCodes and the timeline makes no founding-date claim.
+- **2025 Multi-Tenant POS**, **2026 Enterprise ERP & CRM**, **2026 AIC Operations Suite**, **2026 Multi-School Learning Platform**: folded into the 2026 ShiftCodes entry. They are still in Selected work.
+- **Food Manufacturing ERP**: still undated. It is not the Venu Dine platform (see the content-career notes), so it gets no year.
+
+## Still excluded
+- Account generators, checkers, scrapers and bots: excluded by rule. Freelance scraping is mentioned only generically in Experience ("data-extraction and automation tooling"), never in the timeline.
+- Internal ShiftCodes hostnames, private repo names and people's names: never used.
+
+## Developer notes (T-013 pins to update)
+- The entry count is **15**, the same as before. Same-year groups are now 2019×2, 2025×4 and 2026×3.
+- There are now **3** timeline links (simple_compiler, ashurbank.iq, JenDock), down from 6. Update the "6 links" acceptance pin to 3. Every link is still `https://github.com/TPCT/…`.
+- Company names (Aqua Web, WeDoAcc, Stackdeans, Venu Dine, dot.jo, Kearney, IPXBit, Raqmix, Everything To Gain, ShiftCodes, Monglish, Edulixa360) now appear in the timeline. None is on the private denylist, and all are public on the owner's LinkedIn.

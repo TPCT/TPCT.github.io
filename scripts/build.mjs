@@ -25,17 +25,20 @@ export async function build({ outDir = 'dist', root = REPO_ROOT } = {}) {
   await mkdir(outDir, { recursive: true });
   try { await cp(path.join(root, 'public'), outDir, { recursive: true }); } catch (e) { if (e.code !== 'ENOENT') throw e; }
   await mkdir(path.join(outDir, 'assets'), { recursive: true });
+  const main = [renderHero, renderAbout, renderExperience, renderSkills, renderWork, renderServices, renderProcess, renderContact].map(render => render(c)).join('');
+  // Count rendered sections so the explicit grid also spans future sections without JS.
+  const sectionCount = (main.match(/<section\b/g) ?? []).length;
   const assets = {};
   for (const [folder, ext] of [['styles', 'css'], ['scripts', 'js']]) {
     const dir = path.join(root, 'src', folder);
     const names = (await readdir(dir)).filter(n => n.endsWith(`.${ext}`)).sort();
-    const content = (await Promise.all(names.map(n => readFile(path.join(dir, n), 'utf8')))).join('\n');
+    let content = (await Promise.all(names.map(n => readFile(path.join(dir, n), 'utf8')))).join('\n');
+    if (ext === 'css') content += `\nmain:has(> .spine) { --spine-sections: ${sectionCount}; }\n`;
     await writeFile(path.join(outDir, `assets/site.${ext}`), content);
     assets[ext] = createHash('sha256').update(content).digest('hex').slice(0, 10);
   }
   const head = renderHead(c, { page: 'home', title: c.site.title, description: c.site.description, assets });
-  const main = [renderHero, renderAbout, renderExperience, renderSkills, renderWork, renderServices, renderProcess, renderContact].map(render => render(c)).join('');
-  await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, footer: renderFooter(c) }));
+  await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, spine: true, footer: renderFooter(c) }));
   const url = new URL('/', c.site.url).href;
   await writeFile(path.join(outDir, '404.html'), render404(c, { assets }));
   await writeFile(path.join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml', url).href}\n`);

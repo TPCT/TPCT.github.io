@@ -190,3 +190,22 @@ T-006/T-007/T-008 can run in parallel once T-005 is merged.
 - D19 OG SVG references fonts by URL relative to the SVG and is rendered from the committed file; no absolute local path may appear in committed files (test scans `src/ public/ scripts/`). Earlier commits keep the old SVG (no history rewrite; accepted low risk).
 
 **Risks:** compact JS under tight byte caps may hurt readability (mitigated by review); `display: contents` on `#about .section-head` at lg means its reveal is a no-op there (accepted); view transitions are Chromium/Safari only (instant fallback elsewhere).
+
+## 14. Wow round (T-010..T-014, on top of T-007 + T-015)
+- Spec: `.company/ux-wow.md` (W-1..W-5). Baseline: T-015 has landed (one-pad rhythm, desktop `.spine`, chapter nodes `.is-lit`).
+- New partials only. JS: `70-field.js`, `71-decode.js`, `72-spot.js`, `73-timeline.js`. CSS: `41-field`, `42-type`, `43-hero-wow`, `55-timeline`, `56-marquee`, `61-cards-live`. Each chunk owns disjoint files. `sections.mjs` is shared by T-013 → T-014, which run sequentially.
+- Budgets:
+  - `site.js` cap = B + 8,192 (B = cap after T-015).
+  - CSS caps +16,384 raw / +4,096 gzip.
+  - Both are raised once, in T-010.
+- Data: `content.timeline` (verbatim from `.company/timeline.json`), `timelineIntro`, `sections.timeline`, and nav "Journey". All are validated in `validate.mjs`. Years go out of order → warning only.
+- Decisions:
+  - The card state class is `is-spot` (avoids T-015's `.is-lit`).
+  - The timeline line reuses the spine's track/fill gradients.
+  - The draw is JS-driven and monotonic (alternative: CSS scroll-timeline, rejected because Firefox lacks it and node-lighting sync matters).
+  - The constellation is canvas 2D, confined to the hero (alternative: full-page field, rejected for its paint cost).
+- Risks:
+  - Canvas cost on low-end devices. Mitigated by adaptive N, then auto-disable; 30fps on coarse pointers.
+  - Byte creep. Each file has its own cap test.
+  - Confidentiality of timeline copy. Covered by a scoped `checkConfidential` test on the rendered section.
+- Tests: one new test file per chunk, plus the shared vm smoke test. The lead runs the full suite, Lighthouse/axe and the eyes-on checklist (ux-wow §8) once at the gate.

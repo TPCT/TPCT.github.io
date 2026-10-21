@@ -1,4 +1,3 @@
-main > #contact { padding-block-end: var(--space-10); }
 #contact > .container { position: relative; overflow: hidden; isolation: isolate; padding: 32px 22px; border-radius: var(--r-lg); background: var(--plate-brand); border: 1px solid var(--rim); box-shadow: var(--shadow-card); }
 #contact > .container::before, #contact > .container::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
 #contact > .container::before { width: 420px; height: 420px; inset-block-start: -180px; inset-inline-end: -120px; background: radial-gradient(circle, var(--glow-a), transparent 65%); }
@@ -31,3 +30,14 @@ main > #contact { padding-block-end: var(--space-10); }
 }
 
 .email__domain { overflow-wrap: anywhere; }
+
+main > #contact { --contact-pad: var(--space-6); --contact-inline: 22px; position: relative; margin-block-start: calc(var(--section-gap) - var(--contact-pad) - 1px); }
+@media (min-width: 768px) { main > #contact { --contact-pad: var(--space-7); --contact-inline: var(--space-7); } }
+@media (min-width: 1024px) {
+  main > #contact { --contact-pad: 56px; --contact-inline: var(--space-8); }
+  #contact .section-head::before, #contact .section-head__index::after { display: none; }
+  #contact::before { content: ""; position: absolute; inset-inline-start: calc(var(--spine-x) - 4px); inset-block-start: calc(var(--contact-pad) + 10px); width: 10px; height: 10px; border-radius: 50%; background: var(--logo-b); box-shadow: 0 0 16px var(--glow-a); }
+  #contact::after { content: ""; position: absolute; inset-inline-start: var(--spine-x); inset-block-start: calc(var(--contact-pad) + 15px); width: calc(var(--chapter-offset) + var(--contact-inline) + 1px); height: 1px; background: var(--brand-line); }
+  .motion #contact:not(:has(.section-head.is-lit))::before { opacity: .35; scale: .6; }
+  #contact:has(.section-head.is-lit)::before { opacity: 1; scale: 1; transition: opacity var(--dur-3), scale var(--dur-3) var(--ease-spring); }
+}

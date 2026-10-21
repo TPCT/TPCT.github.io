@@ -19,7 +19,7 @@ test('script source conventions, syntax and CSP safety', async () => {
   }
 });
 
-for (const [name, cap] of [['60-motion.js', 3000], ['61-pointer.js', 4096], ['10-theme.js', 1500], ['30-filter.js', 5000]]) {
+for (const [name, cap] of [['60-motion.js', 3000], ['62-spine.js', 700], ['61-pointer.js', 4096], ['10-theme.js', 1500], ['30-filter.js', 5000]]) {
   test(name + ' stays within its source byte budget', async () => {
     const source = await readFile(new URL('../src/scripts/' + name, import.meta.url));
     assert.ok(source.length <= cap, name + ': ' + source.length + ' > ' + cap);
@@ -60,7 +60,7 @@ test('built scripts respect the bundle budget and tolerate missing hooks', async
   t.after(() => rm(outDir, { recursive: true, force: true }));
   await build({ outDir });
   const source = await readFile(path.join(outDir, 'assets/site.js'), 'utf8');
-  assert.ok(Buffer.byteLength(source) <= 17500);
+  assert.ok(Buffer.byteLength(source) <= 18200);
   for (const reduce of [true, false]) {
     const ctx = context(reduce);
     assert.doesNotThrow(() => vm.runInNewContext(source, ctx));
@@ -85,4 +85,25 @@ test('hero assembly is independent of pointer initialization and replay resets s
   const pointer = await readFile(new URL('../src/scripts/61-pointer.js', import.meta.url), 'utf8');
   assert.doesNotMatch(pointer, /is-assembling/);
   assert.match(pointer, /classList\.add\('is-replay'\);\s*void g\.offsetWidth;\s*g\.classList\.remove\('is-replay'\)/);
+});
+
+test('spine progress is clamped, frame-throttled and respects motion changes', async () => {
+  const source = await readFile(new URL('../src/scripts/62-spine.js', import.meta.url), 'utf8');
+  let top = 480, progress, queued, frames = 0;
+  const events = {}, preference = { matches: false, addEventListener: (name, fn) => { events[name] = fn; } };
+  const main = { style: { setProperty: (name, value) => { assert.equal(name, '--spine-progress'); progress = value; } } };
+  vm.runInNewContext(source, {
+    document: { querySelector: selector => { assert.equal(selector, '.spine'); return { getBoundingClientRect: () => ({ top, height: 4000 }), parentElement: main }; } }, matchMedia: () => preference, innerHeight: 800,
+    addEventListener: (name, fn) => { events[name] = fn; },
+    requestAnimationFrame: fn => { queued = fn; frames++; return frames; }
+  });
+  assert.equal(progress, 0);
+  top = -1520;
+  events.scroll(); events.scroll();
+  assert.equal(frames, 1);
+  queued(); assert.equal(progress, .5);
+  top = -5000;
+  events.scroll(); queued(); assert.equal(progress, 1);
+  preference.matches = true; top = 1000;
+  events.change(); queued(); assert.equal(progress, 1);
 });

@@ -129,7 +129,10 @@
 
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
   --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px; --space-10: 128px;
-  --section-pad: clamp(72px, 4rem + 5vw, 136px);
+  --section-pad: clamp(48px, 2rem + 3vw, 88px);
+  --section-gap: var(--section-pad);
+  --spine-x: max(16px, calc((100vw - var(--container)) / 2 - 40px));
+  --chapter-offset: calc(max(var(--gutter), (100vw - var(--container)) / 2) - var(--spine-x));
 
   --r-ctl: 14px;    /* inputs, small tiles, menu links */
   --r-card: 18px;   /* skill/service inner tiles, empty state icon */

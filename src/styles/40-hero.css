@@ -1,4 +1,4 @@
-.hero { padding-block: 32px 64px; overflow-x: clip; }
+.hero { padding-block: 32px 0; overflow-x: clip; }
 .hero__grid { display: grid; gap: 40px; }
 .hero__text { min-width: 0; }
 .hero__visual { position: relative; }
@@ -48,7 +48,7 @@
 .stat__label { display: block; margin-block-start: 10px; max-width: 32ch; color: var(--fg2); font-size: var(--fs-small); }
 @media (min-width: 400px) { .roles li { white-space: nowrap; } }
 @media (min-width: 768px) {
-  .hero { padding-block: 56px 80px; }
+  .hero { padding-block: 56px 0; }
   .hero__ctas .btn { width: auto; }
   .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: 72px; }
   .stats li { padding: 28px 24px; }
@@ -56,7 +56,7 @@
   .stats li + li { border-block-start: 0; border-inline-start: 1px solid var(--border-soft); }
 }
 @media (min-width: 1024px) {
-  .hero { padding-block: 72px 96px; }
+  .hero { padding-block: 72px 0; }
   .hero__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
   .hero__text { grid-column: 1 / 8; }
   .hero__visual { grid-column: 8 / 13; align-self: center; }
@@ -130,3 +130,6 @@
   @keyframes sc-brand-bottom { 50% { transform: translate(-2px, 2px); } }
   .motion-paused .sc-hero *, .motion-paused .sc-hero *::before, .sc-hero.is-idle *, .sc-hero.is-idle *::before { animation-play-state: paused !important; }
 }
+
+.hero__scroll-cue { display: none; }
+@media (min-width: 1024px) { .hero__scroll-cue { display: block; position: relative; height: 0; } .hero__scroll-cue::after { content: ""; position: absolute; inset-inline-start: calc(-1 * var(--chapter-offset)); width: 1px; height: 40px; background: var(--logo-a); } }

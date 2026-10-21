@@ -1,7 +1,7 @@
 .eyebrow, .section-head__index { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 6px 14px 6px 10px; border-radius: var(--r-pill); background: var(--nav-sel); color: var(--brand); font: 800 var(--fs-label)/16px var(--font-sans); letter-spacing: var(--tracking-label); text-transform: uppercase; }
 .eyebrow::before, .section-head__index::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); }
 .label { font: 800 var(--fs-label)/16px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.section-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); margin-block-end: var(--space-7); }
+.section-head { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); margin-block-end: var(--space-5); }
 .section-head h2 { margin: 0; max-width: 20ch; }
 .btn { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 24px; border-radius: var(--r-pill); border: 1px solid var(--control-rim); background: var(--control); box-shadow: var(--control-shadow); color: var(--fg); font: 600 1rem/1.25 var(--font-sans); text-decoration: none; transition: translate var(--dur-3) var(--ease-spring), scale var(--dur-1) var(--ease-out), box-shadow var(--dur-2), color var(--dur-1); }
 .btn:active { scale: .97; }
@@ -50,3 +50,11 @@
 .sc-sheen-edge { stop-color: var(--sheen); stop-opacity: 0; }
 .sc-sheen-center { stop-color: var(--sheen); }
 @media (max-width: 359px) { .tag { white-space: normal; } }
+
+@media (min-width: 768px) { .section-head { margin-block-end: var(--space-6); } }
+@media (min-width: 1024px) {
+  .section-head__index { position: relative; }
+  .section-head__index::after { content: ""; position: absolute; inset-inline-start: calc(-1 * var(--chapter-offset)); inset-block-start: 50%; width: var(--chapter-offset); height: 1px; background: var(--brand-line); }
+  .section-head::before { content: ""; position: absolute; inset-inline-start: calc(-1 * var(--chapter-offset) - 4px); inset-block-start: 9px; width: 10px; height: 10px; border-radius: 50%; background: var(--logo-b); box-shadow: 0 0 16px var(--glow-a); }
+
+}

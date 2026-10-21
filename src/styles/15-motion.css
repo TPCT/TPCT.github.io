@@ -22,7 +22,7 @@
   .sc-hero.is-idle *, .sc-hero.is-idle *::before { animation-play-state: paused !important; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .motion [data-reveal].is-pending { opacity: 0; translate: 0 28px; scale: .985; }
+  .motion [data-reveal].is-pending { opacity: 0; translate: 0 16px; scale: .985; }
   .motion [data-reveal].is-revealing {
     transition: opacity 700ms var(--ease-rise), translate var(--dur-4) var(--ease-rise), scale var(--dur-4) var(--ease-rise);
     transition-delay: var(--rd, 0ms);
@@ -50,4 +50,9 @@ main, .site-footer { position: relative; z-index: 1; }
 .motion-paused .cursor-glow { display: none; }
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .cursor-glow { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .motion .section-head:not(.is-lit)::before { opacity: .35; scale: .6; }
+  .section-head.is-lit::before { opacity: 1; scale: 1; transition: opacity var(--dur-3), scale var(--dur-3) var(--ease-spring); }
 }
