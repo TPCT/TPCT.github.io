@@ -71,3 +71,8 @@ export async function checkConfidential({ dist, denylist, root, git = true }): P
 
 ## Out of scope
 Section content/filters (T-002); GitHub workflow, README, `.gitignore` (T-004); creating `.company/private/denylist.txt` (lead task); Lighthouse/axe (QA).
+
+## Addendum (lead, after T-001 review)
+- In `src/lib/validate.mjs`: validate `hero.ctaTertiary.href`, `contact.github`, `contact.website`, `experience[].orgUrl`, project `repoUrl` as `^https://`, and `hero.ctaSecondary.href` as `^mailto:`; add tests (review r1 note #5).
+- Email is now `th3professionalcod3r@gmail.com` (use it in JSON-LD etc. via content.json, never hard-code).
+- `.company/private/denylist.txt` now exists locally; run `npm run check:confidential` and report pass/fail (never print terms).

@@ -1,0 +1,53 @@
+import test from 'node:test';
+import os from 'node:os';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { mkdtemp, readFile, rm, mkdir, writeFile, cp } from 'node:fs/promises';
+import { build } from '../scripts/build.mjs';
+import { THEME_SCRIPT, cspHash } from '../src/render/head.mjs';
+import { renderHero } from '../src/render/hero.mjs';
+import { esc } from '../src/lib/html.mjs';
+const c = JSON.parse(await readFile(new URL('../src/content.json', import.meta.url), 'utf8'));
+test('build emits scaffold, accessible hero and exact CSP script', async t => {
+  const outDir = await mkdtemp(path.join(os.tmpdir(), 'tpct-build-'));
+  t.after(() => rm(outDir, { recursive: true, force: true }));
+  const result = await build({ outDir });
+  for (const file of ['index.html', 'assets/site.css', 'assets/site.js']) { assert.ok(result.files.includes(file)); assert.ok((await readFile(`${outDir}/${file}`, 'utf8')).length); }
+  const html = await readFile(`${outDir}/index.html`, 'utf8');
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+  assert.ok(html.includes('<html lang="en" class="no-js" data-theme="dark">'));
+  assert.ok(html.includes(`<body><a class="skip" href="#main">${esc(c.site.skipLink)}</a>`));
+  for (const n of c.site.nav) assert.ok(html.includes(`id="${n.href.slice(1)}"`));
+  const inline = [...html.matchAll(/<script>(.*?)<\/script>/gs)];
+  assert.equal(inline.length, 1); assert.equal(inline[0][1], THEME_SCRIPT);
+  assert.ok(html.includes(cspHash(THEME_SCRIPT)));
+  assert.doesNotMatch(html, /style="|\son[a-z]+\s*=/i);
+  assert.match(html, /class="icon-btn theme-toggle" hidden/);
+  assert.match(html, /class="icon-btn menu-btn"[^>]* hidden/);
+  for (const s of [...c.hero.roles, c.hero.name, c.hero.headline, c.hero.subheadline, ...c.hero.domains, c.hero.location, c.hero.reach, ...['ctaPrimary', 'ctaSecondary', 'ctaTertiary'].map(k => c.hero[k].label)]) assert.ok(html.includes(esc(s)), s);
+  const hero = renderHero(c);
+  assert.equal((hero.match(/class="stat__value"/g) ?? []).length, 3);
+  assert.equal((hero.match(/<a /g) ?? []).length, 3);
+  assert.ok(!renderHero({ ...c, stats: [] }).includes('class="stats"'));
+  assert.match(html, /site\.css\?v=[a-f0-9]{10}/); assert.match(html, /site\.js\?v=[a-f0-9]{10}/);
+  const css = await readFile(`${outDir}/assets/site.css`, 'utf8');
+  assert.doesNotMatch(css, /\.skip\s*\{[^}]*visibility:\s*hidden/);
+  assert.match(css, /\.js \.site-header:not\(\[data-nav-ready\]\) #primary-nav\s*\{\s*display: none;/);
+  assert.match(css, /\.no-js \.site-header\s*\{[^}]*position: static;[^}]*height: auto;/);
+  assert.match(css, /\.no-js #primary-nav ul\s*\{[^}]*flex-wrap: wrap/);
+});
+test('invalid category fails API and CLI before output', async t => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'tpct-invalid-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(`${root}/src`, { recursive: true });
+  const bad = structuredClone(c); bad.projects[0].category = 'invalid';
+  await writeFile(`${root}/src/content.json`, JSON.stringify(bad));
+  await assert.rejects(build({ root }), /projects\[0\]\.category: not in categories/);
+  // Copy the build entry and its imports so the CLI uses the isolated fixture root.
+  await cp(new URL('../scripts', import.meta.url), `${root}/scripts`, { recursive: true });
+  await cp(new URL('../src/lib', import.meta.url), `${root}/src/lib`, { recursive: true });
+  await cp(new URL('../src/render', import.meta.url), `${root}/src/render`, { recursive: true });
+  const { spawnSync } = await import('node:child_process');
+  const cli = spawnSync(process.execPath, [`${root}/scripts/build.mjs`], { encoding: 'utf8' });
+  assert.equal(cli.status, 1); assert.match(cli.stderr, /^projects\[0\]\.category: not in categories\n$/);
+});

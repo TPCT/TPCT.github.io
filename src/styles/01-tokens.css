@@ -1,0 +1,99 @@
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:            #0B0B12;  /* page ground = c.site.themeColorDark */
+  --surface:       #13131C;  /* cards, header, panels */
+  --surface-2:     #1B1B26;  /* hover fill, tags, code-ish rows */
+  --line:          #24242F;  /* decorative hairlines only (no contrast requirement) */
+  --line-strong:   #6A6A7A;  /* UI component boundaries: chips, outline buttons, toggle */
+  --text:          #ECEAE3;  /* primary ink */
+  --text-muted:    #A3A3B0;  /* body secondary, descriptions */
+  --text-subtle:   #82828F;  /* mono labels, indices, meta. Use ONLY on --bg/--surface */
+  --accent:        #F2A93B;  /* sodium amber: primary buttons, active chip, marks, focus */
+  --accent-hover:  #FFBE5C;
+  --on-accent:     #0B0B12;  /* text/icons on --accent */
+  --accent-text:   #F2A93B;  /* accent used as text (links on hover, case-study badge) */
+  --oss:           #7FD1B9;  /* sea-glass: open-source badge + GitHub link accent */
+  --focus:         #F2A93B;
+  --selection-bg:  #F2A93B;
+  --selection-fg:  #0B0B12;
+  --shadow-card:   none;
+  --shadow-card-hover: none;
+  --shadow-pop:    0 16px 40px -12px rgba(0,0,0,.6);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg:            #FAFAFC;  /* = c.site.themeColorLight */
+  --surface:       #FFFFFF;
+  --surface-2:     #EFEFF3;
+  --line:          #E2E2E8;
+  --line-strong:   #8A8A98;
+  --text:          #14141C;
+  --text-muted:    #4E4E5C;
+  --text-subtle:   #6B6B78;
+  --accent:        #9A5B00;  /* burnt amber, darkened so white text passes */
+  --accent-hover:  #7E4A00;
+  --on-accent:     #FFFFFF;
+  --accent-text:   #9A5B00;
+  --oss:           #0F6E5C;  /* deep teal */
+  --focus:         #9A5B00;
+  --selection-bg:  #9A5B00;
+  --selection-fg:  #FFFFFF;
+  --shadow-card:   0 1px 0 rgba(20,20,28,.04), 0 1px 2px rgba(20,20,28,.06);
+  --shadow-card-hover: 0 10px 24px -12px rgba(20,20,28,.22);
+  --shadow-pop:    0 16px 40px -16px rgba(20,20,28,.28);
+}
+:root {
+  --font-sans: "Archivo", "Archivo Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Fluid type scale (min at 360px, max at 1280px) */
+  --fs-display: clamp(2.75rem, 1.6rem + 5.6vw, 6rem);      /* 44 -> 96  h1 hero name */
+  --fs-h2:      clamp(2rem, 1.45rem + 2.4vw, 3.25rem);      /* 32 -> 52  section titles */
+  --fs-contact: clamp(2.25rem, 1.4rem + 3.8vw, 4.5rem);     /* 36 -> 72  contact h2 */
+  --fs-email:   clamp(1.375rem, 0.85rem + 2.6vw, 2.75rem);  /* 22 -> 44  big email link */
+  --fs-stat:    clamp(2.5rem, 2rem + 2.2vw, 3.75rem);       /* 40 -> 60  stat values */
+  --fs-lead:    clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);   /* 20 -> 26  hero headline, about p1 */
+  --fs-h3:      clamp(1.1875rem, 1.1rem + 0.35vw, 1.375rem);/* 19 -> 22  card/service/group titles */
+  --fs-body:    clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);   /* 16 -> 17 */
+  --fs-small:   0.9375rem;  /* 15 */
+  --fs-label:   0.8125rem;  /* 13, mono, uppercase, tracking .08em */
+  --fs-tag:     0.8125rem;  /* 13, mono, normal case */
+
+  --lh-tight: 0.95;  /* display */
+  --lh-head:  1.12;  /* h2/h3 */
+  --lh-body:  1.6;
+  --lh-snug:  1.4;   /* lead, card summary */
+
+  --tracking-display: -0.025em;
+  --tracking-h2:      -0.015em;
+  --tracking-label:   0.08em;
+}
+:root {
+  /* 4px base */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+  --section-pad: clamp(64px, 4rem + 5vw, 128px);   /* block padding of each section */
+
+  --radius-1: 2px;   /* tags, badges, schematic boxes */
+  --radius-2: 6px;   /* buttons, chips, toggle, menu panel */
+  --radius-3: 10px;  /* cards, empty state */
+
+  --container: 1200px;           /* content max width */
+  --gutter: 20px;                /* inline page padding; 32px ≥768, 40px ≥1280 */
+  --header-h: 56px;              /* 64px ≥768 */
+
+  --dur-1: 120ms;  /* colour/border hover */
+  --dur-2: 200ms;  /* chips, menu open/close, card hover, card filter fade */
+  --dur-3: 480ms;  /* hero schematic draw */
+  --stagger: 45ms;
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-in-out: cubic-bezier(.65,0,.35,1);
+
+  --tap: 44px;     /* minimum touch target */
+}
+@media (min-width: 768px)  { :root { --gutter: 32px; --header-h: 64px; } }
+@media (min-width: 1280px) { :root { --gutter: 40px; } }
+

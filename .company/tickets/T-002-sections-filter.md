@@ -77,3 +77,8 @@ Card data attributes: `data-category="{slugify(category)}" data-kind="{kind}" da
 
 ## Out of scope
 Head/SEO/OG/404/robots/sitemap/manifest/font/favicons/confidentiality check (T-003); workflow/README (T-004). Visual QA/axe/Lighthouse (QA role).
+
+## Addendum (lead, after T-001 review)
+- Content changed in T-001-fix-r1: new open-source project `ashur-bank-cms` (repoUrl https://github.com/TPCT/ashurbank.iq), `idempotent-session-ingest` removed, email is now `th3professionalcod3r@gmail.com`. Render from `src/content.json`; don't hard-code counts.
+- Forced colours: accent squares (brand, eyebrow, origin node) vanish under `forced-colors: active` — add `forced-color-adjust: none` or a `CanvasText` border in a forced-colors media block (review r1 note #8).
+- Do not re-format `src/content.json`.

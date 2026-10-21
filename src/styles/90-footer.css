@@ -1,0 +1,4 @@
+.site-footer { border-block-start: 1px solid var(--line); padding-block: 32px; }
+.site-footer p { color: var(--text-subtle); font-size: var(--fs-small); }
+.footer-links { display: flex; flex-direction: column; }
+@media (min-width: 768px) { .site-footer .container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); } .footer-links { flex-direction: row; flex-wrap: wrap; gap: var(--space-5); flex-shrink: 0; } }

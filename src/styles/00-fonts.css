@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo-var.woff2") format("woff2-variations"),
+       url("/assets/fonts/archivo-var.woff2") format("woff2");
+  font-weight: 400 800;
+  font-stretch: 100% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+/* Metric-matched fallback to keep CLS ≤ 0.1 (Archivo hhea: upm 1000, asc 878, desc 210). QA may tune size-adjust ±3%. */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans");
+  size-adjust: 102%;
+  ascent-override: 86%;
+  descent-override: 20.6%;
+  line-gap-override: 0%;
+}
