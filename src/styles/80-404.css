@@ -1,7 +1,24 @@
-.nf { padding-block: var(--section-pad); min-height: 70vh; }
-.nf__code { font-size: clamp(6rem, 3rem + 18vw, 15rem); font-weight: 800; font-stretch: 125%; color: var(--accent-text); line-height: .9; font-variant-numeric: tabular-nums; margin-block: 0 var(--space-6); }
+.nf { min-height: 70vh; padding-block: var(--section-pad); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.nf__code { font: 800 clamp(7rem, 4rem + 16vw, 14rem)/.85 var(--font-display); letter-spacing: -.04em; background: var(--grad-accent); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; margin-block-end: 24px; }
 .nf h1 { font-size: var(--fs-h2); }
-.nf__message { color: var(--text-muted); margin-block: var(--space-5); }
-.nf__schematic { display: flex; justify-content: space-between; max-width: 320px; margin-block-start: var(--space-8); border-block-start: 2px solid var(--line-strong); }
-.nf__schematic i { width: 16px; height: 16px; background: var(--accent); transform: translateY(-9px); }
-.nf__schematic i:last-child { background: var(--bg); border: 2px dashed var(--accent-text); }
+.nf__message { color: var(--fg2); margin-block: 16px 28px; }
+.nf__schematic { position: relative; width: 220px; height: 110px; margin-block-start: 56px; border: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes shard-in { from { opacity: .001; translate: 0 40px; } }
+  @keyframes wobble { 0%, 100% { rotate: 0deg; } 30% { rotate: -10deg; } 60% { rotate: 5deg; } }
+  .js   .js   .js   .js .nf__code { animation: rise 900ms var(--ease-rise) 0ms both; }
+  .js .nf h1 { animation: rise 900ms var(--ease-rise) 120ms both; }
+  .js .nf__message { animation: rise 900ms var(--ease-rise) 200ms both; }
+  .js .nf .btn { animation: rise 900ms var(--ease-rise) 280ms both; }
+}
+@media (forced-colors: active) {
+  .nf__code { background: none; color: CanvasText; -webkit-text-fill-color: CanvasText; }
+  .nf__schematic { display: none; }
+}
+
+.nf__schematic { width: 240px; height: auto; }
+.nf__mark { display: block; width: 100%; overflow: visible; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .nf__mark .sc-part--hook-top path { animation: sc-drift-top 7s ease-in-out infinite alternate; }
+  .js .nf__mark .sc-part--hook-bottom path { animation: sc-drift-bottom 7s ease-in-out infinite alternate; }
+}

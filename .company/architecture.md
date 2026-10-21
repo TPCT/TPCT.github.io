@@ -164,3 +164,29 @@ JSON-LD Person (T-003): `name`=hero.name, `jobTitle`=hero.roles.slice(1), `url`=
 - D9 Actions pinned to current majors (checkout v7, setup-node v7, configure-pages v6, upload-pages-artifact v5, deploy-pages v5), Node 22.
 - D10 No code licence file: site content is personal (© Islam Elsayed); third-party notices (Archivo OFL, Lucide ISC) in README and `OFL.txt`.
 - D11 Local preview via `scripts/serve.mjs` (Node http, serves `dist/`, 404 → `404.html` with status 404).
+
+## 13. Prism reskin (T-005..T-008)
+Spec: `ux-prism.md` (normative visual + motion layer; IA/behaviour from `ux.md` unchanged).
+
+**Ticket split (file ownership, no overlaps after T-005):**
+| Ticket | Owns | New test file |
+|---|---|---|
+| T-005 | fonts, `00-`..`40-` + new `15-motion.css`, `head.mjs`/`hero.mjs`/`icons.mjs`/`validate.mjs`, `content.json`, README notices | edits `build`/`seo`/`content` tests |
+| T-006 | `sections.mjs` (`data-reveal` only), `50-`..`90-` CSS | `test/sections.test.mjs` |
+| T-007 | `10-theme.js`, `30-filter.js`, new `60-motion.js`, `61-pointer.js` | `test/scripts.test.mjs` |
+| T-008 | `scripts/render-images.mjs` + the 8 generated image/icon files | `test/images.test.mjs` |
+T-006/T-007/T-008 can run in parallel once T-005 is merged.
+
+**Motion gates** (§5.1): `html.js` (inline head script) gates only the pure-CSS hero entrance (`animation-fill-mode: both`); `html.motion` (added by `60-motion.js` when reduced motion is off and IO exists) gates scroll reveals and ambient loops; `html.motion-paused` pauses loops (persisted in `localStorage.motion = 'paused'|'running'`). Every `@keyframes` sits in `@media (prefers-reduced-motion: no-preference)`; the global reduce rule in `10-base.css` stays. Animations use only transform/translate/rotate/scale/opacity (theme reveal `clip-path` on view-transition snapshots is the single exception). No-JS and reduced-motion users get the full static design.
+
+**Decisions**
+- D12 Visual reskin replaces the visual layer only; markup changes limited to hero word spans, `.hero__visual`/`.prism`/motion toggle (T-005) and bare `data-reveal` hooks (T-006).
+- D13 Fonts: self-hosted Outfit + Plus Jakarta Sans woff2 subsets (OFL), metric-matched fallbacks; Archivo removed. Alternative (Google Fonts CDN) rejected: breaks self-only CSP and adds a third-party request.
+- D14 Backdrop-filter budget = 3 elements (header pill, mobile menu, hero domains plate); plates/cards are near-opaque gradients. Alternative (glass on every card) rejected for scroll/animation cost on mid-range phones.
+- D15 Per-element motion values via CSSOM `style.setProperty` only (CSP `style-src 'self'` forbids `style=` attributes); static indices via `:nth-child`.
+- D16 JS budget: `site.js` ≤ 16,000 bytes (spec's 14,000 assumed a 7.6 KB base; actual ~8.8 KB). Per file: 60-motion ≤ 3,000, 61-pointer ≤ 1,900, 10-theme ≤ 1,500, 30-filter ≤ 5,000. CSS ≤ 45 KB.
+- D17 Filter animation uses WAAPI FLIP (finer control, no page snapshot); View Transitions API only for the theme circle reveal, with an instant fallback.
+- D18 JS behaviour is tested by static checks + a `node:vm` smoke run with a stub DOM (no jsdom dependency); real behaviour is verified eyes-on in QA.
+- D19 OG SVG references fonts by URL relative to the SVG and is rendered from the committed file; no absolute local path may appear in committed files (test scans `src/ public/ scripts/`). Earlier commits keep the old SVG (no history rewrite; accepted low risk).
+
+**Risks:** compact JS under tight byte caps may hurt readability (mitigated by review); `display: contents` on `#about .section-head` at lg means its reveal is a no-op there (accepted); view transitions are Chromium/Safari only (instant fallback elsewhere).

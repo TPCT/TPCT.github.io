@@ -32,7 +32,7 @@ No dependency installation is needed for the build or tests.
 | `npm run check:confidential` | Scan generated output and repository files for confidential terms. |
 | `npm run check` | Run build, tests and confidentiality check in sequence. |
 | `npm run images` | Development only: regenerate social images and icons. |
-| `bash scripts/build-font.sh` | Development only: download and subset Archivo using Python font tools. |
+| `bash scripts/build-font.sh` | Development only: download and subset Outfit and Plus Jakarta Sans using Python font tools. |
 
 Image generation needs a local Chromium executable via `CHROME_PATH` and an
 externally installed `playwright-core` module via `PLAYWRIGHT_CORE` (module path).
@@ -77,7 +77,7 @@ deployment. In repository **Settings → Pages → Source**, select **GitHub Act
 
 ## Credits / licences
 
-- Archivo by Omnibus-Type: SIL Open Font License 1.1;
-  see [public/assets/fonts/OFL.txt](public/assets/fonts/OFL.txt).
+- Outfit (SIL OFL 1.1, `public/assets/fonts/OFL-Outfit.txt`).
+- Plus Jakarta Sans (SIL OFL 1.1, `public/assets/fonts/OFL-PlusJakartaSans.txt`).
 - Icons from Lucide: ISC licence.
 - Site content © Islam Elsayed, all rights reserved.

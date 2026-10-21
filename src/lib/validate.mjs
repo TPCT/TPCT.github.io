@@ -23,6 +23,7 @@ export function validateContent(c) {
     if (typeof n.href === 'string' && !n.href.startsWith('#')) errors.push(`site.nav[${i}].href: must start with #`);
   });
   const hero = strings(c.hero, 'eyebrow name headline subheadline location reach domainsLabel', 'hero');
+  strings(hero.motionToggle, 'pause play', 'hero.motionToggle');
   for (const k of ['roles', 'domains']) stringArray(hero[k], `hero.${k}`);
   for (const k of ['ctaPrimary', 'ctaSecondary', 'ctaTertiary']) strings(hero[k], 'label href', `hero.${k}`);
   const protocol = (value, pattern, field) => { if (typeof value !== 'string' || !pattern.test(value)) errors.push(`${field}: invalid URL protocol`); };

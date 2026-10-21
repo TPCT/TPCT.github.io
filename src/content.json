@@ -9,8 +9,8 @@
     "author": "Islam Elsayed",
     "ogImage": "/assets/og-image.png",
     "ogImageAlt": "Islam Elsayed — Founder @ ShiftCodes, Systems Architect, Senior Full-Stack Engineer",
-    "themeColorDark": "#0B0B12",
-    "themeColorLight": "#FAFAFC",
+    "themeColorDark": "#110D1F",
+    "themeColorLight": "#EEEBFA",
     "nav": [
       {
         "label": "About",
@@ -75,7 +75,11 @@
       "label": "GitHub",
       "href": "https://github.com/TPCT"
     },
-    "domainsLabel": "Domains"
+    "domainsLabel": "Domains",
+    "motionToggle": {
+      "pause": "Pause animation",
+      "play": "Play animation"
+    }
   },
   "about": {
     "title": "About",

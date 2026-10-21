@@ -1,99 +1,158 @@
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg:            #0B0B12;  /* page ground = c.site.themeColorDark */
-  --surface:       #13131C;  /* cards, header, panels */
-  --surface-2:     #1B1B26;  /* hover fill, tags, code-ish rows */
-  --line:          #24242F;  /* decorative hairlines only (no contrast requirement) */
-  --line-strong:   #6A6A7A;  /* UI component boundaries: chips, outline buttons, toggle */
-  --text:          #ECEAE3;  /* primary ink */
-  --text-muted:    #A3A3B0;  /* body secondary, descriptions */
-  --text-subtle:   #82828F;  /* mono labels, indices, meta. Use ONLY on --bg/--surface */
-  --accent:        #F2A93B;  /* sodium amber: primary buttons, active chip, marks, focus */
-  --accent-hover:  #FFBE5C;
-  --on-accent:     #0B0B12;  /* text/icons on --accent */
-  --accent-text:   #F2A93B;  /* accent used as text (links on hover, case-study badge) */
-  --oss:           #7FD1B9;  /* sea-glass: open-source badge + GitHub link accent */
-  --focus:         #F2A93B;
-  --selection-bg:  #F2A93B;
-  --selection-fg:  #0B0B12;
-  --shadow-card:   none;
-  --shadow-card-hover: none;
-  --shadow-pop:    0 16px 40px -12px rgba(0,0,0,.6);
+  /* Ground + field */
+  --canvas: #110D1F;
+  --field-a: #2A1A55; --field-b: #1B2150; --field-c: #160F2A; --field-d: #0D0A18;
+  --field: radial-gradient(ellipse at 18% 6%, var(--field-a) 0%, transparent 42%),
+           radial-gradient(ellipse at 92% 40%, var(--field-b) 0%, transparent 48%),
+           linear-gradient(135deg, var(--field-c), var(--field-d));
+  --blob-a: #3B1E86;            /* drifting plum light (body::before) */
+  --blob-b: #1E2A6E;            /* drifting ink-blue light (body::after) */
+  /* Surfaces / plates */
+  --surface: #1E1832; --surface-raised: #261F3D; --surface-soft: #2E2649;
+  --plate: linear-gradient(145deg, rgb(36 29 61 / .90), rgb(26 21 46 / .86));
+  --plate-opaque: #1E1832;
+  --plate-brand: linear-gradient(140deg, #2B1D57, #1F1840);
+  --plate-cyan: linear-gradient(140deg, #1D2353, #181C40);
+  --shell: linear-gradient(135deg, rgb(34 27 58 / .88), rgb(24 19 42 / .84));  /* header pill, menu, domains plate */
+  --glass-blur: blur(14px) saturate(140%);
+  --rim: rgb(220 208 255 / .22);
+  --shadow-card: inset 0 1px 1px rgb(232 222 255 / .16), inset 0 -1px 2px rgb(10 8 20 / .35), 0 3px 6px rgb(10 8 20 / .18), 0 16px 28px -17px rgb(10 8 20 / .5);
+  --shadow-lift: inset 0 1px 1px rgb(232 222 255 / .20), inset 0 -1px 2px rgb(10 8 20 / .35), 0 30px 60px -28px rgb(0 0 0 / .75), 0 0 0 1px rgb(110 43 251 / .28);
+  --shadow-pop:  inset 0 1px 1px rgb(232 222 255 / .16), 0 12px 32px rgb(0 0 0 / .5);
+  /* Controls */
+  --control: linear-gradient(160deg, #3A3160, #2B2450);
+  --control-rim: rgb(232 222 255 / .18);
+  --control-shadow: inset 0 1px 1px rgb(232 222 255 / .14), 0 3px 6px rgb(0 0 0 / .3);
+  --well: inset 0 2px 4px rgb(0 0 0 / .35), 0 1px 0 rgb(232 222 255 / .08);
+  /* Text + lines */
+  --fg: #F3F0FF; --fg2: #CEC6E8; --muted: #ABA1CC;
+  --border: #3A3160; --border-soft: #2D2650; --border-strong: #9D93C2;
+  /* ShiftCodes violet */
+  --brand: #B9A2FF; --brand-hover: #C9B8FF; --brand-pressed: #A98BFF;
+  --brand-tint: #2A1F55; --nav-sel: #33266A; --brand-line: #5B45A8;
+  --primary-skin: linear-gradient(165deg, #7B3FFF, #5A1FE0);
+  --primary-skin-hover: linear-gradient(165deg, #8A55FF, #6328F0);
+  --on-primary: #FFFFFF;
+  --primary-shadow: inset 0 1px 1px rgb(255 255 255 / .35), 0 4px 10px -3px rgb(0 0 0 / .5);
+  --primary-glow: 0 10px 28px -8px rgb(110 43 251 / .6);
+  --btn-glow: rgb(255 255 255 / .22);       /* magnetic hotspot inside primary buttons */
+  --count-on-primary: rgb(255 255 255 / .18);  /* count bubble inside a pressed chip */
+  /* Secondary accents */
+  --cyan: #8FA0FF; --cyan-text: #8FA0FF; --cyan-soft: #1D2353; --cyan-line: #3B4794;
+  --crown: #C9B8FF;
+  /* Logo art */
+  --prism-1: #B9A2FF; --prism-2: #8A5BFF; --prism-3: #6E2BFB; --prism-4: #8FA0FF;
+  --glow-a: rgb(110 43 251 / .45); --glow-b: rgb(143 160 255 / .28);
+  --beam: rgb(255 255 255 / .85);
+  --prism-shadow: rgb(4 2 12 / .6);
+  --sheen: rgb(255 255 255 / .10);
+  /* Gradient text */
+  --grad-name: linear-gradient(100deg, #C9B8FF 0%, #8A5BFF 50%, #8FA0FF 100%);
+  --grad-accent: linear-gradient(100deg, #C9B8FF 0%, #8A5BFF 50%, #8FA0FF 100%);
+  /* Focus + selection */
+  --focus: #9EA8FF;
+  --selection-bg: #6E2BFB; --selection-fg: #FFFFFF;
+  --logo-a: #8A5BFF; --logo-b: #6E2BFB; --logo-c: #5A1FE0;
 }
 
 [data-theme="light"] {
   color-scheme: light;
-  --bg:            #FAFAFC;  /* = c.site.themeColorLight */
-  --surface:       #FFFFFF;
-  --surface-2:     #EFEFF3;
-  --line:          #E2E2E8;
-  --line-strong:   #8A8A98;
-  --text:          #14141C;
-  --text-muted:    #4E4E5C;
-  --text-subtle:   #6B6B78;
-  --accent:        #9A5B00;  /* burnt amber, darkened so white text passes */
-  --accent-hover:  #7E4A00;
-  --on-accent:     #FFFFFF;
-  --accent-text:   #9A5B00;
-  --oss:           #0F6E5C;  /* deep teal */
-  --focus:         #9A5B00;
-  --selection-bg:  #9A5B00;
-  --selection-fg:  #FFFFFF;
-  --shadow-card:   0 1px 0 rgba(20,20,28,.04), 0 1px 2px rgba(20,20,28,.06);
-  --shadow-card-hover: 0 10px 24px -12px rgba(20,20,28,.22);
-  --shadow-pop:    0 16px 40px -16px rgba(20,20,28,.28);
+  --canvas: #EEEBFA;
+  --field-a: #E4DAFF; --field-b: #DCE2FF; --field-c: #F3F0FD; --field-d: #E7E3F7;
+  --blob-a: #D9C9FF; --blob-b: #CCD6FF;
+  --surface: #FCFBFF; --surface-raised: #F5F2FE; --surface-soft: #EAE5FA;
+  --plate: linear-gradient(145deg, rgb(255 255 255 / .86), rgb(253 251 255 / .72));
+  --plate-opaque: #FCFBFF;
+  --plate-brand: linear-gradient(140deg, #F4EEFF, #E4DAFF);
+  --plate-cyan: linear-gradient(140deg, #F1F3FF, #DFE5FF);
+  --shell: linear-gradient(135deg, rgb(255 255 255 / .88), rgb(245 241 255 / .84));
+  --rim: rgb(255 255 255 / .88);
+  --shadow-card: inset 0 1px 1px rgb(255 255 255 / .96), inset 0 -1px 2px rgb(140 125 200 / .22), 0 3px 6px rgb(60 40 130 / .05), 0 16px 28px -17px rgb(70 45 160 / .32);
+  --shadow-lift: inset 0 1px 1px rgb(255 255 255 / .96), inset 0 -1px 2px rgb(140 125 200 / .22), 0 28px 48px -26px rgb(70 45 160 / .45), 0 0 0 1px rgb(110 43 251 / .12);
+  --shadow-pop:  inset 0 1px 1px rgb(255 255 255 / .96), 0 12px 32px rgb(70 45 160 / .24);
+  --control: linear-gradient(160deg, #FFFFFF, #F1ECFF);
+  --control-rim: rgb(255 255 255 / .9);
+  --control-shadow: inset 0 1px 1px #FFFFFF, 0 3px 6px rgb(70 45 160 / .10);
+  --well: inset 0 2px 4px rgb(70 45 160 / .13), 0 1px 0 rgb(255 255 255 / .75);
+  --fg: #1C1530; --fg2: #4A4266; --muted: #5A5275;
+  --border: #D8D1F0; --border-soft: #E5E0F7; --border-strong: #7D73A3;
+  --brand: #5B21E6; --brand-hover: #4F1BC8; --brand-pressed: #4317AD;
+  --brand-tint: #F1EBFF; --nav-sel: #E6DBFF; --brand-line: #C7B5FF;
+  --primary-skin: linear-gradient(165deg, #7B3FFF, #5A1FE0);
+  --primary-skin-hover: linear-gradient(165deg, #6E2BFB, #4F1BC8);
+  --on-primary: #FFFFFF;
+  --primary-shadow: inset 0 1px 1px rgb(255 255 255 / .5), 0 4px 8px -3px rgb(70 45 160 / .35);
+  --primary-glow: 0 10px 26px -8px rgb(110 43 251 / .45);
+  --btn-glow: rgb(255 255 255 / .12);       /* capped: keeps white label ≥ 4.5:1 at the hotspot */
+  --count-on-primary: rgb(0 0 0 / .18);
+  --cyan: #3346C4; --cyan-text: #3346C4; --cyan-soft: #E6EAFF; --cyan-line: #AFBAF5;
+  --crown: #6E2BFB;
+  --prism-1: #8A5BFF; --prism-2: #6E2BFB; --prism-3: #5A1FE0; --prism-4: #3346C4;
+  --glow-a: rgb(110 43 251 / .28); --glow-b: rgb(51 70 196 / .18);
+  --beam: rgb(60 40 130 / .55);
+  --prism-shadow: rgb(70 45 160 / .28);
+  --sheen: rgb(255 255 255 / .55);
+  --focus: #3346C4;
+  --selection-bg: #6E2BFB; --selection-fg: #FFFFFF;
+  --logo-a: #7B3FFF; --logo-b: #6E2BFB; --logo-c: #5A1FE0;
+  --grad-name: linear-gradient(100deg, #6E2BFB 0%, #5A1FE0 55%, #3346C4 100%);
+  --grad-accent: linear-gradient(100deg, #6E2BFB 0%, #5A1FE0 55%, #3346C4 100%);
 }
+
+/* Opaque fallbacks: no backdrop-filter support, or the user asks for reduced transparency */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root:root { --plate: var(--plate-opaque); --shell: var(--plate-opaque); --glass-blur: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root:root { --plate: var(--plate-opaque); --shell: var(--plate-opaque); --glass-blur: none; }
+}
+
 :root {
-  --font-sans: "Archivo", "Archivo Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-display: "Outfit", "Outfit Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Jakarta Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Fluid type scale (min at 360px, max at 1280px) */
-  --fs-display: clamp(2.75rem, 1.6rem + 5.6vw, 6rem);      /* 44 -> 96  h1 hero name */
-  --fs-h2:      clamp(2rem, 1.45rem + 2.4vw, 3.25rem);      /* 32 -> 52  section titles */
-  --fs-contact: clamp(2.25rem, 1.4rem + 3.8vw, 4.5rem);     /* 36 -> 72  contact h2 */
-  --fs-email:   clamp(1.375rem, 0.85rem + 2.6vw, 2.75rem);  /* 22 -> 44  big email link */
-  --fs-stat:    clamp(2.5rem, 2rem + 2.2vw, 3.75rem);       /* 40 -> 60  stat values */
-  --fs-lead:    clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);   /* 20 -> 26  hero headline, about p1 */
-  --fs-h3:      clamp(1.1875rem, 1.1rem + 0.35vw, 1.375rem);/* 19 -> 22  card/service/group titles */
-  --fs-body:    clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);   /* 16 -> 17 */
-  --fs-small:   0.9375rem;  /* 15 */
-  --fs-label:   0.8125rem;  /* 13, mono, uppercase, tracking .08em */
-  --fs-tag:     0.8125rem;  /* 13, mono, normal case */
+  --fs-display: clamp(3rem, 1.75rem + 5.4vw, 6rem);         /* 48 → 96  hero name */
+  --fs-h2:      clamp(2rem, 1.55rem + 2vw, 3.25rem);         /* 32 → 52  section titles */
+  --fs-contact: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);     /* 36 → 68 */
+  --fs-email:   clamp(1.375rem, 0.9rem + 2.4vw, 2.625rem);   /* 22 → 42 */
+  --fs-stat:    clamp(2.5rem, 2rem + 2vw, 3.5rem);           /* 40 → 56 */
+  --fs-lead:    clamp(1.1875rem, 1.05rem + .6vw, 1.5rem);    /* 19 → 24 */
+  --fs-h3:      clamp(1.125rem, 1.07rem + .25vw, 1.3125rem); /* 18 → 21 */
+  --fs-body:    clamp(1rem, .97rem + .15vw, 1.0625rem);      /* 16 → 17 */
+  --fs-small:   .9375rem;  /* 15 */
+  --fs-chip:    .875rem;   /* 14 */
+  --fs-label:   .75rem;    /* 12, 800, uppercase, .08em */
+  --lh-tight: .98; --lh-head: 1.08; --lh-body: 1.6; --lh-snug: 1.4;
+  --tracking-display: -.035em; --tracking-h2: -.02em; --tracking-label: .08em;
 
-  --lh-tight: 0.95;  /* display */
-  --lh-head:  1.12;  /* h2/h3 */
-  --lh-body:  1.6;
-  --lh-snug:  1.4;   /* lead, card summary */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+  --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px; --space-10: 128px;
+  --section-pad: clamp(72px, 4rem + 5vw, 136px);
 
-  --tracking-display: -0.025em;
-  --tracking-h2:      -0.015em;
-  --tracking-label:   0.08em;
+  --r-ctl: 14px;    /* inputs, small tiles, menu links */
+  --r-card: 18px;   /* skill/service inner tiles, empty state icon */
+  --r-plate: 24px;  /* cards, plates, stats, filters */
+  --r-lg: 32px;     /* contact panel */
+  --r-pill: 999px;  /* buttons, chips, tags, header */
+
+  --container: 1200px;
+  --gutter: 20px;
+  --header-h: 68px;            /* pill 52 + 2×8 padding */
+  --tap: 44px;
+
+  /* Motion */
+  --ease-rise:   cubic-bezier(.16, 1, .3, 1);     /* entrances, reveals */
+  --ease-out:    cubic-bezier(.2, .7, .2, 1);     /* hovers, settles */
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);    /* line draws, theme reveal, drifts */
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1); /* magnetic return, icon morph, node pop */
+  --dur-1: 140ms;   /* colour / press */
+  --dur-2: 240ms;   /* chips, menu, card shadow */
+  --dur-3: 420ms;   /* FLIP, icon morph, underline */
+  --dur-4: 900ms;   /* rise */
+  --dur-5: 1400ms;  /* count-up, line draw */
+  --stagger: 70ms;
 }
-:root {
-  /* 4px base */
-  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
-  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
-  --space-9: 96px; --space-10: 128px;
-  --section-pad: clamp(64px, 4rem + 5vw, 128px);   /* block padding of each section */
-
-  --radius-1: 2px;   /* tags, badges, schematic boxes */
-  --radius-2: 6px;   /* buttons, chips, toggle, menu panel */
-  --radius-3: 10px;  /* cards, empty state */
-
-  --container: 1200px;           /* content max width */
-  --gutter: 20px;                /* inline page padding; 32px ≥768, 40px ≥1280 */
-  --header-h: 56px;              /* 64px ≥768 */
-
-  --dur-1: 120ms;  /* colour/border hover */
-  --dur-2: 200ms;  /* chips, menu open/close, card hover, card filter fade */
-  --dur-3: 480ms;  /* hero schematic draw */
-  --stagger: 45ms;
-  --ease-out: cubic-bezier(.2,.7,.2,1);
-  --ease-in-out: cubic-bezier(.65,0,.35,1);
-
-  --tap: 44px;     /* minimum touch target */
-}
-@media (min-width: 768px)  { :root { --gutter: 32px; --header-h: 64px; } }
+@media (min-width: 768px)  { :root { --gutter: 32px; --header-h: 76px; } }  /* pill 56 + 2×10 */
 @media (min-width: 1280px) { :root { --gutter: 40px; } }
-

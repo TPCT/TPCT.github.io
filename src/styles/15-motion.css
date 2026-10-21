@@ -1,0 +1,38 @@
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise { from { opacity: .001; transform: translateY(18px) scale(.985); } }
+  @keyframes fade-in { from { opacity: .001; } }
+  @keyframes pop { 0% { scale: .5; } 60% { scale: 1.15; } 100% { scale: 1; } }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes drift-a { 50% { transform: translate(10vw, 12vh) scale(1.1); } 100% { transform: translate(-4vw, 22vh) scale(.95); } }
+  @keyframes drift-b { 50% { transform: translate(-12vw, -8vh) scale(1.12); } 100% { transform: translate(-4vw, -20vh) scale(.96); } }
+  @keyframes prism-spin   { to { rotate: 360deg; } }
+  @keyframes prism-float  { from { transform: translateY(-6px); } to { transform: translateY(6px); } }
+  @keyframes shadow-float { from { transform: scale(.9); opacity: .7; } to { transform: scale(1.05); opacity: 1; } }
+  @keyframes glow-breathe { from { transform: scale(.94); opacity: .7; } to { transform: scale(1.06); opacity: 1; } }
+  @keyframes shard-float  { from { transform: translateY(-8px) rotate(var(--r)); } to { transform: translateY(8px) rotate(calc(var(--r) + 5deg)); } }
+  @keyframes beam-pulse   { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+  @keyframes spectrum-breathe { from { transform: scaleX(.9); opacity: .45; } to { transform: scaleX(1); opacity: .75; } }
+
+  .motion body::before { animation: drift-a 46s var(--ease-in-out) infinite alternate; }
+  .motion body::after  { animation: drift-b 58s var(--ease-in-out) infinite alternate; }
+
+  .motion-paused body::before, .motion-paused body::after,
+  .motion-paused .sc-hero *, .motion-paused .sc-hero *::before,
+  .sc-hero.is-idle *, .sc-hero.is-idle *::before { animation-play-state: paused !important; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motion [data-reveal].is-pending { opacity: 0; translate: 0 28px; scale: .985; }
+  .motion [data-reveal].is-revealing {
+    transition: opacity 700ms var(--ease-rise), translate var(--dur-4) var(--ease-rise), scale var(--dur-4) var(--ease-rise);
+    transition-delay: var(--rd, 0ms);
+  }
+}
+@media print { [data-reveal].is-pending { opacity: 1 !important; translate: none !important; scale: none !important; } }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+  @media (prefers-reduced-motion: no-preference) {
+    ::view-transition-new(root) { animation: theme-reveal 620ms var(--ease-in-out); }
+    @keyframes theme-reveal { from { clip-path: circle(0 at var(--vt-x, 100%) var(--vt-y, 0)); }
+                              to   { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 100%) var(--vt-y, 0)); } }
+  }
+  

@@ -56,3 +56,10 @@ for (const [name, mutate, message] of [
   ['duplicate id', x => { x.projects[1].id = x.projects[0].id; }, /duplicate id/],
   ['OSS without repoUrl', x => { delete x.projects.find(p => p.kind === 'open-source').repoUrl; }, /repoUrl/]
 ]) test(name, () => { const bad = structuredClone(c); mutate(bad); assert.match(validateContent(bad).errors.join('\n'), message); });
+
+test('Prism theme and motion labels validate', () => {
+  assert.deepEqual(c.hero.motionToggle, { pause: 'Pause animation', play: 'Play animation' });
+  assert.equal(c.site.themeColorDark, '#110D1F'); assert.equal(c.site.themeColorLight, '#EEEBFA');
+  const bad = structuredClone(c); delete bad.hero.motionToggle.pause;
+  assert.match(validateContent(bad).errors.join('\n'), /hero\.motionToggle\.pause/);
+});

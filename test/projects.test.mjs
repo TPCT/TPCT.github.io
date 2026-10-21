@@ -48,7 +48,7 @@ test('projects render complete cards, filters and section hierarchy', async t =>
   for (const id of ids.slice(1)) assert.ok(html.includes(`aria-labelledby="${id}-title"`));
   assert.match(html, /class="filters" hidden/);
   assert.match(html, /class="btn btn--secondary copy-btn" hidden/);
-  assert.ok(html.includes(`href="mailto:${c.contact.email}" aria-describedby="email-label">${c.contact.email}</a>`));
+  assert.ok(html.includes(`href="mailto:${c.contact.email}" aria-describedby="email-label">${c.contact.email.split('@')[0]}<wbr><span class="email__domain">@${c.contact.email.split('@')[1]}</span></a>`));
   assert.ok(html.includes('id="copy-status"'));
   assert.ok((await readFile(`${outDir}/assets/site.js`)).length < 30000);
 });
