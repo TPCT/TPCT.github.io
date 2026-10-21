@@ -43,7 +43,7 @@ test('hero entrance offsets and kinetic source meet watchdog and CSP contracts',
   for (const animation of animations) assert.ok(animation.includes('var(--intro-offset)'), animation);
   assert.doesNotMatch(css, /\.js \.roles li:nth-child/);
   const source = await readFile(new URL('../src/scripts/81-kinetic.js', import.meta.url), 'utf8');
-  assert.ok(Buffer.byteLength(source) <= 2400);
+  assert.ok(Buffer.byteLength(source) <= 2600);
   for (const hook of ['aria-label', 'is-kinetic', 'expo.out', '--sy']) assert.ok(source.includes(hook));
   assert.doesNotMatch(source, /innerHTML|outerHTML|insertAdjacentHTML|cssText|setAttribute\(\s*['"]style|\beval\(|new Function/);
 });
@@ -106,7 +106,7 @@ test('kinetic rise follows the curtain clock, waits for ready, and preserves rep
         createElement: () => ({ setAttribute() {} }) },
       performance: { now: () => 50 },
       MutationObserver: class { constructor(callback) { observer = callback; } observe() {} disconnect() {} },
-      addEventListener() {}, removeEventListener() {}
+      addEventListener() {}, removeEventListener() {}, setTimeout() {}, clearTimeout() {}
     });
     assert.equal(initial.yPercent, 118);
     assert.equal(initial.opacity, 0.001);
@@ -122,5 +122,50 @@ test('kinetic rise follows the curtain clock, waits for ready, and preserves rep
     assert.equal(target.opacity, 1);
     classes.add('motion-paused');
     observer();
+  }
+});
+
+test('kinetic restores the name on curtain cancellation, errors, and the hard deadline', async () => {
+  const { runInNewContext } = await import('node:vm');
+  const source = await readFile(new URL('../src/scripts/81-kinetic.js', import.meta.url), 'utf8');
+  for (const mode of ['cancelled', 'pending', 'error', 'stalled']) {
+    let rejectReady, resolveReady, task, timeout, delay, cleared = false, disconnected = false, labelled = false, timelines = 0;
+    const word = { textContent: 'Islam', parentElement: { classList: { contains: () => false } },
+      replaceChildren(...nodes) { this.textContent = ''; this.children = nodes; }, style: { removeProperty() {} } };
+    const heading = { textContent: 'Islam', querySelectorAll: () => [word],
+      setAttribute() { labelled = true; }, removeAttribute() { labelled = false; }, classList: { add() {} } };
+    const animation = { animationName: 'intro-out', startTime: null,
+      ready: new Promise((resolve, reject) => { resolveReady = resolve; rejectReady = reject; }) };
+    const g = { set() { if (mode === 'error') throw new Error('animation unavailable'); },
+      timeline() { timelines++; return { to() { return { progress() {} }; } }; } };
+    runInNewContext(source, {
+      window: { TPCT_BOLD: { now: callback => { task = callback({ g }); }, ready() {} } },
+      document: { readyState: 'complete', timeline: { currentTime: 500 },
+        documentElement: { classList: { contains: name => ['kinetic', 'intro'].includes(name) } },
+        querySelector: selector => selector === '.hero h1' ? heading : { getAnimations: () => [animation] },
+        createElement: () => ({ setAttribute() {} }) },
+      performance: { now: () => 500 },
+      MutationObserver: class { observe() {} disconnect() { disconnected = true; } },
+      addEventListener() {}, removeEventListener() {},
+      setTimeout(callback, ms) { timeout = callback; delay = ms; return 1; },
+      clearTimeout(id) { assert.equal(id, 1); cleared = true; }
+    });
+    assert.equal(delay, 2500, 'watchdog expires at 3000ms from navigation');
+    if (mode === 'cancelled') rejectReady(new Error('curtain cancelled before starting'));
+    if (mode === 'pending' || mode === 'stalled') {
+      assert.equal(word.textContent, '', 'letters start hidden');
+      if (mode === 'stalled') {
+        animation.startTime = 400;
+        resolveReady();
+        await task;
+      }
+      timeout();
+    }
+    if (mode !== 'pending' && mode !== 'stalled') await task;
+    assert.equal(word.textContent, 'Islam', mode);
+    assert.equal(labelled, false, mode);
+    assert.equal(disconnected, true, mode);
+    assert.equal(cleared, true, mode);
+    assert.equal(timelines, mode === 'stalled' ? 1 : 0, 'fallback does not start a new entrance');
   }
 });

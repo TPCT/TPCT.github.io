@@ -13,17 +13,19 @@
     });
     h.classList.add('is-kinetic');
     words.forEach(w=>{if(w.parentElement.classList.contains('w--accent')){w.style.setProperty('--ww',String(w.offsetWidth));[...w.children].forEach(c=>c.style.setProperty('--cx',String(c.offsetLeft)))}});
-    let done=false,tl;
+    let done=false,tl,timer;
     const observer=new MutationObserver(()=>{if(e.classList.contains('motion-paused')){tl?.progress(1);revert()}});
-    const revert=()=>{if(done)return;done=true;observer.disconnect();removeEventListener('beforeprint',finish);words.forEach((w,i)=>{w.textContent=texts[i];w.style.removeProperty('--ww')});h.removeAttribute('aria-label')};
-    const finish=()=>{tl?.progress(1);revert()};
+    const revert=()=>{if(done)return;done=true;clearTimeout(timer);observer.disconnect();removeEventListener('beforeprint',finish);words.forEach((w,i)=>{w.textContent=texts[i];w.style.removeProperty('--ww')});h.removeAttribute('aria-label')};
+    const finish=()=>{try{tl?.progress(1)}finally{revert()}};
     observer.observe(e,{attributes:true,attributeFilter:['class']});addEventListener('beforeprint',finish);
-    B.g.set(chars,{yPercent:118,rotationX:-88,opacity:0.001,transformOrigin:'50% 100% -12px'});
+    timer=setTimeout(finish,Math.max(0,3000-performance.now()));
+    try{B.g.set(chars,{yPercent:118,rotationX:-88,opacity:0.001,transformOrigin:'50% 100% -12px'});
     const intro=e.classList.contains('intro'),a=intro&&document.querySelector('.intro-screen')?.getAnimations().find(x=>x.animationName==='intro-out');
-    if(a&&a.startTime==null)await a.ready;
+    if(a&&a.startTime==null)await a.ready.catch(()=>{finish()});
     if(done)return;
     const delay=a&&a.startTime!=null?Math.max(0,(a.startTime+820-document.timeline.currentTime)/1000):Math.max(0,(intro?0.72:0.10)-performance.now()/1000);
     tl=B.g.timeline({delay,onComplete:revert}).to(chars,{yPercent:0,rotationX:0,opacity:1,duration:0.8,ease:'expo.out',stagger:{each:0.020}});
+    }catch{finish()}
     });
     B.ready(B=>{if(document.querySelector('.sc-hero'))B.mm.add(B.Q.motion,()=>{B.g.to('.sc-hero',{'--sy':1,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:0.5}})})});
   };
