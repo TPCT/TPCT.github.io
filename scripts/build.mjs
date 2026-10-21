@@ -3,8 +3,9 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { homeGraph } from '../src/lib/schema.mjs';
-import { esc } from '../src/lib/html.mjs';
+import { esc, projectPath, sortProjects } from '../src/lib/html.mjs';
 import { validateContent } from '../src/lib/validate.mjs';
+import { renderProjectPage } from '../src/render/project-page.mjs';
 import { render404 } from '../src/render/page-404.mjs';
 import { renderHead } from '../src/render/head.mjs';
 import { renderPage } from '../src/render/layout.mjs';
@@ -43,12 +44,18 @@ export async function build({ outDir = 'dist', root = REPO_ROOT, now = new Date(
     await writeFile(path.join(outDir, `assets/site.${ext}`), content);
     assets[ext] = createHash('sha256').update(content).digest('hex').slice(0, 10);
   }
-  const head = renderHead(c, { page: 'home', title: c.site.title, description: c.site.description, path: '/', jsonLd: homeGraph(c, { dateModified: lastmod }), assets });
+  const ordered = sortProjects(c.projects);
+  for (const [i, p] of ordered.entries()) {
+    const dir = path.join(outDir, 'work', p.id);
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, 'index.html'), renderProjectPage(c, p, { assets, prev: ordered[i - 1] ?? null, next: ordered[i + 1] ?? null }));
+  }
+  const head = renderHead(c, { page: 'home', title: c.site.title, description: c.site.description, path: '/', jsonLd: homeGraph(c, { dateModified: lastmod, projectUrl: p => new URL(projectPath(p), c.site.url).href }), assets });
   await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, spine: true, footer: renderFooter(c) }));
   const url = new URL('/', c.site.url).href;
   await writeFile(path.join(outDir, '404.html'), render404(c, { assets }));
   await writeFile(path.join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml', url).href}\n`);
-  await writeFile(path.join(outDir, 'sitemap.xml'), sitemapXml([{ loc: url, lastmod }]));
+  await writeFile(path.join(outDir, 'sitemap.xml'), sitemapXml([{ loc: url, lastmod }, ...ordered.map(p => ({ loc: new URL(projectPath(p), c.site.url).href, lastmod }))]));
   await writeFile(path.join(outDir, 'site.webmanifest'), JSON.stringify({ name: c.site.title, short_name: c.site.shortTitle, background_color: c.site.themeColorDark, theme_color: c.site.themeColorDark, display: 'browser', start_url: '/', icons: [192, 512].map(size => ({ src: `/icon-${size}.png`, sizes: `${size}x${size}`, type: 'image/png' })) }, null, 2) + '\n');
   const files = await readdir(outDir, { recursive: true, withFileTypes: true });
   return { outDir, files: files.filter(f => f.isFile()).map(f => path.relative(outDir, path.join(f.parentPath ?? f.path, f.name))).sort() };

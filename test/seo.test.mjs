@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { build } from '../scripts/build.mjs';
 import { homeGraph } from '../src/lib/schema.mjs';
-import { esc, attr } from '../src/lib/html.mjs';
+import { esc, attr, sortProjects } from '../src/lib/html.mjs';
 import { THEME_SCRIPT, cspHash, renderHead } from '../src/render/head.mjs';
 import { validateContent } from '../src/lib/validate.mjs';
 const c = JSON.parse(await readFile(new URL('../src/content.json', import.meta.url), 'utf8'));
@@ -27,7 +27,21 @@ test('SEO, 404, discovery files and committed assets', async t => {
   const nf = await readFile(path.join(outDir, '404.html'), 'utf8');
   assert.match(nf, /<meta name="robots" content="noindex">/); assert.doesNotMatch(nf, /rel="canonical"|<nav\b|menu-btn|application\/ld\+json/); assert.ok(nf.includes(`<title>404 — ${esc(c.notFound.title)} · ${esc(c.site.shortTitle)}</title>`)); assert.ok(nf.includes(`<h1>${esc(c.notFound.title)}</h1>`)); assert.ok(nf.includes(esc(c.notFound.message))); assert.ok(nf.includes(`href="/">${esc(c.notFound.cta.label)}</a>`)); assert.match(nf, /class="icon-btn theme-toggle" hidden/); assert.ok(nf.includes(THEME_SCRIPT)); assert.ok(nf.includes(cspHash(THEME_SCRIPT))); assert.match(nf, /class="nf__schematic" aria-hidden="true"/);
   assert.equal(await readFile(path.join(outDir, 'robots.txt'), 'utf8'), 'User-agent: *\nAllow: /\nSitemap: https://tpct.github.io/sitemap.xml\n');
-  const sitemap = await readFile(path.join(outDir, 'sitemap.xml'), 'utf8'); assert.equal((sitemap.match(/<url>/g) || []).length, 1); assert.match(sitemap, /<loc>https:\/\/tpct.github.io\/<\/loc>/); assert.doesNotMatch(sitemap, /404/); assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+  const sitemap = await readFile(path.join(outDir, 'sitemap.xml'), 'utf8');
+  const entries = [...sitemap.matchAll(/<url>(.*?)<\/url>/gs)].map(m => m[1]);
+  assert.equal(entries.length, c.projects.length + 1);
+  assert.deepEqual(entries.map(entry => entry.match(/^<loc>(.*?)<\/loc>/)[1]), ['https://tpct.github.io/', ...sortProjects(c.projects).map(p => `https://tpct.github.io/work/${p.id}/`)]);
+  for (const entry of entries) assert.match(entry, /^<loc>[^<]+<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>$/);
+  assert.doesNotMatch(sitemap, /404/);
+  const caseStudies = c.projects.filter(p => p.kind === 'case-study');
+  const cards = [...html.matchAll(/<li class="card card--case-study"[^>]*>(.*?)<\/article><\/li>/gs)].map(m => m[1]);
+  assert.equal(cards.length, caseStudies.length);
+  for (const p of caseStudies) {
+    const card = cards.find(card => card.includes(`<h3 id="p-${p.id}">`));
+    assert.ok(card, p.id);
+    assert.equal((card.match(/<a\b/g) ?? []).length, 1);
+    assert.deepEqual([...card.matchAll(/\bhref="([^"]*)"/g)].map(m => m[1]), [`/work/${p.id}/`]);
+  }
   const manifest = JSON.parse(await readFile(path.join(outDir, 'site.webmanifest'), 'utf8')); assert.equal(manifest.name, c.site.title); assert.equal(manifest.short_name, c.site.shortTitle); assert.equal(manifest.display, 'browser'); assert.equal(manifest.start_url, '/'); assert.equal(manifest.theme_color, c.site.themeColorDark); assert.equal(manifest.background_color, c.site.themeColorDark); assert.deepEqual(manifest.icons.map(i => i.sizes), ['192x192', '512x512']);
   for (const i of manifest.icons) await readFile(path.join(outDir, i.src));
   for (const [file, width, height, cap] of [['assets/og-image.png', 1200, 630, 300 * 1024], ['apple-touch-icon.png', 180, 180, Infinity], ['favicon-32.png', 32, 32, Infinity], ['icon-192.png', 192, 192, Infinity], ['icon-512.png', 512, 512, Infinity]]) { const bytes = await readFile(new URL('../public/' + file, import.meta.url)); assert.equal(bytes.readUInt32BE(16), width); assert.equal(bytes.readUInt32BE(20), height); assert.ok(bytes.length <= cap); }

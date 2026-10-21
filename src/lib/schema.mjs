@@ -18,3 +18,16 @@ export function homeGraph(c, { dateModified, projectUrl = null }) {
   ] };
 }
 export function jsonLdScript(data) { return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`; }
+export function projectGraph(c, p, { url, title, description }) {
+  const ids = schemaIds(c);
+  return { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebPage', '@id': url, url, name: title, description, inLanguage: c.site.lang, isPartOf: { '@id': ids.website }, about: { '@id': ids.project(p.id) }, breadcrumb: { '@id': url + '#breadcrumb' } },
+    { '@type': 'BreadcrumbList', '@id': url + '#breadcrumb', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: c.projectPage.homeLabel, item: ids.base },
+      { '@type': 'ListItem', position: 2, name: p.name, item: url }
+    ] },
+    projectNode(c, p, { url }),
+    { '@type': 'Person', '@id': ids.person, name: c.hero.name, url: ids.base },
+    { '@type': 'WebSite', '@id': ids.website, url: ids.base, name: c.site.shortTitle }
+  ] };
+}

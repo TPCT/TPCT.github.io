@@ -1,0 +1,25 @@
+.project__wrap { max-width: 860px; margin-inline: auto; padding-block: var(--section-pad); overflow-wrap: anywhere; }
+.crumbs ol { margin: 0; padding: 0; list-style: none; display: inline-flex; flex-wrap: wrap; gap: 8px; color: var(--muted); }
+.crumbs li + li::before { content: "/"; margin-inline-end: 8px; color: var(--muted); }
+.crumbs [aria-current] { color: var(--fg); }
+.project__head { margin-block: 32px; }
+.project__head h1 { margin-block: 16px; font: 600 clamp(2rem, 1.3rem + 3vw, 3.5rem)/1.1 var(--font-display); }
+.project__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--plate); border: 1px solid var(--rim); border-radius: var(--r-plate); box-shadow: var(--shadow-card); }
+.project__facts > div { padding: 16px; border-inline-start: 1px solid var(--border-soft); }
+.project__facts dt { font: 800 var(--fs-label)/16px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.project__facts dd { margin: 8px 0 0; color: var(--fg); }
+.project__block { margin-block: 32px; }
+.project__block h2 { margin-block-end: 16px; }
+.project__highlights { display: grid; gap: 8px; color: var(--fg); }
+.project__highlights li { position: relative; padding-inline-start: 18px; }
+.project__highlights li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+.project__pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-block: 40px 20px; }
+.project__pager a { min-height: 56px; padding: 16px; background: var(--plate); border: 1px solid var(--rim); border-radius: var(--r-plate); color: var(--fg); text-decoration: none; }
+.project__pager .label { display: block; margin-block-end: 8px; }
+.project__next { grid-column: 2; text-align: end; }
+.project__pager a:hover, .project__pager a:focus-visible { border-color: var(--brand); }
+.card__more { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; margin-block-start: 12px; color: var(--fg); font-weight: 600; text-underline-offset: 6px; }
+.card__more:hover, .card__more:focus-visible { color: var(--brand); }
+@media (min-width: 768px) { .project__facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .project__pager { grid-template-columns: minmax(0, 1fr); } .project__next { grid-column: 1; } }
+@media (forced-colors: active) { .project__facts, .project__pager a { border: 1px solid CanvasText; } }

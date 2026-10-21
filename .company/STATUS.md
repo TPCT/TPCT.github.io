@@ -20,7 +20,7 @@
 | T-013 | W-4 Journey timeline section (content, validation, render, CSS, draw JS) | M | T-010 | done |
 | T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | done |
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
-| T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | todo |
+| T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds its own new test file; run one after another if RAM is tight).
@@ -100,3 +100,4 @@ SEO order: T-016 → T-017 → T-018 (may run ∥ T-010/T-011/T-012; never ∥ T
   - Lighthouse mobile (SEO 100, Perf ≥ 90, A11y ≥ 95) is a reviewer gate run with the local Playwright Chromium via `npx -y lighthouse@12` (never a repo dependency). The cross-origin canonical flag on localhost is accepted; SEO 100 is confirmed on the live URLs after deploy.
 - 2026-10-21 PM: T-020 (urgent, owner via coordinator): Google Search Console verification meta added in a clean worktree from origin/main and pushed alone (71dfe24); live verified. Local main must pull/rebase before the next push.
 - 2026-10-21 PM: T-010/T-011/T-012/T-017/T-018 shipped in ONE commit (files interleaved: content.json/validate.mjs shared by T-017+T-018; shipping speed prioritised per coordinator). Lighthouse mobile local: Perf 97, A11y 100, BP 100, SEO 92 (robots-txt audit blocked by CSP connect-src 'none' → follow-up: connect-src 'self' in T-019).
+- 2026-10-21 PM: T-019 shipped (20 project pages). Lighthouse mobile local: home 93/100/100/100, project pages 99/100/100/100. Follow-ups (cosmetic): first fact cell extra left rule; empty 4th fact cell on 2 undated projects.

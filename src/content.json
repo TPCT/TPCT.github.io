@@ -1,4 +1,20 @@
 {
+  "projectPage": {
+    "breadcrumbLabel": "Breadcrumb",
+    "homeLabel": "Home",
+    "workLabel": "Work",
+    "highlightsTitle": "Highlights",
+    "stackTitle": "Stack",
+    "yearLabel": "Year",
+    "typeLabel": "Type",
+    "categoryLabel": "Category",
+    "pagerLabel": "More projects",
+    "prevLabel": "Previous project",
+    "nextLabel": "Next project",
+    "backLabel": "Back to all work",
+    "caseStudyLink": "Read case study",
+    "openSourceLink": "Project details"
+  },
   "site": {
     "title": "Islam Elsayed — Senior Full-Stack Engineer | Laravel, Python",
     "jobTitle": "Senior Full-Stack Engineer & Systems Architect",

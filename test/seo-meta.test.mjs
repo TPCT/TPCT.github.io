@@ -51,9 +51,13 @@ test('SEO metadata, linked graph, identity and accessible names', async t => {
     assert.equal(item.name, p.name);
     assert.equal(item['@type'], p.kind === 'open-source' ? 'SoftwareSourceCode' : 'CreativeWork');
     if (p.kind === 'open-source') assert.equal(item.codeRepository, p.repoUrl);
-    else { assert.ok(!('codeRepository' in item)); assert.ok(!('url' in item)); }
+    else {
+      assert.ok(!('codeRepository' in item));
+      assert.equal(item.url, `https://tpct.github.io/work/${p.id}/`);
+    }
   });
-  assert.equal(await readFile(path.join(outDir, 'sitemap.xml'), 'utf8'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://tpct.github.io/</loc><lastmod>2026-10-21</lastmod></url></urlset>\n');
+  const urls = ['https://tpct.github.io/', ...sorted.map(p => `https://tpct.github.io/work/${p.id}/`)];
+  assert.equal(await readFile(path.join(outDir, 'sitemap.xml'), 'utf8'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(url => `<url><loc>${url}</loc><lastmod>2026-10-21</lastmod></url>`).join('')}</urlset>\n`);
   for (const page of [html, nf]) {
     for (const [tag] of page.matchAll(/<img\b[^>]*>/g)) assert.match(tag, /\balt="[^"]+"/);
     for (const [svg] of page.matchAll(/<svg\b.*?<\/svg>/gs)) assert.ok(/^[^>]*aria-hidden="true"/.test(svg) || (/^[^>]*role="img"/.test(svg) && /<title\b[^>]*>[^<]+<\/title>/.test(svg)), svg);

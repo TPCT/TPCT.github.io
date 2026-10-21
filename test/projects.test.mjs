@@ -22,10 +22,13 @@ test('projects render complete cards, filters and section hierarchy', async t =>
     assert.ok(card.includes(`data-category="${slugify(p.category)}"`));
     assert.ok(card.includes(`data-featured="${p.featured}"`));
     if (p.kind === 'case-study') {
-      assert.doesNotMatch(card, /<a\b/);
+      assert.equal((card.match(/<a\b/g) || []).length, 1);
+      assert.ok(card.includes(`href="/work/${p.id}/"`));
+      assert.doesNotMatch(card, /target=|href="http/);
       assert.ok(card.includes(esc(c.projectsIntro.privateNote)));
     } else {
-      assert.equal((card.match(/<a\b/g) || []).length, 1);
+      assert.equal((card.match(/<a\b/g) || []).length, 2);
+      assert.ok(card.includes(`href="/work/${p.id}/"`));
       assert.ok(card.includes(`href="${esc(p.repoUrl)}" target="_blank" rel="noopener noreferrer"`));
       assert.ok(card.includes(`<span class="vh"> : ${esc(p.name)} ${esc(c.a11y.newTab)}</span>`));
     }
@@ -59,7 +62,8 @@ test('projects render complete cards, filters and section hierarchy', async t =>
 test('case-study repoUrl is ignored and content is escaped', () => {
   const p = c.projects.find(p => p.kind === 'case-study');
   const card = renderCard({ ...p, repoUrl: 'https://github.com/TPCT/example', name: '<script>"&' }, c);
-  assert.doesNotMatch(card, /<a\b|<script>/);
+  assert.doesNotMatch(card, /href="http|github\.com|<script>/);
+  assert.deepEqual([...card.matchAll(/href="([^"]+)"/g)].map(m => m[1]), [`/work/${p.id}/`]);
   assert.ok(card.includes('&lt;script&gt;&quot;&amp;'));
   assert.ok(card.includes(esc(c.projectsIntro.privateNote)));
 });

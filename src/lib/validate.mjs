@@ -58,6 +58,7 @@ export function validateContent(c) {
   strings(c.a11y, 'newTab', 'a11y');
   strings(c.contact, 'title lead email emailLabel copyLabel copiedLabel website websiteLabel github githubLabel linkedin linkedinLabel location', 'contact');
   const nf = strings(c.notFound, 'title code message', 'notFound'); strings(nf.cta, 'label href', 'notFound.cta');
+  strings(c.projectPage, 'breadcrumbLabel homeLabel workLabel highlightsTitle stackTitle yearLabel typeLabel categoryLabel pagerLabel prevLabel nextLabel backLabel caseStudyLink openSourceLink', 'projectPage');
   const intro = strings(c.projectsIntro, 'title lead filterLabel allLabel repoLinkLabel privateNote emptyState kindFilterLabel countSingular countPlural resetLabel roleLabel stackLabel', 'projectsIntro');
   strings(intro.kindLabels, 'case-study open-source', 'projectsIntro.kindLabels');
   array(c.skills, 'skills').forEach((s, i) => { s = strings(s, 'group', `skills[${i}]`); stringArray(s.items, `skills[${i}].items`); });

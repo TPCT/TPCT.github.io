@@ -79,7 +79,9 @@ test('career is grouped with native earlier roles and deterministic inclusive da
   assert.doesNotMatch(html, /exp__summary/);
   assert.equal((html.match(/class="career__now"/g) ?? []).length, 3);
   const project = c.projects.find(p => p.id === 'multi-vendor-restaurant-platform');
-  assert.doesNotMatch(renderCard(project, c), /<a\b/);
+  const card = renderCard(project, c);
+  assert.equal((card.match(/<a\b/g) ?? []).length, 1);
+  assert.deepEqual([...card.matchAll(/\bhref="([^"]*)"/g)].map(m => m[1]), [`/work/${project.id}/`]);
   assert.match(renderCard(c.projects.find(p => p.id === 'national-waste-analytics'), c), /class="card__year">2025</);
   assert.equal(c.projects.find(p => p.id === 'aic-operations-suite').year, 2026);
 });
