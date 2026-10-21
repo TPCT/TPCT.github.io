@@ -1,0 +1,17 @@
+@property --shift { syntax: '<number>'; inherits: true; initial-value: 0; }
+.sc-hero { transition: --shift 520ms var(--ease-spring); }
+.sc-hero .sc-part--hook-top    { transform: translate(calc(var(--px) * 10px + var(--shift) * 14px), calc(var(--py) * 10px - var(--shift) * 14px)); }
+.sc-hero .sc-part--hook-bottom { transform: translate(calc(var(--px) * -10px - var(--shift) * 14px), calc(var(--py) * -10px + var(--shift) * 14px)); }
+.sc-hero .sc-part--lt    { transform: translateX(calc(var(--shift) * -6px)); }
+.sc-hero .sc-part--gt    { transform: translateX(calc(var(--shift) * 6px)); }
+.sc-hero .sc-part--slash { transform: rotate(calc(var(--shift) * 12deg)); }
+.sc-hero__glow { opacity: calc(.75 + var(--shift) * .25); scale: calc(1 + var(--shift) * .08); }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .motion .sc-hero:hover { --shift: 1; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes hero-exit { to { translate: 0 -10%; scale: .84; opacity: .2; } }
+    .motion .sc-hero { animation: hero-exit linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  }
+}

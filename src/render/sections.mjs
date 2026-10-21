@@ -41,7 +41,13 @@ export function renderTimeline(c) {
   return section('timeline', '03', c.sections.timeline, intro.title, `<p class="lead tl__lead" data-reveal>${esc(intro.lead)}</p><div class="tl"><span class="tl__spark" aria-hidden="true"></span><ol class="timeline">${items}</ol></div>`);
 }
 export function renderSkills(c) {
-  return section('skills', '04', navLabel(c, 'skills'), c.sections.skills, `<div class="skills">${c.skills.map((s, i) => `<div class="skill-group" data-reveal><div class="skill-group__head"><span aria-hidden="true">S${i + 1}</span><h3>${esc(s.group)}</h3></div>${tags(s.items)}</div>`).join('')}</div>`);
+  const items = [...new Set(c.skills.flatMap(s => s.items))];
+  const row = (name, parity) => {
+    const list = `<ul class="marquee__list">${items.filter((_, i) => i % 2 === parity).map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
+    return `<div class="marquee__row marquee__row--${name}">${list}${list}</div>`;
+  };
+  const marquee = `<div class="marquee" aria-hidden="true">${row('a', 0)}${row('b', 1)}</div>`;
+  return section('skills', '04', navLabel(c, 'skills'), c.sections.skills, marquee + `<div class="skills">${c.skills.map((s, i) => `<div class="skill-group" data-reveal><div class="skill-group__head"><span aria-hidden="true">S${i + 1}</span><h3>${esc(s.group)}</h3></div>${tags(s.items)}</div>`).join('')}</div>`);
 }
 export function renderCard(p, c) {
   const s = c.projectsIntro;

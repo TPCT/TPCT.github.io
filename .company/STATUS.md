@@ -18,7 +18,7 @@
 | T-011 | W-2 Compile type: glyph decode + name flow | S | T-010 | done |
 | T-012 | W-3 Live cards: cursor spotlight + rim signal | S | T-010 | done |
 | T-013 | W-4 Journey timeline section (content, validation, render, CSS, draw JS) | M | T-010 | done |
-| T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | todo |
+| T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | done |
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | todo |
 

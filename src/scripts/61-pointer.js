@@ -70,7 +70,4 @@ o=s.getBoundingClientRect()}}c=e.clientX;
   if(!heroVisible){cancelAnimationFrame(raf);
   raf=0;
   if(y)n(y,'cursor-opacity','0')}else scheduleHero()},{threshold:0}).observe(v);
-  g.addEventListener('click',()=>{if(!canAnimate())return;
-  g.classList.add('is-replay');
-  void g.offsetWidth;
-  g.classList.remove('is-replay')})})();
+})();

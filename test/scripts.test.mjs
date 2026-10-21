@@ -84,7 +84,9 @@ test('hero assembly is independent of pointer initialization and replay resets s
   assert.match(css, /\.sc-hero\.is-replay \.sc-mark path \{ animation: none !important; \}/);
   const pointer = await readFile(new URL('../src/scripts/61-pointer.js', import.meta.url), 'utf8');
   assert.doesNotMatch(pointer, /is-assembling/);
-  assert.match(pointer, /classList\.add\('is-replay'\);\s*void g\.offsetWidth;\s*g\.classList\.remove\('is-replay'\)/);
+  assert.doesNotMatch(pointer, /is-replay/);
+  const motion = await readFile(new URL('../src/scripts/60-motion.js', import.meta.url), 'utf8');
+  assert.match(motion, /addEventListener\('click',\(\)=>\{[^}]*classList\.add\('is-replay'\);\s*void r\.offsetWidth;\s*r\.classList\.remove\('is-replay'\)/);
 });
 
 test('spine progress is clamped, frame-throttled and respects motion changes', async () => {

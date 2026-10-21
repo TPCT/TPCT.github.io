@@ -1,0 +1,17 @@
+#skills { overflow-x: clip; min-width: 0; }
+.marquee { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .marquee { display: grid; gap: 14px; margin-inline: calc(50% - 50vw); margin-block: 0 var(--space-6); padding-block: 18px; rotate: -1.5deg;
+    content-visibility: auto; contain: inline-size; contain-intrinsic-size: auto 150px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .marquee__row { display: flex; width: max-content; animation: marquee 64s linear infinite; }
+  .marquee__row--b { animation-duration: 78s; animation-direction: reverse; }
+  .marquee__list { display: flex; flex-shrink: 0; }
+  .marquee__list li { display: inline-flex; align-items: center; gap: 18px; padding-inline-end: 18px; white-space: nowrap;
+    font: 600 clamp(1.375rem, 1rem + 1.8vw, 2.5rem)/1.2 var(--font-display); letter-spacing: -.01em; color: var(--fg2); }
+  .marquee__list li::before { content: "/"; color: var(--brand); font-weight: 700; }
+  .marquee__row--b li { color: transparent; -webkit-text-stroke: 1px var(--border-strong); }
+  @keyframes marquee { to { translate: -50% 0; } }
+  .marquee:hover .marquee__row, .motion-paused .marquee__row { animation-play-state: paused; }
+}
+@media print, (forced-colors: active) { .marquee { display: none !important; } }
