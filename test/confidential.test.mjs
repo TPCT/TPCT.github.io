@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { checkConfidential } from '../scripts/check-confidential.mjs';
+test('confidentiality rules, token boundaries, binary skips and redacted CLI', async t => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'tpct-confidential-')); t.after(() => rm(root, { recursive: true, force: true }));
+  const dist = path.join(root, 'dist'), denylist = path.join(root, 'terms.txt'); await mkdir(dist);
+  await writeFile(denylist, '# comment\n\ndemo-secret-repo\na.b\n');
+  const opts = { root, dist, denylist, git: false };
+  await writeFile(path.join(dist, 'index.html'), 'https://shiftcodes.net\nprefix-demo-secret-repo-suffix\naXb');
+  assert.deepEqual((await checkConfidential(opts)).hits, []);
+  await writeFile(path.join(dist, 'index.html'), 'foo' + '.' + 'shiftcodes' + '.net');
+  assert.ok((await checkConfidential(opts)).hits.some(h => h.rule === 'hostname'));
+  await writeFile(path.join(dist, 'index.html'), 'DEMO-SECRET-REPO\na.b');
+  const result = await checkConfidential(opts); assert.equal(result.denylistLoaded, true); assert.ok(result.hits.some(h => h.rule === 'denylist#1' && h.line === 1)); assert.ok(result.hits.some(h => h.rule === 'denylist#2')); assert.ok(!JSON.stringify(result).includes('demo-secret-repo'));
+  const cli = spawnSync(process.execPath, ['scripts/check-confidential.mjs', '--root', root, '--dist', dist, '--denylist', denylist, '--no-git'], { encoding: 'utf8' }); assert.equal(cli.status, 1); assert.match(cli.stdout, /denylist#1/); assert.doesNotMatch(cli.stdout + cli.stderr, /demo-secret-repo/i);
+  await writeFile(path.join(dist, 'index.html'), Buffer.from('\0demo-secret-repo')); assert.deepEqual((await checkConfidential(opts)).hits, []);
+  await mkdir(path.join(root, 'test/fixtures/confidential'), { recursive: true }); await writeFile(path.join(root, 'test/fixtures/confidential/sample.txt'), 'demo-secret-repo'); assert.deepEqual((await checkConfidential(opts)).hits, []);
+  assert.equal((await checkConfidential({ ...opts, denylist: path.join(root, 'absent') })).denylistLoaded, false);
+  await rm(dist, { recursive: true }); assert.ok((await checkConfidential(opts)).hits.some(h => h.rule === 'missing dist'));
+});

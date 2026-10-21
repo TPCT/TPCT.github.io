@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { validateContent } from '../src/lib/validate.mjs';
+import { render404 } from '../src/render/page-404.mjs';
 import { renderHead } from '../src/render/head.mjs';
 import { renderPage } from '../src/render/layout.mjs';
 import { renderHeader } from '../src/render/header.mjs';
@@ -32,9 +33,14 @@ export async function build({ outDir = 'dist', root = REPO_ROOT } = {}) {
     await writeFile(path.join(outDir, `assets/site.${ext}`), content);
     assets[ext] = createHash('sha256').update(content).digest('hex').slice(0, 10);
   }
-  const head = renderHead(c, { title: c.site.title, description: c.site.description, assets });
+  const head = renderHead(c, { page: 'home', title: c.site.title, description: c.site.description, assets });
   const main = [renderHero, renderAbout, renderExperience, renderSkills, renderWork, renderServices, renderProcess, renderContact].map(render => render(c)).join('');
   await writeFile(path.join(outDir, 'index.html'), renderPage(c, { head, header: renderHeader(c), main, footer: renderFooter(c) }));
+  const url = new URL('/', c.site.url).href;
+  await writeFile(path.join(outDir, '404.html'), render404(c, { assets }));
+  await writeFile(path.join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${new URL('sitemap.xml', url).href}\n`);
+  await writeFile(path.join(outDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${url}</loc></url></urlset>\n`);
+  await writeFile(path.join(outDir, 'site.webmanifest'), JSON.stringify({ name: c.site.title, short_name: c.site.shortTitle, background_color: c.site.themeColorDark, theme_color: c.site.themeColorDark, display: 'browser', start_url: '/', icons: [192, 512].map(size => ({ src: `/icon-${size}.png`, sizes: `${size}x${size}`, type: 'image/png' })) }, null, 2) + '\n');
   const files = await readdir(outDir, { recursive: true, withFileTypes: true });
   return { outDir, files: files.filter(f => f.isFile()).map(f => path.relative(outDir, path.join(f.parentPath ?? f.path, f.name))).sort() };
 }

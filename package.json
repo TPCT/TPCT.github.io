@@ -8,6 +8,9 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "serve": "node scripts/serve.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "check:confidential": "node scripts/check-confidential.mjs",
+    "check": "npm run build && npm test && npm run check:confidential",
+    "images": "node scripts/render-images.mjs"
   }
 }

@@ -25,6 +25,11 @@ export function validateContent(c) {
   const hero = strings(c.hero, 'eyebrow name headline subheadline location reach domainsLabel', 'hero');
   for (const k of ['roles', 'domains']) stringArray(hero[k], `hero.${k}`);
   for (const k of ['ctaPrimary', 'ctaSecondary', 'ctaTertiary']) strings(hero[k], 'label href', `hero.${k}`);
+  const protocol = (value, pattern, field) => { if (typeof value !== 'string' || !pattern.test(value)) errors.push(`${field}: invalid URL protocol`); };
+  protocol(hero.ctaSecondary?.href, /^mailto:/, 'hero.ctaSecondary.href');
+  protocol(hero.ctaTertiary?.href, /^https:\/\//, 'hero.ctaTertiary.href');
+  for (const k of ['github', 'website']) protocol(c.contact?.[k], /^https:\/\//, `contact.${k}`);
+  if (Array.isArray(c.experience)) c.experience.forEach((v, i) => protocol(v?.orgUrl, /^https:\/\//, `experience[${i}].orgUrl`));
   const about = strings(c.about, 'title', 'about'); stringArray(about.paragraphs, 'about.paragraphs');
   strings(c.sections, 'skills experience services process', 'sections');
   strings(c.a11y, 'newTab', 'a11y');
@@ -49,6 +54,7 @@ export function validateContent(c) {
     if (p.year !== undefined && (!Number.isInteger(p.year) || p.year < 1990 || p.year > 2100)) errors.push(`${path}.year: expected integer 1990–2100`);
     if (typeof p.featured !== 'boolean') errors.push(`${path}.featured: expected boolean`);
     if (p.kind === 'open-source' && (typeof p.repoUrl !== 'string' || !/^https:\/\/github\.com\/TPCT\/[A-Za-z0-9._-]+$/.test(p.repoUrl))) errors.push(`${path}.repoUrl: required TPCT GitHub repository URL`);
+    if (p.repoUrl !== undefined) protocol(p.repoUrl, /^https:\/\//, `${path}.repoUrl`);
     if (p.kind === 'case-study' && p.repoUrl !== undefined) warnings.push(`${path}.repoUrl: ignored for case study`);
   });
   return { errors, warnings };

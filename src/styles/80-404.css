@@ -1,0 +1,7 @@
+.nf { padding-block: var(--section-pad); min-height: 70vh; }
+.nf__code { font-size: clamp(6rem, 3rem + 18vw, 15rem); font-weight: 800; font-stretch: 125%; color: var(--accent-text); line-height: .9; font-variant-numeric: tabular-nums; margin-block: 0 var(--space-6); }
+.nf h1 { font-size: var(--fs-h2); }
+.nf__message { color: var(--text-muted); margin-block: var(--space-5); }
+.nf__schematic { display: flex; justify-content: space-between; max-width: 320px; margin-block-start: var(--space-8); border-block-start: 2px solid var(--line-strong); }
+.nf__schematic i { width: 16px; height: 16px; background: var(--accent); transform: translateY(-9px); }
+.nf__schematic i:last-child { background: var(--bg); border: 2px dashed var(--accent-text); }

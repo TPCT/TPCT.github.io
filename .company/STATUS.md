@@ -3,9 +3,9 @@
 | Ticket | Title | Size | Depends on | State |
 |---|---|---|---|---|
 | T-001 | Scaffold, build script, content source, tokens, header, hero, footer | M | none | done |
-| T-002 | Content sections, project cards, filters, copy email, scroll-spy | M | T-001 | todo |
-| T-003 | SEO/OG/JSON-LD, favicons + OG image, font, 404, robots/sitemap/manifest, confidentiality check | M | T-001 | todo |
-| T-004 | GitHub Pages workflow + README | S | T-003 (after T-002) | todo |
+| T-002 | Content sections, project cards, filters, copy email, scroll-spy | M | T-001 | done |
+| T-003 | SEO/OG/JSON-LD, favicons + OG image, font, 404, robots/sitemap/manifest, confidentiality check | M | T-001 | done |
+| T-004 | GitHub Pages workflow + README | S | T-003 (after T-002) | done |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 
@@ -29,3 +29,5 @@ Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is ti
 - 2026-10-21 TL: No code licence file; content © Islam Elsayed; Archivo (OFL) and Lucide (ISC) credited in README.
 - 2026-10-21 TL: JSON-LD `jobTitle` = hero.roles minus the founder role; address country `EG` is a build constant (not visible copy).
 - 2026-10-21 PM: User update relayed from profile-readme session — contact email is now `th3professionalcod3r@gmail.com` (replaces eslamjackie@outlook.com everywhere); drop `palm-resources-01` from the portfolio; add public repo `ashurbank.iq` (Laravel 10 + Filament 3 bilingual CMS for a bank: RBAC via filament-shield/spatie-permission, audit log via laravel-auditing, Excel import/export via maatwebsite/excel — verified in its composer.json). Applied as ticket T-005 after T-001.
+- 2026-10-21 PM: Owner feedback on first live version: "looks bad, no animations, doesn't use the Prism principle from the artifacts". Prism = owner's own design language (Prism D22, from the "Workbot Prism Website" design canvas; refs copied to `.company/private/prism/`, gitignored). Decision: keep IA/behaviour, replace the visual layer with a Prism reskin (dark default) + an orchestrated motion system → `.company/ux-prism.md`, then reskin tickets T-005+. T-002/T-003 reviewed for function only.
+- 2026-10-21 PM: Site went live early at owner's request: T-004 workflow pushed first (with `check:confidential --if-present` until T-003 lands); run success, https://tpct.github.io → 200.

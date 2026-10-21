@@ -1,0 +1,38 @@
+#work .lead { color: var(--text-muted); }
+.filters { display: grid; gap: 24px; margin-block: 32px; }
+.filters [role="group"] { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters [role="group"] > .label { flex-basis: 100%; margin-block-end: 4px; }
+.chip { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-2); background: transparent; color: var(--text); font-size: .9375rem; font-weight: 600; white-space: normal; transition: background-color var(--dur-2), border-color var(--dur-2), color var(--dur-2); }
+.chip__count { font: 400 var(--fs-tag) var(--font-mono); margin-inline-start: 8px; }
+.chip:hover { background: var(--surface-2); }
+.chip--zero:not([aria-pressed="true"]) { color: var(--text-subtle); border-style: dashed; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip[aria-pressed="true"]:hover { background: var(--accent-hover); }
+.projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: stretch; margin-block-start: 32px; }
+.card { min-width: 0; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-3); box-shadow: var(--shadow-card); overflow-wrap: anywhere; }
+.card article { display: flex; flex-direction: column; height: 100%; }
+.card__meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font: 500 var(--fs-label)/var(--lh-body) var(--font-mono); text-transform: uppercase; color: var(--text-subtle); }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: .6875rem; letter-spacing: .08em; padding: 3px 8px; border: 1px solid currentColor; border-radius: var(--radius-1); color: var(--accent-text); }
+.card--open-source .badge { color: var(--oss); }
+.card__year { margin-inline-start: auto; font-variant-numeric: tabular-nums; }
+.card h3 { margin-block-start: 16px; }
+.card__summary { color: var(--text-muted); line-height: 1.5; margin-block-start: 8px; }
+.card__highlights { display: grid; gap: 8px; margin-block-start: 16px; font-size: var(--fs-small); }
+.card__highlights li { position: relative; padding-inline-start: 20px; }
+.card__highlights li::before { content: ''; position: absolute; inset-inline-start: 0; top: .75em; width: 12px; height: 1px; background: var(--accent-text); }
+.card--open-source .card__highlights li::before { background: var(--oss); }
+.card .tags { margin-block-start: 20px; margin-block-end: 24px; }
+.card__foot { margin-block-start: auto; border-block-start: 1px solid var(--line); padding-block-start: 16px; }
+.card__role { font-size: var(--fs-small); }
+.card__role .label { margin-inline-end: 8px; }
+.card__private { display: inline-flex; align-items: baseline; gap: 8px; color: var(--accent-text); font: 400 var(--fs-tag)/var(--lh-body) var(--font-mono); border: 1px dashed var(--line-strong); border-radius: var(--radius-1); padding: 6px 10px; margin-block-start: 12px; }
+.card__repo { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--oss); font-weight: 600; text-underline-offset: .22em; }
+.card__repo:hover { text-decoration-thickness: 2px; }
+.card--open-source { transition: border-color var(--dur-2), box-shadow var(--dur-2); }
+.card--open-source:hover { border-color: var(--line-strong); box-shadow: var(--shadow-card-hover); }
+.projects-empty { margin-block-start: 32px; padding: 48px 24px; text-align: center; border: 1px solid var(--line); border-radius: var(--radius-3); }
+.projects-empty .btn { margin-block-start: 24px; }
+@media (min-width: 768px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } .card { padding: 24px; } }
+@media (min-width: 1280px) { .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; } }
+@media (prefers-reduced-motion: no-preference) { .card.is-entering { animation: card-in var(--dur-2) var(--ease-out); } @keyframes card-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } } }
+@media (forced-colors: active) { .chip { border-color: ButtonText; } .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: Highlight; color: HighlightText; border-color: Highlight; forced-color-adjust: none; } }
