@@ -24,7 +24,7 @@
 | T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | done |
 | T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | done |
 | T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | done |
-| T-025 | B-4 Story: pillar fan, pinned Process story, horizontal Work rail (desktop) | M | T-022, T-023 (round 3) | todo |
+| T-025 | B-4 Story: pillar fan, pinned Process story, horizontal Work rail (desktop) | M | T-022, T-023 (round 3) | done |
 | T-026 | B-5 Atmosphere: section colour morphs + split-line heading reveals | S | T-023 (T-022 for About lines) | done |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
