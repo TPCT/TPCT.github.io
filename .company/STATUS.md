@@ -21,11 +21,19 @@
 | T-014 | W-5 Shift and rhythm: S-mark shift, hero exit, stack marquee (CSS only) | S | T-013 | done |
 | T-018 | SEO: title/description, JSON-LD @graph, LinkedIn + rel=me, robots meta, sitemap lastmod, a11y-name audit | M | T-016, T-017 | done |
 | T-019 | Project pages /work/<slug>/ (+ card links, sitemap, breadcrumbs JSON-LD) + reviewer Lighthouse gate | M | T-018, T-010 | done |
+| T-022 | B-1 About rewrite: 2-line lead, 4 pillar cards, "Worked with" company rail (+ CSS cap raise) | S | none | todo |
+| T-023 | B-2 Motion foundation: self-hosted GSAP/ScrollTrigger/Lenis loading, pre-paint flags, 80-bold.js core, ScrollTrigger CSP guard (+ JS cap raise) | M | vendor files committed | todo |
+| T-024 | B-3 Hero: CSS intro loader, kinetic 3D name, roles rotator, S-mark scroll depth | M | T-023 | todo |
+| T-025 | B-4 Story: pillar fan, pinned Process story, horizontal Work rail (desktop) | M | T-022, T-023 (round 3) | todo |
+| T-026 | B-5 Atmosphere: section colour morphs + split-line heading reveals | S | T-023 (T-022 for About lines) | todo |
 
 Order: T-001 → (T-002 ∥ T-003, disjoint files; run sequentially if RAM is tight — ~4 GB free at planning time) → T-004.
 Reskin order: T-005 → (T-006 ∥ T-007 ∥ T-008: disjoint files, each adds its own new test file; run one after another if RAM is tight).
 Wow order (max 2 Codex runs at once): T-015 → T-010 (alone; raises caps) → (T-011 ∥ T-013) → (T-012 ∥ T-014; T-014 only after T-013). T-012 is disjoint from all others and can fill any free slot after T-010.
 SEO order: T-016 → T-017 → T-018 (may run ∥ T-010/T-011/T-012; never ∥ T-013/T-014/T-019) → T-019 (after T-018 and T-010; may run ∥ T-011/T-012; never ∥ T-013/T-014). Simplest: put T-018 → T-019 before T-013, or after T-014.
+
+Bold order (max 2 Codex runs at once): R1 T-022 ∥ T-023 (disjoint files; T-022 owns the CSS cap raise, T-023 the site.js cap raise) → R2 T-024 ∥ T-026 (disjoint) → R3 T-025 alone (pin-heavy, needs T-022 + T-023) → ux-bold §10 gate (lead: `npm run check`, Lighthouse mobile+desktop Perf ≥ 90 / CLS ≤ 0.05 / A11y ≥ 95, 0 CSP violations, eyes-on). Merge T-023 before starting R2.
+Bold lead pre-step: commit + push `public/assets/vendor/` (currently untracked) and the bold planning docs BEFORE creating worktrees for R1, otherwise worktrees from HEAD have no vendor files.
 
 ### Lead tasks outside Codex (Codex may not edit `.company/` or touch the remote)
 - After T-001 is approved: delete `.company/content.json` (moved to `src/content.json`).
@@ -101,3 +109,28 @@ SEO order: T-016 → T-017 → T-018 (may run ∥ T-010/T-011/T-012; never ∥ T
 - 2026-10-21 PM: T-020 (urgent, owner via coordinator): Google Search Console verification meta added in a clean worktree from origin/main and pushed alone (71dfe24); live verified. Local main must pull/rebase before the next push.
 - 2026-10-21 PM: T-010/T-011/T-012/T-017/T-018 shipped in ONE commit (files interleaved: content.json/validate.mjs shared by T-017+T-018; shipping speed prioritised per coordinator). Lighthouse mobile local: Perf 97, A11y 100, BP 100, SEO 92 (robots-txt audit blocked by CSP connect-src 'none' → follow-up: connect-src 'self' in T-019).
 - 2026-10-21 PM: T-019 shipped (20 project pages). Lighthouse mobile local: home 93/100/100/100, project pages 99/100/100/100. Follow-ups (cosmetic): first fact cell extra left rule; empty 4th fact cell on 2 undated projects.
+- 2026-10-21 PM: Owner (via coordinator): 'still no real wow', 'About is a wall of text', loves current visuals. New round → .company/ux-bold.md: About rewrite (2-line lead + pillar cards + company strip) and bold motion with GSAP+ScrollTrigger+Lenis SELF-HOSTED in public/assets/vendor (CSP stays self-only), intro loader, kinetic hero, pinned storytelling, horizontal Work gallery (desktop), section colour morphs; Lighthouse perf ≥ 90 gate. History rewrite still undecided by owner — untouched.
+- 2026-10-21 PM (lead): vendor files fetched via npm pack (gsap@3.15.0 dist gsap.min.js + ScrollTrigger.min.js, lenis@1.3.27 dist lenis.min.js) into public/assets/vendor/ unmodified + SHA256SUMS + licences. Note: ScrollTrigger calls setAttribute('style','') then removeAttribute on one internal element — may log a CSP report under style-src 'self'; reviewer must check console.
+- 2026-10-21 UX (ux-bold.md Assumptions, logged by TL):
+  1. Versions: GSAP pinned to 3.15.0 (npm latest on 2026-10-21; Standard "no charge" licence, allows a public portfolio) and Lenis to 1.3.27 (MIT). Coordinator floor was 3.12.5 / Lenis 1.x.
+  2. Budget: vendor slightly exceeds the "~120 KB / ~45 KB gzip" ask: ~117.5 KB raw / ~47 KB gzip on mobile, plus ~19 KB / ~6 KB Lenis on fine pointers only. Test caps 120,000/49,152 and 20,000/7,168. Reduced-motion visitors still download gsap+ScrollTrigger (cached; executed but not initialised), keeping the simple `defer` loading.
+  3. No SplitText: own splitting (h1 into letters, reverted after the entrance; h2s into lines, reverted after the reveal). Static HTML unchanged for crawlers and no-JS.
+  4. Intro is CSS-only (1.0s), never blocks content or waits on the network; skipped on repeat views in the same tab, deep links (hash), when paused and under reduced motion.
+  5. Kinetic name has a CSS watchdog (`--kinetic-wait: 1600ms`): if GSAP is late, the existing word-up plays and GSAP bails, so the name never animates twice.
+  6. Roles rotator is CSS (3 items, 9s cycle), not GSAP: no JS measuring, no CLS, works if GSAP fails; reverts to the inline row when paused.
+  7. Only Process is pinned as a story; About pillars get a scrubbed fan instead of a pin (avoid three pinned chapters).
+  8. Pins and the rail need a fine pointer and a tall enough window (min-height 640/720 + fit check). Touch devices of any width get no pins.
+  9. Pause semantics follow ux-wow rule 2: loops (rotator, rails) and Lenis stop; scroll-linked effects (pins, rail, depth, morphs) stay; one-shot entrances finish.
+  10. Pause before paint: `motion-paused` is applied pre-paint by THEME_SCRIPT to prevent a rotator layout shift.
+  11. About copy: pillars Architecture / Leadership / Scale / Trust ("Delivery" replaced by "Trust", which carries the confidentiality message); countries and the CEO line move into a one-sentence `intro`.
+  12. Companies strip: 12 entries incl. ShiftCodes, "Freelance" excluded; validation forces each name to match an `experience[].org`.
+  13. Colour morphs cross-fade 3 fixed light layers through CSS vars on one element, rather than re-tinting root tokens (which would restyle the document every frame).
+  14. RTL noted but not built (site is English-only).
+- 2026-10-21 TL: Bold tickets T-022..T-026 written (= ux-bold B-1..B-5); architecture.md §16.
+  - Vendor files are used as committed (`gsap.min.js`, `ScrollTrigger.min.js`, `lenis.min.js`, `LICENSE-gsap.txt`, `LICENSE-lenis.txt`, `SHA256SUMS`), not ux-bold §3.1's versioned names / `VERSIONS.json`. Integrity = `SHA256SUMS` checked by `test/vendor.test.mjs`; cache busting via `?v=<version>` from `head.mjs` `VENDOR`. `lenis.min.js` keeps its trailing `sourceMappingURL` comment (files never edited; map not shipped).
+  - ScrollTrigger CSP finding: the `setAttribute('style','')` is in `ScrollTrigger.enable()`, which runs at auto-registration when `ScrollTrigger.min.js` executes (not on refresh/pinReparent/ignoreMobileResize), and only if `<body>` has no `style` attribute. Mitigation in T-023: `80-bold.js` (runs earlier in the same defer queue) sets a CSSOM custom property on `<body>` so the branch is skipped, then removes it at DOMContentLoaded (`removeAttribute` is not CSP-checked). Verified by a headless-Chromium `securitypolicyviolation` check (with a detector sanity case). Rejected: editing vendor code, `style=""` in markup, `'unsafe-inline'`.
+  - Bold modules start on DOMContentLoaded unless `readyState === 'complete'` (ux-bold's "run at once if not loading" would run inside the defer queue before the vendor scripts).
+  - Cap ownership split: T-022 raises the CSS caps (94,208 / 21,504), T-023 the site.js caps (39,704), so R1 can run in parallel.
+  - Pillar text vs Stack items uses `(?<![A-Za-z0-9])…(?![A-Za-z0-9])` instead of `\b…\b` (items like `C#`).
+  - `toggle` refresh hook uses a capture listener (the event does not bubble).
+  - Every bold ticket includes a throwaway Playwright check outside the repo (CSP violations + console errors = 0, plus its behaviour), using the local Chromium/playwright-core paths from T-003.
